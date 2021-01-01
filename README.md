@@ -6,10 +6,15 @@
 Team member:
 
   
+- 20424032: Trương Thái Minh Hiếu
 
-- 20424051: Nguyen Thanh Long
+- 20424035: Lê Phước Hưng
 
 - 20424039: Đỗ Công Khải
+
+- 20424042: Bùi Đăng Khoa
+
+- 20424051: Nguyen Thanh Long
 
   
 
