@@ -9,9 +9,13 @@ const app = express();
 
 app.use('/public', express.static('public'));
 
-app.get('/',(req,res)=>res.send('Muzik'))
-app.get('/throw',(req,res)=>{throw new Error("error")})
+app.get('/',(req,res)=>res.send('Muzik'));
 
+app.get('/register',(req,res)=>{
+  res.sendFile(__dirname + '/register.html');
+});
+
+app.get('/throw',(req,res)=>{throw new Error("error")})
 app.use(function (req, res) {
   res.status(404).send('Not found')
 })
