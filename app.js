@@ -1,20 +1,20 @@
 console.log(`this is ${process.env.ENVIROMENT} environment`)
 
 const express = require('express');
+const exphbs = require('express-handlebars');
 
 //TIME ZONE:
 process.env.TZ = "Asia/Ho_Chi_Minh"
 
 const app = express();
 
+app.engine('hbs',exphbs());
+app.set('view engine', 'hbs');
+
 app.use('/public', express.static('public'));
 
 app.get('/',(req,res)=>res.send('Muzik'));
-
-app.get('/register',(req,res)=>{
-  res.sendFile(__dirname + '/register.html');
-});
-
+app.use('/', require('./routes/user.route'));
 app.get('/throw',(req,res)=>{throw new Error("error")})
 app.use(function (req, res) {
   res.status(404).send('Not found')
