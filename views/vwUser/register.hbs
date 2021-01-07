@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/public/css/register.css">
 
-<form action="register" method="POST">
+<form action="register" method="POST" id="formRegister">
     <div class="container">
       <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
@@ -12,9 +12,7 @@
       <p></p>
       <label for="username"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="Username" id="Username" required>
-      {{#if err}}
-        <p id="err">Username đã tồn tại</p>
-      {{/if}}
+      <p id="err"></p>
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="Password" id="psw" required>
   
@@ -42,4 +40,22 @@
   {
       document.getElementById("err").innerHTML = "";
   }
+  $('#formRegister').on('submit', function (e) {
+    e.preventDefault();
+    var username = $("#Username").val();    
+    $.ajax({
+    url: "/checkUsername",
+    type: "POST",
+    data: "username=" + username,
+    success: function (data) {  
+      if (data){
+        document.getElementById("err").innerHTML = "Username đã tồn tại";
+      }
+      else
+      {
+        $('#formRegister').off('submit').submit();
+      }
+    }
+    });
+  });
 </script
