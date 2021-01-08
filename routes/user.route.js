@@ -44,15 +44,17 @@ router.post('/checkInfo',(req,res) => {
 
 router.post('/register', async function (req, res){
     var passwordHash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
+    var token = Math.floor(100000 + Math.random() * 900000);
     var user = {
         userName: req.body.Username,
         Password: passwordHash,
         Email: req.body.Email,
         Gender: req.body.gender,
-        DOB: req.body.Birthday
+        DOB: req.body.Birthday,
+        Token: token
     }
     console.log(user);
-    res.send("Sent Email");
+    res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
 });
 
 module.exports = router;

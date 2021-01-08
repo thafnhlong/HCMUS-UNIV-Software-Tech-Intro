@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="/public/css/register.css">
 
+{{#if Success}}
+  <h1><span id="success">Tạo tài khoản thành công, vui lòng check gmail: {{Email}} để kích hoạt tài khoản</span></h1>
+{{/if}}
 <form action="register" method="POST" id="formRegister">
     <div class="container">
       <h1>Register</h1>
@@ -41,6 +44,7 @@
   {
       document.getElementById("errEmail").innerHTML = "";
       document.getElementById("errUS").innerHTML = "";
+      document.getElementById("success").innerHTML = "";
   }
   $('#formRegister').on('submit', function (e) {
     e.preventDefault();
