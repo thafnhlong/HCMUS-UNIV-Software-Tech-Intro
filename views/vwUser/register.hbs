@@ -7,12 +7,13 @@
       <hr>
   
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="Email" id="email" required>
-      
-      <p></p>
+      <input type="text" placeholder="Enter Email" name="Email" id="Email" required>
+      <p id="errEmail"></p>
+
       <label for="username"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="Username" id="Username" required>
-      <p id="err"></p>
+      <p id="errUS"></p>
+
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="Password" id="psw" required>
   
@@ -38,18 +39,28 @@
 <script>
   function check()
   {
-      document.getElementById("err").innerHTML = "";
+      document.getElementById("errEmail").innerHTML = "";
+      document.getElementById("errUS").innerHTML = "";
   }
   $('#formRegister').on('submit', function (e) {
     e.preventDefault();
-    var username = $("#Username").val();    
+    var email =  $("#Email").val();
+    var username = $("#Username").val();
+    var data = {Email: email, Username: username};
+    data = JSON.stringify({data});
     $.ajax({
-    url: "/checkUsername",
+    url: "/checkInfo",
     type: "POST",
-    data: "username=" + username,
+    data: "Data=" + data,
     success: function (data) {  
-      if (data){
-        document.getElementById("err").innerHTML = "Username đã tồn tại";
+      if (data.Exist){
+        if (data.err == 0){
+          document.getElementById("errEmail").innerHTML = "Email này đã tồn tại";
+        }
+        else
+        {
+          document.getElementById("errUS").innerHTML = "Username này đã tồn tại";
+        }
       }
       else
       {
