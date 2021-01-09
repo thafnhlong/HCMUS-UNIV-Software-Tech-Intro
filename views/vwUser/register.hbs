@@ -1,3 +1,9 @@
+{{#section 'js'}}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer></script>
+{{/section}}
+
 <link rel="stylesheet" href="/public/css/register.css">
 
 {{#if Success}}
@@ -10,7 +16,7 @@
       <hr>
   
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="Email" id="Email" required>
+      <input type="email" placeholder="Enter Email" name="Email" id="Email" required>
       <p class="error" id="errEmail"></p>
 
       <label for="username"><b>Username</b></label>
@@ -88,4 +94,4 @@
     document.getElementById("errCaptcha").innerHTML = "";
     checked_Captcha = true;
   }
-</script
+</script>

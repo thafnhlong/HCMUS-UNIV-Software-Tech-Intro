@@ -2,13 +2,19 @@ console.log(`this is ${process.env.ENVIROMENT} environment`)
 
 const express = require('express');
 const exphbs = require('express-handlebars');
+var express_handlebars_sections = require('express-handlebars-sections');
 
 //TIME ZONE:
 process.env.TZ = "Asia/Ho_Chi_Minh"
 
 const app = express();
 
-app.engine('hbs',exphbs());
+app.engine('hbs',exphbs({
+  helpers: {
+    section: express_handlebars_sections()
+  }
+}));
+
 app.set('view engine', 'hbs');
 app.use(express.urlencoded({
   extended: true
