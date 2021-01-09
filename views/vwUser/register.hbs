@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/public/css/register.css">
 
 {{#if Success}}
-  <h1><span id="success">Tạo tài khoản thành công, vui lòng check gmail: {{Email}} để kích hoạt tài khoản</span></h1>
+  <h1><span class="success" id="success">Tạo tài khoản thành công. Vui lòng check gmail: {{Email}}, để kích hoạt tài khoản</span></h1>
 {{/if}}
 <form action="register" method="POST" id="formRegister">
     <div class="container">
@@ -11,11 +11,11 @@
   
       <label for="email"><b>Email</b></label>
       <input type="text" placeholder="Enter Email" name="Email" id="Email" required>
-      <p id="errEmail"></p>
+      <p class="error" id="errEmail"></p>
 
       <label for="username"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="Username" id="Username" required>
-      <p id="errUS"></p>
+      <p class="error" id="errUS"></p>
 
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="Password" id="psw" required>
@@ -31,7 +31,10 @@
         <input type="radio" name="gender" id="female" value="female">
       </fieldset>
       <hr>
-      <button type="submit" class="registerbtn" onclick="check()">Register</button>
+       <div class="g-recaptcha" data-sitekey="6LfdpSYaAAAAAI5Cq89EOVX57-BLGt6z-zuamKJ5"
+         data-callback="recaptcha_callback"></div>
+        <p class="error" id="errCaptcha"></p>
+      <button type="submit" id="registerBtn" class="registerbtn" onclick="resetValue()">Register</button>
     </div>
   
     <div class="container signin">
@@ -40,14 +43,21 @@
 </form>
 
 <script>
-  function check()
+  var checked_Captcha = false;
+  function resetValue()
   {
       document.getElementById("errEmail").innerHTML = "";
       document.getElementById("errUS").innerHTML = "";
       document.getElementById("success").innerHTML = "";
+      document.getElementById("errCaptcha").innerHTML = "";
   }
   $('#formRegister').on('submit', function (e) {
     e.preventDefault();
+    if (!checked_Captcha)
+    {
+        document.getElementById("errCaptcha").innerHTML = "Captcha không hợp lệ!!!";
+        return;
+    }
     var email =  $("#Email").val();
     var username = $("#Username").val();
     var data = {Email: email, Username: username};
@@ -73,4 +83,9 @@
     }
     });
   });
+  function recaptcha_callback()
+  {
+    document.getElementById("errCaptcha").innerHTML = "";
+    checked_Captcha = true;
+  }
 </script
