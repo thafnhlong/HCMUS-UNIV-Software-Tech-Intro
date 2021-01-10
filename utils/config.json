@@ -1,10 +1,10 @@
 {
     "mysql": {
         "connectionLimit": 50,
-        "host": "localhost",
-        "user": "root",
-        "password": "",
-        "database": "muzik"
+        "host": "remotemysql.com",
+        "user": "JuMJWPpv2T",
+        "password": "grGVh0yXNO",
+        "database": "JuMJWPpv2T"
     },
     "pagination": {
         "limit": 6,
