@@ -53,6 +53,8 @@ router.post('/register', async function (req, res){
         DOB: req.body.Birthday,
         Token: token
     }
+    // Lưu user xuống db
+    // gửi mail kích hoạt tài khoản
     console.log(user);
     res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
 });

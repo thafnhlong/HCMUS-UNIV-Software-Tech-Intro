@@ -4,7 +4,9 @@
     async defer></script>
 {{/section}}
 
-<link rel="stylesheet" href="/public/css/register.css">
+{{#section 'css'}}
+  <link rel="stylesheet" href="/public/css/register.css">
+{{/section}}
 
 {{#if Success}}
   <h1><span class="success" id="success">Tạo tài khoản thành công. Vui lòng check gmail: {{Email}}, để kích hoạt tài khoản</span></h1>
