@@ -1,0 +1,39 @@
+{{#section 'js'}}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer></script>
+{{/section}}
+Form quen mat khau
+<hr>
+{{#if success}}
+<p style="color: greenyellow;">Da gui huong dan lay lai mat khau den email: {{success.email}}</p>
+{{/if}}
+<form method="post" onsubmit="onSubmit(event)">
+    <label for="email">Nhap email</label>
+    <input type="email" required name="email" id="email" value="{{model.email}}">
+    {{#if error.email}}<p style="color: red;">{{error.email}}</p>{{/if}}
+    
+    <div class="g-recaptcha" data-sitekey="6LfdpSYaAAAAAI5Cq89EOVX57-BLGt6z-zuamKJ5"
+         data-callback="recaptcha_callback"></div>
+    <p style="color: red;" id="errCaptcha"></p>
+
+    <input type="submit" value="Quen mat khau">
+</form>
+
+
+<script>
+  var checked_Captcha = true;
+  function onSubmit(e){
+    if (!checked_Captcha)
+    {
+        document.getElementById("errCaptcha").innerHTML = "Captcha không hợp lệ!!!";
+        e.preventDefault()
+    }
+  }
+
+  function recaptcha_callback()
+  {
+    document.getElementById("errCaptcha").innerHTML = "";
+    checked_Captcha = true;
+  }
+</script>
