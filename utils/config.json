@@ -1,0 +1,13 @@
+{
+    "mysql": {
+        "connectionLimit": 50,
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "muzik"
+    },
+    "pagination": {
+        "limit": 6,
+        "limitAdmin":10
+    }
+}
