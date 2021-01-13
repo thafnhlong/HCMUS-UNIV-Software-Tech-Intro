@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const md5 = require("md5");
-
+const UserModel = require("../models/user.model");
+const Helper = require("../utils/helper");
 const config = require("../config/default.json");
 
 router.get('/register',(req,res) => {
@@ -47,16 +48,23 @@ router.post('/checkInfo',(req,res) => {
 router.post('/register', async function (req, res){
     var passwordHash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
     var token = Math.floor(100000 + Math.random() * 900000);
+    var getDateTimeNow = Helper.ConverDateTime(new Date());
     var user = {
         userName: req.body.Username,
         Password: passwordHash,
         Email: req.body.Email,
         Gender: req.body.gender,
+        permision: 0,
+        delete: 0,
+        status: 0,
+        createDate: getDateTimeNow,
+        modifileDate: getDateTimeNow,
         DOB: req.body.Birthday,
-        Token: token
+        activeToken: token
     }
     // Lưu user xuống db
-    // gửi mail kích hoạt tài khoản
+    await UserModel.add(user);
+    // Sendmail(user.Email, user.Token)
     console.log(user);
     res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
 });
