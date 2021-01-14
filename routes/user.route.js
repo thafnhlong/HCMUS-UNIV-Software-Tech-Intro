@@ -10,9 +10,7 @@ router.get('/register',(req,res) => {
     res.render("vwUser/register.hbs");
 });
 
-router.post('/checkInfo',(req,res) => {
-    const UsernameInDB = ["nguyenvana", "123", "Le Thi Cuc"];
-    const EmailInDB = ["nguyenvanb", "1234", "Le Thi Cuc1"];
+router.post('/checkInfo', async (req,res) => {
     var Data;
     try{
       Data = JSON.parse(req.body.Data);
@@ -23,25 +21,14 @@ router.post('/checkInfo',(req,res) => {
     }
 
     var Exist = true;
-    //Check mail
-    for (mail of EmailInDB)
-    {
-        if (Data.data.Email == mail)
-        {              
-            return res.status(200).send({Exist: Exist, err: 0});
-        }
-    }
+    //Check mail    
+    if (await UserModel.checkExistEmail(Data.data.Email))        
+        return res.status(200).send({Exist: Exist, err: 0});
     
     //Check username
-    for (username of UsernameInDB)
-    {
-        if (Data.data.Username == username)
-        {            
-            return res.status(200).send({Exist: Exist, err: 1});
-        }
-    }
+    if (await UserModel.checkExistUsername(Data.data.Username))       
+        return res.status(200).send({Exist: Exist, err: 1});
     Exist = false;
-    
     res.status(200).send(Exist);
 });
 
