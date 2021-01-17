@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation datetime: Jan 10, 2021 at 12:50 PM
+-- Generation time: Jan 10, 2021 at 12:50 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET datetime_zone = "+00:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
