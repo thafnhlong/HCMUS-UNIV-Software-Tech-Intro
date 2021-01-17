@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const md5 = require("md5");
+
 const config = require("../config/default.json");
 
 router.get('/register',(req,res) => {
@@ -58,7 +60,6 @@ router.post('/register', async function (req, res){
     console.log(user);
     res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
 });
-const md5 = require("md5");
 
 const DBUSER = [{
     ID: 1, email: 'abc@gmail.com', name: 'abc'
