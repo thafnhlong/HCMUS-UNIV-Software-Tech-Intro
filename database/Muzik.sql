@@ -97,7 +97,7 @@ CREATE TABLE `Users` (
   `userName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `DOB` datetime(6) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
   `gender` tinyint(3) DEFAULT NULL,
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `permision` int(10) NOT NULL,
