@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 10, 2021 at 12:50 PM
+-- Generation datetime: Jan 10, 2021 at 12:50 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET datetime_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -31,8 +31,8 @@ CREATE TABLE `Categories` (
   `ID` int(10) NOT NULL,
   `Name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `delete` tinyint(3) DEFAULT NULL,
-  `createDate` time(6) DEFAULT NULL,
-  `modifileDate` time(6) DEFAULT NULL
+  `createDate` datetime(6) DEFAULT NULL,
+  `modifileDate` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -45,8 +45,8 @@ CREATE TABLE `Permision` (
   `ID` int(10) NOT NULL,
   `Name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `createDate` time(6) DEFAULT NULL,
-  `modifileDate` time(6) NOT NULL,
+  `createDate` datetime(6) DEFAULT NULL,
+  `modifileDate` datetime(6) NOT NULL,
   `delete` tinyint(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -68,8 +68,8 @@ CREATE TABLE `Songs` (
   `category` int(10) NOT NULL,
   `status` int(10) DEFAULT NULL,
   `reason` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `createDate` time(6) DEFAULT NULL,
-  `publishDate` time(6) DEFAULT NULL,
+  `createDate` datetime(6) DEFAULT NULL,
+  `publishDate` datetime(6) DEFAULT NULL,
   `delete` tinyint(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -97,13 +97,13 @@ CREATE TABLE `Users` (
   `userName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `DOB` time(6) DEFAULT NULL,
+  `DOB` datetime(6) DEFAULT NULL,
   `gender` tinyint(3) DEFAULT NULL,
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `permision` int(10) NOT NULL,
   `delete` tinyint(3) DEFAULT NULL,
-  `createDate` time(6) DEFAULT NULL,
-  `modifileDate` time(6) DEFAULT NULL,
+  `createDate` datetime(6) DEFAULT NULL,
+  `modifileDate` datetime(6) DEFAULT NULL,
   `status` int(10) DEFAULT NULL,
   `activeToken` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `refreshToken` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -121,8 +121,8 @@ CREATE TABLE `Users_Comments` (
   `User` int(10) NOT NULL,
   `Song` int(10) NOT NULL,
   `delete` tinyint(3) DEFAULT NULL,
-  `createDate` time(6) DEFAULT NULL,
-  `modifileDate` time(6) DEFAULT NULL
+  `createDate` datetime(6) DEFAULT NULL,
+  `modifileDate` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
