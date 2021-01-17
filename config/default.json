@@ -1,5 +1,11 @@
 {
     "authentication":{
         "saltRounds": 8
+    },
+    "email": {
+        "service": "Gmail",
+        "user": "tn397032@gmail.com",
+        "from": "Hệ thống nghe nhạc trực tuyến MUZIK",
+        "pass": "11112222AAAA"
     }
 }
