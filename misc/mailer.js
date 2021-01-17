@@ -1,24 +1,72 @@
 const nodemailer=require('nodemailer');
+const config = require('../config/default.json')
 
 const transport = nodemailer.createTransport({
 
-    service:'Gmail',
+    service: config.email.service,
     auth: {
-        user: 'tn397032@gmail.com',
-        pass: '11112222AAAA'
+        user: config.email.user,
+        pass: config.email.pass
     },
     tls:{
         rejectUnauthorized: false
     }
 });
-//send mail 
-module.exports = {
-    async sendEmail(from,to,subject,html){
-        return new Promise((resolve, reject)=>{
-            transport.sendMail({from, subject, to, html}, (err, info)=>{
-                if(err)reject(err);
-                resolve(info);
-            })
+
+const from = {
+    name: config.email.from,
+    address: config.email.user
+}
+
+async function _sendEmail(to,subject,html){
+    return new Promise((resolve,)=>{
+        transport.sendMail({from, subject, to, html}, (err, info)=>{
+            if(err){
+                console.log(err)
+                resolve(false);
+            }
+            resolve(true);
         })
+    })
+}
+
+//send mail 
+const tryAgainCount = 2
+
+module.exports = {
+    sendEmail: async function(to,subject,html){
+        let result = false
+        for(let i =0;i<tryAgainCount;++i){
+            result = await _sendEmail(to,subject,html)
+            if (result)
+                return result
+        }
+        return result
+    },
+
+    /**
+     * Ham gui link kich hoat tai khoan
+     * @param {*} email `abc@gmail.com`
+     * @param {*} link `http://example.com`
+     */
+    sendActiveToken: async function(email,link){
+        const subject = "Kích hoạt tài khoản"
+        const html = `<h3>Vui lòng nhấp vào link dưới đây để kích hoạt</h3><br>
+            <a href="${link}">${link}</a>`
+        
+        return await this.sendEmail(email,subject,html)
+    },
+
+    /**
+     * Ham gui link quen mat khau
+     * @param {*} email `abc@gmail.com`
+     * @param {*} link `http://example.com`
+     */
+    sendForgetToken: async function(email,link){
+        const subject = "Quên mật khẩu"
+        const html = `<h3>Vui lòng nhấp vào link dưới đây để lấy lại mật khẩu</h3><br>
+            <a href="${link}">${link}</a>`
+        return await this.sendEmail(email,subject,html)
     }
 };
+
