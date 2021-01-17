@@ -12,5 +12,15 @@ module.exports = {
     checkExistEmail: async function(Email){
         const result = await db.load(`SELECT * FROM ${TBL_USER} WHERE email = '${Email}'`);
         return result.length > 0;
+    },
+    activeAccount: function(token){
+        const condition  = {
+            activeToken: token
+        };
+        const entity = {
+            activeToken: null,
+            status: 1
+        }
+        return db.patch(TBL_USER, entity, condition);
     }
 };

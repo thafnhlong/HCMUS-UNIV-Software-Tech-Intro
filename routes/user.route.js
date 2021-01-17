@@ -56,6 +56,17 @@ router.post('/register', async function (req, res){
     res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
 });
 
+router.get('/active', async function (req, res){
+    const token = +req.query.token || -1;
+    const rs = await UserModel.activeAccount(token);
+    if (rs.changedRows > 0)
+    {
+        return res.send("Active Success");
+    }
+    res.send("Active Failed");
+    
+});
+
 const DBUSER = [{
     ID: 1, email: 'abc@gmail.com', name: 'abc'
 }, {
