@@ -1,6 +1,6 @@
 const db = require("../utils/dao");
 
-const TBL_USER = "USERS"
+const TBL_USER = "Users"
 module.exports = {
     add: function(user){
         return db.add(TBL_USER, user);
