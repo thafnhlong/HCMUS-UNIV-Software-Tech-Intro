@@ -71,7 +71,7 @@
     var data = {Email: email, Username: username};
     data = JSON.stringify({data});
     $.ajax({
-    url: "/checkInfo",
+    url: "/register/checkinfo",
     type: "POST",
     data: "Data=" + data,
     success: function (data) {  

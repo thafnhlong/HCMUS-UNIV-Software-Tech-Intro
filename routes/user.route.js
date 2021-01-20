@@ -11,7 +11,7 @@ router.get('/register',(req,res) => {
     res.render("vwUser/register.hbs");
 });
 
-router.post('/checkInfo', async (req,res) => {
+router.post('/register/checkinfo', async (req,res) => {
     var Data;
     try{
       Data = JSON.parse(req.body.Data);
@@ -53,7 +53,7 @@ router.post('/register', async function (req, res){
     // Lưu user xuống db
     await UserModel.add(user);
     // Sendmail
-    //var linkActive = `http://localhost:3000/active?token=${user.token}`;
+    //var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
     //mailer.sendActiveToken(user.Email, linkActive);
     console.log(user);
     res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
