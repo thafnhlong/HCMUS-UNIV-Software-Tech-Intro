@@ -5,7 +5,7 @@ const md5 = require("md5");
 const UserModel = require("../models/user.model");
 const Helper = require("../utils/helper");
 const config = require("../config/default.json");
-//const mailer = require("../misc/mailer");
+const mailer = require("../misc/mailer");
 
 router.get('/register',(req,res) => {
     res.render("vwUser/register.hbs");
@@ -53,8 +53,8 @@ router.post('/register', async function (req, res){
     // Lưu user xuống db
     await UserModel.add(user);
     // Sendmail
-    //var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
-    //mailer.sendActiveToken(user.Email, linkActive);
+    var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
+    mailer.sendActiveToken(user.Email, linkActive);
     console.log(user);
     res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
 });
