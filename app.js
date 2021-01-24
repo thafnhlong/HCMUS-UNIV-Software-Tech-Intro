@@ -22,7 +22,7 @@ app.get('/',(req,res)=>{
   res.render("home.hbs");
 });
 
-//app.use('/', require('./routes/user.route'));
+app.use('/', require('./routes/user.route'));
 app.get('/throw',(req,res)=>{throw new Error("error")})
 app.use(function (req, res) {
   res.status(404).send('Not found')
