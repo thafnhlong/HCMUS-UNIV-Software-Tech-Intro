@@ -1,0 +1,57 @@
+{{#section 'js'}}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer></script>
+{{/section}}
+
+{{#section 'css'}}
+  <link rel="stylesheet" href="/public/css/register.css">
+{{/section}}
+
+{{#if Success}}
+  <h1><span class="success" id="success">Đăng nhập thành công</span></h1>
+{{/if}}
+<form action="login" method="POST" id="formLogin">
+    <div class="container">
+      <h1>login</h1>
+      <hr>
+      <label for="username"><b>Username or Email</b></label>
+      <input type="text" placeholder="Enter Username" name="Username" id="Username" required>
+      <p class="error" id="errUS"></p>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="Password" id="psw" required>
+       <div class="g-recaptcha" data-sitekey="6LfdpSYaAAAAAI5Cq89EOVX57-BLGt6z-zuamKJ5"
+         data-callback="recaptcha_callback"></div>
+        <p class="error" id="errCaptcha"></p>
+      <button type="submit" id="registerBtn" class="registerbtn" onclick="resetValue()">Login</button>
+    </div>
+  
+    
+</form>
+
+<div class="container signin">
+  <form action="register"> <button>Login with faccebook</button><button>Login with google</button></form>
+</div>
+<script>
+  var checked_Captcha = false;
+  function resetValue()
+  {
+      document.getElementById("errUS").innerHTML = "";
+      document.getElementById("success").innerHTML = "";
+      document.getElementById("errCaptcha").innerHTML = "";
+  }
+  $('#formLogin').on('submit', function (e) {
+    e.preventDefault();
+    if (!checked_Captcha)
+    {
+        document.getElementById("errCaptcha").innerHTML = "Captcha không hợp lệ!!!";
+        return;
+    }
+  });
+  function recaptcha_callback()
+  {
+    document.getElementById("errCaptcha").innerHTML = "";
+    checked_Captcha = true;
+  }
+</script>
