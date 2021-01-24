@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 
 //app.use('/', require('./routes/user.route'));
 
-app.use("/dashboard", require("./routes/dashboard.rote"));
+app.use("/dashboard", require("./routes/dashboard.route"));
 
 app.get("/throw", (req, res) => {
   throw new Error("error");
