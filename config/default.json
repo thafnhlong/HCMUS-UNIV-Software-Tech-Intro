@@ -1,4 +1,7 @@
 {
+    "site" : {
+        "url": "http://localhost:3000"
+    },
     "authentication":{
         "saltRounds": 8
     },
