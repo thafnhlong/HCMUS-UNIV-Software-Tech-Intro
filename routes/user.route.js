@@ -2,17 +2,16 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const md5 = require("md5");
-const UserModel=require('../model/user')
-
+const UserModel = require("../models/user.model");
+const Helper = require("../utils/helper");
 const config = require("../config/default.json");
+const mailer = require("../misc/mailer");
 
 router.get('/register',(req,res) => {
     res.render("vwUser/register.hbs");
 });
 
-router.post('/checkInfo',(req,res) => {
-    const UsernameInDB = ["nguyenvana", "123", "Le Thi Cuc"];
-    const EmailInDB = ["nguyenvanb", "1234", "Le Thi Cuc1"];
+router.post('/register/checkinfo', async (req,res) => {
     var Data;
     try{
       Data = JSON.parse(req.body.Data);
@@ -23,43 +22,52 @@ router.post('/checkInfo',(req,res) => {
     }
 
     var Exist = true;
-    //Check mail
-    for (mail of EmailInDB)
-    {
-        if (Data.data.Email == mail)
-        {              
-            return res.status(200).send({Exist: Exist, err: 0});
-        }
-    }
+    //Check mail    
+    if (await UserModel.checkExistEmail(Data.data.Email))        
+        return res.status(200).send({Exist: Exist, err: 0});
     
     //Check username
-    for (username of UsernameInDB)
-    {
-        if (Data.data.Username == username)
-        {            
-            return res.status(200).send({Exist: Exist, err: 1});
-        }
-    }
+    if (await UserModel.checkExistUsername(Data.data.Username))       
+        return res.status(200).send({Exist: Exist, err: 1});
     Exist = false;
-    
     res.status(200).send(Exist);
 });
 
 router.post('/register', async function (req, res){
     var passwordHash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
     var token = Math.floor(100000 + Math.random() * 900000);
+    var getDateTimeNow = Helper.ConverDateTime(new Date());
     var user = {
         userName: req.body.Username,
         Password: passwordHash,
         Email: req.body.Email,
         Gender: req.body.gender,
+        permision: 0,
+        delete: 0,
+        status: 0,
+        createDate: getDateTimeNow,
+        modifileDate: getDateTimeNow,
         DOB: req.body.Birthday,
-        Token: token
+        activeToken: token
     }
     // Lưu user xuống db
-    // gửi mail kích hoạt tài khoản
+    await UserModel.add(user);
+    // Sendmail
+    var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
+    mailer.sendActiveToken(user.Email, linkActive);
     console.log(user);
     res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
+});
+
+router.get('/active', async function (req, res){
+    const token = +req.query.token || -1;
+    const rs = await UserModel.activeAccount(token);
+    if (rs.changedRows > 0)
+    {
+        return res.send("Active Success");
+    }
+    res.send("Active Failed");
+    
 });
 
 const DBUSER = [{
