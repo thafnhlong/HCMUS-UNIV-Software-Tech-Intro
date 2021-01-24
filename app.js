@@ -13,7 +13,8 @@ app.use(express.urlencoded({
 
 //config view_engine and libraries helper as hbs-sections
 require('./middlewares/viewengine.mdw')(app);
-
+require('./middlewares/session.mdw')(app);
+require('./middlewares/local.mdw')(app);
 app.use('/public', express.static('public'));
 
 //app.get('/',(req,res)=>res.send('Muzik'));

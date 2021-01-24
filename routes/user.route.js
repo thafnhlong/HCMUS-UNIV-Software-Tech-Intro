@@ -131,7 +131,7 @@ router.post('/login', async function(req, res){
       err: 'Invalid username or password.'
     })
   }
-  const rs = bcrypt.compareSync(req.body.password, user.Password);
+  const rs = bcrypt.compareSync(req.body.password, user.password);
   if (rs === false) {
     return res.render('vwUser/login', {
       err: 'Invalid username or password.'

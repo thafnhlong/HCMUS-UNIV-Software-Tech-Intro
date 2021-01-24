@@ -5,8 +5,8 @@ module.exports = {
     add: function(user){
         return db.add(TBL_USER, user);
     },
-    checkExistUsername: async function(userName){
-        const result = await db.load(`SELECT * FROM ${TBL_USER} WHERE userName = '${userName}'`);
+    checkExistusername: async function(username){
+        const result = await db.load(`SELECT * FROM ${TBL_USER} WHERE username = '${username}'`);
         return result.length > 0;
     },
     checkExistEmail: async function(Email){
@@ -22,5 +22,28 @@ module.exports = {
             status: 1
         }
         return db.patch(TBL_USER, entity, condition);
+    },
+
+    // get data
+    singleByusernameorEmail: async function (username) {
+        const rows = await db.load(`select * from ${TBL_USER} where username = '${username}' or email = '${username}'`);
+        if (rows.length === 0)
+            return null;
+        return rows[0];
+    },
+    //check username
+    checkExistAccount: async function(username){
+        const result = await db.load(`SELECT * FROM ${TBL_USER} WHERE username = '${username} or email = '${username}'`);
+        return result.length > 0;
+    },
+
+    // active account
+
+    // get otp 
+    singleOtp: async function (username, email) {
+        const rows = await db.load(`select otpverify from ${TBL_USER} where username = '${username}' or email = '${email}'`);
+        if (rows.length === 0)
+            return null;
+        return rows[0];
     }
 };
