@@ -5,8 +5,21 @@ module.exports = {
     add: function(user){
         return db.add(TBL_USER, user);
     },
-    checkExistusername: async function(username){
-        const result = await db.load(`SELECT * FROM ${TBL_USER} WHERE username = '${username}'`);
+    getByEmai: async (email) => {
+        return db.load(`SELECT * FROM ${TBL_USER} WHERE email = '${email}'`);
+    },
+    setForgetToken: async (token,id) => {
+        return db.patch(TBL_USER,{refreshToken:token},{ID:id})
+    },
+    getByForgetToken: async (token) => {
+        return db.load(`SELECT * FROM ${TBL_USER} WHERE refreshToken = '${token}'`);
+    },
+    patch: async (entity,id) => {
+        delete entity.ID
+        return db.patch(TBL_USER,entity,{ID:id})
+    },
+    checkExistUsername: async function(userName){
+        const result = await db.load(`SELECT * FROM ${TBL_USER} WHERE userName = '${userName}'`);
         return result.length > 0;
     },
     checkExistEmail: async function(Email){
@@ -25,7 +38,7 @@ module.exports = {
     },
 
     // get data
-    singleByusernameorEmail: async function (username) {
+    singleByUserNameorEmail: async function (username) {
         const rows = await db.load(`select * from ${TBL_USER} where username = '${username}' or email = '${username}'`);
         if (rows.length === 0)
             return null;
@@ -46,4 +59,4 @@ module.exports = {
             return null;
         return rows[0];
     }
-};
+}
