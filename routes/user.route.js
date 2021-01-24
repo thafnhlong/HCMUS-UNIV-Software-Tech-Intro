@@ -70,54 +70,63 @@ router.get('/active', async function (req, res){
     
 });
 
-const DBUSER = [{
-    ID: 1, email: 'abc@gmail.com', name: 'abc'
-}, {
-    ID: 2, email: 'abc1@gmail.com', name: 'abc1'
-}]
+
 router.get('/forget', (req, res) => {
     res.render('vwUser/forget')
 })
 
-router.post('/forget', (req, res) => {
+router.post('/forget', (req, res, next) => {
     const {email} = req.body
-    const user = DBUSER.find(x=>x.email==email)
-    if (!user){
-        return res.render('vwUser/forget',{error:{email:"Khong tim thay email"},model:{email}})
-    }
-    const randint = Math.floor(Math.random()*899999) + 100000
-    user.forgetToken = md5(user.ID+ '|' + randint)
-    // todo sendmail
-    // abc.com/forget/user.forgetToken?pass=randint
-    console.log(`/forget/${user.forgetToken}?pass=${randint}`)
-    res.render('vwUser/forget',{success:{email}})
+    let randint,forgetToken
+    UserModel.getByEmai(email)
+        .then(users=>{
+            if (users.length == 0){
+                return res.render('vwUser/forget',{error:{email:"Khong tim thay email"},model:{email}})
+            }
+            const user = users[0]
+            randint = Math.floor(Math.random()*899999) + 100000
+            forgetToken = md5(user.ID+ '|' + randint)
+
+            UserModel.setForgetToken(forgetToken,user.ID)
+            return mailer.sendForgetToken(user.email,`${config.site.url}/forget/${forgetToken}?pass=${randint}`)
+        })
+        .then(response=>{
+            console.log('Email response:', response)
+            console.log(`/forget/${forgetToken}?pass=${randint}`)
+            res.render('vwUser/forget',{success:{email}})
+        })
+        .catch(next)
 })
 
 const forgetPasswordMiddleware = (req,res,next)=>{
     const {token} = req.params
     const {pass} = req.query
-    const user = DBUSER.find(x=>x.forgetToken==token) || {}
-    const hash = md5(user.ID+ '|' + pass)
-    if (!user || token != hash) {
-        return res.redirect('/login')
-    }
-    req.targetUser = user
-    next()
+    UserModel.getByForgetToken(token).then(response=>{
+        const user = response[0] || {}
+        const hash = md5(user.ID+ '|' + pass)
+        if (!user || token != hash) {
+            return res.redirect('/login')
+        }
+        req.targetUser = user
+        next()
+    }).catch(next)
 }
 
 router.get('/forget/:token',forgetPasswordMiddleware,(req,res)=>{
     res.render('vwUser/resetpassword')
 })
 
-router.post('/forget/:token',forgetPasswordMiddleware,(req,res)=>{
+router.post('/forget/:token',forgetPasswordMiddleware,(req,res,next)=>{
     const {p1,p2} = req.body
     if (p1 != p2) {
         return res.render('vwUser/resetpassword',{error:"Mat khau khong trung nhau"})
     }
-    const user=req.targetUser
-    user.password = p1
-    user.forgetToken=''
-    res.json(user)
+
+    var passwordHash = bcrypt.hashSync(req.body.p1, config.authentication.saltRounds);
+
+    const id = req.targetUser.ID
+    const updateUser = {refreshToken:null,password:passwordHash,modifileDate:new Date()}
+    UserModel.patch(updateUser,id).then(()=>res.redirect('/login')).catch(next)
 })
 
 module.exports = router;
