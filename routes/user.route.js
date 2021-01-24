@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const md5 = require("md5");
+const UserModel=require('../model/user')
 
 const config = require("../config/default.json");
 
@@ -109,6 +110,34 @@ router.post('/forget/:token',forgetPasswordMiddleware,(req,res)=>{
     user.password = p1
     user.forgetToken=''
     res.json(user)
+})
+
+router.get('/login', function (req, res) {
+
+  res.render('vwUser/login')
+})
+router.post('/login', async function(req, res){
+  const user=await userModel.singleByUserNameorEmail(req.body.username);
+  if(user===null){
+    return res.render('vwUser/login',{
+      err: 'Invalid username or password.'
+    })
+  }
+  const rs = bcrypt.compareSync(req.body.password, user.Password);
+  if (rs === false) {
+    return res.render('vwUser/login', {
+      err: 'Invalid username or password.'
+    })
+  }
+  if(user.status===0){
+    res.redirect('/Active');
+  }
+  delete user.HashPassword;
+  req.session.isAuthenticated = true;
+  req.session.authUser = user;
+
+  const url = req.query.retUrl || '/';
+  res.redirect(url);
 })
 
 module.exports = router;
