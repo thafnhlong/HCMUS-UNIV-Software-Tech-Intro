@@ -30,16 +30,16 @@ app.get("/throw", (req, res) => {
   throw new Error("error");
 });
 app.use(function (req, res) {
-  res.status(404).render('404')
+  res.status(404).render('404',{fullPage:true})
 });
 
 app.use(function (err, req, res, next) {
   console.error(err);
   res.status(500);
   if (process.env.ENVIROMENT === "production")
-    return res.render('500')
+    return res.render('500',{fullPage:true})
   // res.send(err.stack);
-  res.render('500')
+  res.render('500',{fullPage:true})
 });
 
 app.listen(process.env.WEB_PORT, () => {

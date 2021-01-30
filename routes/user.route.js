@@ -8,6 +8,11 @@ const Helper = require("../utils/helper");
 const config = require("../config/default.json");
 const mailer = require("../utils/mailer");
 
+router.all('/confirmmail',(req,res)=>res.render('vwUser/confirmmail',{fullPage:true}))
+
+router.get('/register2',(req,res) => {
+    res.render("vwUser/register2.hbs",{fullPage:true});
+});
 router.get('/register',(req,res) => {
     res.render("vwUser/register.hbs");
 });
@@ -73,7 +78,7 @@ router.get('/active', async function (req, res){
 
 
 router.get('/forget', (req, res) => {
-    res.render('vwUser/forget')
+    res.render('vwUser/forget',{fullPage:true})
 })
 
 router.post('/forget', (req, res, next) => {
@@ -82,7 +87,8 @@ router.post('/forget', (req, res, next) => {
     UserModel.getByEmai(email)
         .then(users=>{
             if (users.length == 0){
-                return res.render('vwUser/forget',{error:{email:"Khong tim thay email"},model:{email}})
+                res.render('vwUser/forget',{error:"Không tìm thấy địa chỉ Email",model:{email},fullPage:1})
+                throw true
             }
             const user = users[0]
             randint = Math.floor(Math.random()*899999) + 100000
@@ -94,9 +100,9 @@ router.post('/forget', (req, res, next) => {
         .then(response=>{
             console.log('Email response:', response)
             console.log(`/forget/${forgetToken}?pass=${randint}`)
-            res.render('vwUser/forget',{success:{email}})
+            return res.redirect('/confirmmail')
         })
-        .catch(next)
+        .catch((e)=>e===true||next(e))
 })
 
 const forgetPasswordMiddleware = (req,res,next)=>{
@@ -114,15 +120,14 @@ const forgetPasswordMiddleware = (req,res,next)=>{
 }
 
 router.get('/forget/:token',forgetPasswordMiddleware,(req,res)=>{
-    res.render('vwUser/resetpassword')
+    res.render('vwUser/resetpassword',{fullPage:true})
 })
 
 router.post('/forget/:token',forgetPasswordMiddleware,(req,res,next)=>{
     const {p1,p2} = req.body
     if (p1 != p2) {
-        return res.render('vwUser/resetpassword',{error:"Mat khau khong trung nhau"})
+        return res.render('vwUser/resetpassword',{error:"Mật khẩu không khớp",fullPage:true})
     }
-
     var passwordHash = bcrypt.hashSync(req.body.p1, config.authentication.saltRounds);
 
     const id = req.targetUser.ID
@@ -130,6 +135,9 @@ router.post('/forget/:token',forgetPasswordMiddleware,(req,res,next)=>{
     UserModel.patch(updateUser,id).then(()=>res.redirect('/login')).catch(next)
 })
 
+router.get('/login2', function (req, res) {
+    res.render('vwUser/login2',{fullPage:true})
+})
 router.get('/login', function (req, res) {
 
   res.render('vwUser/login')

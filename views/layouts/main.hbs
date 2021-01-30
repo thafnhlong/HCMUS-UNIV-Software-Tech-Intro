@@ -29,8 +29,8 @@
    <!-- loader END -->
    <!-- Wrapper Start -->
    <div class="wrapper">
-      {{#if _sections.fullPage}}
-         {{{_sections.fullPage}}}
+      {{#if fullPage}}
+         {{{body}}}
       {{else}}
       <!-- Sidebar  -->
 {{> leftmenu}}
@@ -48,7 +48,7 @@
       {{/if}}
    </div>
    <!-- Wrapper END -->
-   {{#unless _sections.fullPage}}
+   {{#unless fullPage}}
    <!-- Footer -->
 {{> footer}}
    <!-- Footer END -->
@@ -139,10 +139,12 @@
    <script src="/js/style-customizer.js"></script>
    <!-- Chart Custom JavaScript -->
    <script src="/js/chart-custom.js"></script>
-<!-- Music js -->
+   {{#unless fullPage}}
+   <!-- Music js -->
    <script src="/js/music-player.js"></script>
    <!-- Music-player js -->
    <script src="/js/music-player-dashboard.js"></script>
+   {{/unless}}
    <!-- Custom JavaScript -->
    <script src="/js/custom.js"></script>
 
