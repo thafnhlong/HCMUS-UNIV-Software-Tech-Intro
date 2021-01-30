@@ -6,7 +6,7 @@ const md5 = require("md5");
 const UserModel = require('../models/user.model');
 const Helper = require("../utils/helper");
 const config = require("../config/default.json");
-const mailer = require("../misc/mailer");
+const mailer = require("../utils/mailer");
 
 router.get('/register',(req,res) => {
     res.render("vwUser/register.hbs");
@@ -149,7 +149,7 @@ router.post('/login', async function(req, res){
   }
   if(user.status===0){
     var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
-    mailer.sendActiveToken(user.Email, linkActive);
+    mailer.sendActiveToken(user.email, linkActive);
   }
   delete user.password;
   req.session.isAuthenticated = true;
