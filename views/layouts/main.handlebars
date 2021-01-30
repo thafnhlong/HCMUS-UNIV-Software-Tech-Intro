@@ -6,7 +6,7 @@
    <!-- Required meta tags -->
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <title>Muzik- Responsive Bootstrap 4 Admin Dashboard Template</title>
+   <title>{{_sections.title}} | Muzik</title>
    <!-- Favicon -->
    <link rel="shortcut icon" href="/images/favicon.ico" />
    <!-- Bootstrap CSS -->
@@ -29,6 +29,9 @@
    <!-- loader END -->
    <!-- Wrapper Start -->
    <div class="wrapper">
+      {{#if _sections.fullPage}}
+         {{{_sections.fullPage}}}
+      {{else}}
       <!-- Sidebar  -->
       <div class="iq-sidebar">
          <div class="iq-sidebar-logo d-flex justify-content-between">
@@ -50,7 +53,7 @@
             <nav class="iq-sidebar-menu">
                <ul id="iq-sidebar-toggle" class="iq-menu">
                   <li class="active active-menu">
-                     <a href="/#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Dashboard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Dashboard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
                         <li class="active"><a href="/index.html"><i class="las la-house-damage"></i>Home</a></li>
                         <li><a href="/latest.html"><i class="las la-headphones"></i>Latest</a></li>
@@ -58,7 +61,7 @@
                      </ul>
                   </li>
                   <li>
-                     <a href="/#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="ri-admin-line iq-arrow-left"></i><span>Admin</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="ri-admin-line iq-arrow-left"></i><span>Admin</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="admin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li><a href="/admin-dashboard.html"><i class="las la-house-damage"></i>Dashboard</a></li>
                         <li><a href="/admin-category.html"><i class="ri-function-line"></i>Category</a></li>
@@ -71,7 +74,7 @@
                      <a href="/calendar.html" class="iq-waves-effect"><i class="las la-calendar iq-arrow-left"></i><span>Calendar</span></a>
                   </li>
                   <li>
-                     <a href="/#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
                         <li><a href="/profile.html"><i class="las la-id-card-alt"></i>User Profile</a></li>
                         <li><a href="/profile-edit.html"><i class="las la-edit"></i>User Edit</a></li>
@@ -80,10 +83,10 @@
                      </ul>
                   </li>
                   <li>
-                     <a href="/#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li class="elements">
-                           <a href="/#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>UI Kit</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>UI Kit</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="sub-menu" class="iq-submenu collapse" data-parent="#ui-elements">
                               <li><a href="/ui-colors.html"><i class="las la-palette"></i>colors</a></li>
                               <li><a href="/ui-typography.html"><i class="las la-keyboard"></i>Typography</a></li>
@@ -108,7 +111,7 @@
                            </ul>
                         </li>
                         <li class="form">
-                           <a href="/#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-wpforms"></i><span>Forms</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-wpforms"></i><span>Forms</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="forms" class="iq-submenu collapse" data-parent="#ui-elements">
                               <li><a href="/form-layout.html"><i class="las la-book"></i>Form Elements</a></li>
                               <li><a href="/form-validation.html"><i class="las la-edit"></i>Form Validation</a></li>
@@ -118,7 +121,7 @@
                            </ul>
                         </li>
                         <li>
-                           <a href="/#wizard-form" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-archive-drawer-line"></i><span>Forms Wizard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#wizard-form" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-archive-drawer-line"></i><span>Forms Wizard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="wizard-form" class="iq-submenu collapse" data-parent="#ui-elements">
                               <li><a href="/form-wizard.html"><i class="ri-clockwise-line"></i>Simple Wizard</a></li>
                               <li><a href="/form-wizard-validate.html"><i class="ri-clockwise-2-line"></i>Validate Wizard</a></li>
@@ -126,7 +129,7 @@
                            </ul>
                         </li>
                         <li>
-                           <a href="/#tables" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-table-line"></i><span>Table</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#tables" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-table-line"></i><span>Table</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="tables" class="iq-submenu collapse" data-parent="#ui-elements">
                               <li><a href="/tables-basic.html"><i class="ri-table-line"></i>Basic Tables</a></li>
                               <li><a href="/data-table.html"><i class="ri-database-line"></i>Data Table</a></li>
@@ -134,7 +137,7 @@
                            </ul>
                         </li>
                         <li>
-                           <a href="/#charts" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line"></i><span>Charts</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#charts" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line"></i><span>Charts</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="charts" class="iq-submenu collapse" data-parent="#ui-elements">
                               <li><a href="/chart-morris.html"><i class="ri-file-chart-line"></i>Morris Chart</a></li>
                               <li><a href="/chart-high.html"><i class="ri-bar-chart-line"></i>High Charts</a></li>
@@ -143,7 +146,7 @@
                            </ul>
                         </li>
                         <li>
-                           <a href="/#icons" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-list-check"></i><span>Icons</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#icons" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-list-check"></i><span>Icons</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="icons" class="iq-submenu collapse" data-parent="#ui-elements">
                               <li><a href="/icon-dripicons.html"><i class="ri-stack-line"></i>Dripicons</a></li>
                               <li><a href="/icon-fontawesome-5.html"><i class="ri-facebook-fill"></i>Font Awesome 5</a></li>
@@ -155,10 +158,10 @@
                      </ul>
                   </li>
                   <li>
-                     <a href="/#pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-file-alt iq-arrow-left"></i><span>Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="#pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-file-alt iq-arrow-left"></i><span>Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="pages" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         <li>
-                           <a href="/#authentication" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pages-line"></i><span>Authentication</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#authentication" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pages-line"></i><span>Authentication</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="authentication" class="iq-submenu collapse" data-parent="#pages">
                               <li><a href="/sign-in.html"><i class="las la-sign-in-alt"></i>Login</a></li>
                               <li><a href="/sign-up.html"><i class="ri-login-circle-line"></i>Register</a></li>
@@ -168,7 +171,7 @@
                            </ul>
                         </li>
                         <li>
-                           <a href="/#extra-pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           <a href="#extra-pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                            <ul id="extra-pages" class="iq-submenu collapse" data-parent="#pages">
                               <li><a href="/pages-timeline.html"><i class="ri-map-pin-time-line"></i>Timeline</a></li>
                               <li><a href="/pages-invoice.html"><i class="ri-question-answer-line"></i>Invoice</a></li>
@@ -184,24 +187,24 @@
                      </ul>
                   </li>
                   <li>
-                     <a href="/#menu-level" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-record-circle-line iq-arrow-left"></i><span>Menu Level</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="#menu-level" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-record-circle-line iq-arrow-left"></i><span>Menu Level</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="menu-level" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li><a href="/#"><i class="ri-record-circle-line"></i>Menu 1</a></li>
+                        <li><a href="#"><i class="ri-record-circle-line"></i>Menu 1</a></li>
                         <li>
-                           <a href="/#"><i class="ri-record-circle-line"></i>Menu 2</a>
+                           <a href="#"><i class="ri-record-circle-line"></i>Menu 2</a>
                            <ul>
                               <li class="menu-level">
-                                 <a href="/#sub-menus" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>Sub-menu</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                 <a href="#sub-menus" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>Sub-menu</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                                  <ul id="sub-menus" class="iq-submenu iq-submenu-data collapse">
-                                    <li><a href="/#"><i class="ri-record-circle-line"></i>Sub-menu 1</a></li>
-                                    <li><a href="/#"><i class="ri-record-circle-line"></i>Sub-menu 2</a></li>
-                                    <li><a href="/#"><i class="ri-record-circle-line"></i>Sub-menu 3</a></li>
+                                    <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 1</a></li>
+                                    <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 2</a></li>
+                                    <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 3</a></li>
                                  </ul>
                               </li>
                            </ul>
                         </li>
-                        <li><a href="/#"><i class="ri-record-circle-line"></i>Menu 3</a></li>
-                        <li><a href="/#"><i class="ri-record-circle-line"></i>Menu 4</a></li>
+                        <li><a href="#"><i class="ri-record-circle-line"></i>Menu 3</a></li>
+                        <li><a href="#"><i class="ri-record-circle-line"></i>Menu 4</a></li>
                      </ul>
                   </li>
                </ul>
@@ -239,179 +242,53 @@
                         <div class="iq-search-bar">
                            <form action="#" class="searchbox">
                               <input type="text" class="text search-input" placeholder="Search Here..">
-                              <a class="search-link" href="/#"><i class="ri-search-line text-black"></i></a>
-                              <a class="search-audio" href="/#"><i class="las la-microphone text-black"></i></a>
+                              <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
+                              <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
                            </form>
                         </div>
                      </li>
                      <li class="nav-item nav-icon search-content">
-                        <a href="/#" class="search-toggle iq-waves-effect text-gray rounded"><span class="ripple rippleEffect " ></span>
+                        <a href="#" class="search-toggle iq-waves-effect text-gray rounded"><span class="ripple rippleEffect " ></span>
                            <i class="ri-search-line text-black"></i>
                         </a>
                         <form action="#" class="search-box p-0">
                            <input type="text" class="text search-input" placeholder="Type here to search...">
-                           <a class="search-link" href="/#"><i class="ri-search-line text-black"></i></a>
-                           <a class="search-audio" href="/#"><i class="las la-microphone text-black"></i></a>
+                           <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
+                           <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
                         </form>
                      </li>
                      <li class="nav-item nav-icon">
-                        <a href="/#" class="search-toggle iq-waves-effect text-black rounded">
-                           <i class="las la-cog"></i>
+                        <a href="#" class="search-toggle iq-waves-effect text-black rounded">
+                           <i class="las la-file-audio"></i>
                            <span class=" dots"></span>
                         </a>
                      </li>
                      <li class="nav-item nav-icon">
-                        <a href="/#" class="search-toggle iq-waves-effect text-black rounded">
-                           <i class="lar la-envelope"></i>
-                           <span class="massage-icon dots badge badge-primary">5</span>
-                        </a>
-                        <div class="iq-sub-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                              <div class="iq-card-body p-0 ">
-                                 <div class="bg-primary p-3">
-                                    <h5 class="mb-0 text-white">All Messages<small class="badge  badge-light float-right pt-1">5</small></h5>
-                                 </div>
-                                 <a href="/#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="/images/user/01.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Bni Emma Watson</h6>
-                                          <small class="float-left font-size-12">13 Jun</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="/images/user/02.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
-                                          <small class="float-left font-size-12">20 Apr</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="/images/user/03.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Why do we use it?</h6>
-                                          <small class="float-left font-size-12">30 Jun</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="/images/user/04.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Variations Passages</h6>
-                                          <small class="float-left font-size-12">12 Sep</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/#" class="iq-sub-card">
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded" src="/images/user/05.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Lorem Ipsum generators</h6>
-                                          <small class="float-left font-size-12">5 Dec</small>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="nav-item nav-icon">
-                        <a href="/#" class="search-toggle iq-waves-effect text-black rounded">
-                           <i class="ri-notification-line block"></i>
+                        <a href="#" class="search-toggle iq-waves-effect text-black rounded">
+                           <i class="las la-cloud-upload-alt"></i>
                            <span class="notice-icon dots badge badge-primary">+</span>
                         </a>
-                        <div class="iq-sub-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                              <div class="iq-card-body p-0">
-                                 <div class="bg-primary p-3">
-                                    <h5 class="mb-0 text-white">All Notifications<small class="badge  badge-light float-right pt-1">4</small></h5>
-                                 </div>
-                                 <a href="/#" class="iq-sub-card" >
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded img-fluid" src="/images/user/01.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Emma Watson Barry</h6>
-                                          <small class="float-right">Just Now</small>
-                                          <p class="mb-0">95 MB</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/#" class="iq-sub-card" >
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded img-fluid" src="/images/user/02.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">New customer is join</h6>
-                                          <small class="float-right">5 days ago</small>
-                                          <p class="mb-0">Cyst Barry</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/#" class="iq-sub-card" >
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded img-fluid" src="/images/user/03.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Two customer is left</h6>
-                                          <small class="float-right">2 days ago</small>
-                                          <p class="mb-0">Cyst Barry</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/#" class="iq-sub-card" >
-                                    <div class="media align-items-center">
-                                       <div class="">
-                                          <img class="avatar-40 rounded img-fluid" src="/images/user/04.jpg" alt="">
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                          <small class="float-right">3 days ago</small>
-                                          <p class="mb-0">Cyst Barry</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
                      </li>
                      <li class="line-height pt-3">
-                        <a href="/#" class="search-toggle iq-waves-effect d-flex align-items-center">
+                        <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
                            <img src="/images/user/11.png" class="img-fluid rounded-circle" alt="user">
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
                               <div class="iq-card-body p-0 ">
                                  <div class="bg-primary p-3">
-                                    <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
-                                    <span class="text-white font-size-12">Available</span>
+                                    <h5 class="mb-0 text-white line-height">Xin chào Long Nguyen</h5>
+                                    <span class="text-secondary font-size-12">Admin (show if admin)</span>
                                  </div>
+                                 {{#if false}}
                                  <a href="/profile.html" class="iq-sub-card iq-bg-primary-hover">
                                     <div class="media align-items-center">
                                        <div class="rounded iq-card-icon iq-bg-primary">
                                           <i class="ri-file-user-line"></i>
                                        </div>
                                        <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">My Profile</h6>
-                                          <p class="mb-0 font-size-12">View personal profile details.</p>
+                                          <h6 class="mb-0 ">Tài khoản</h6>
+                                          <p class="mb-0 font-size-12">Xem thông tin cá nhân và chỉnh sửa</p>
                                        </div>
                                     </div>
                                  </a>
@@ -421,36 +298,19 @@
                                           <i class="ri-profile-line"></i>
                                        </div>
                                        <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Edit Profile</h6>
-                                          <p class="mb-0 font-size-12">Modify your personal details.</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/account-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                       <div class="rounded iq-card-icon iq-bg-primary">
-                                          <i class="ri-account-box-line"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Account settings</h6>
-                                          <p class="mb-0 font-size-12">Manage your account parameters.</p>
-                                       </div>
-                                    </div>
-                                 </a>
-                                 <a href="/privacy-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                    <div class="media align-items-center">
-                                       <div class="rounded iq-card-icon iq-bg-primary">
-                                          <i class="ri-lock-line"></i>
-                                       </div>
-                                       <div class="media-body ml-3">
-                                          <h6 class="mb-0 ">Privacy Settings</h6>
-                                          <p class="mb-0 font-size-12">Control your privacy parameters.</p>
+                                          <h6 class="mb-0 ">Bài hát</h6>
+                                          <p class="mb-0 font-size-12">Danh sách, chỉnh sửa và cập nhật</p>
                                        </div>
                                     </div>
                                  </a>
                                  <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="bg-primary iq-sign-btn" href="/sign-in.html" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                    <a class="bg-primary iq-sign-btn" href="/sign-in.html" role="button">Đăng xuất<i class="ri-login-box-line ml-2"></i></a>
                                  </div>
+                                 {{else}}
+                                 <div class="d-inline-block w-100 text-center p-3">
+                                    <a class="bg-primary iq-sign-btn" href="/sign-in.html" role="button">Đăng nhập<i class="ri-login-box-line ml-2"></i></a>
+                                 </div>
+                                 {{/if}}
                               </div>
                            </div>
                         </div>
@@ -469,8 +329,10 @@
             </div>
          </div>
       </div>
+      {{/if}}
    </div>
    <!-- Wrapper END -->
+   {{#unless _sections.fullPage}}
    <!-- Footer -->
    <footer class="iq-footer">
       <div class="container-fluid">
@@ -506,9 +368,10 @@
       </div>
    </footer>
    <!-- Footer END -->
+   {{/unless}}
    <!-- color-customizer -->
    {{!-- <div class="iq-colorbox color-fix">
-      <div class="buy-button"> <a class="color-full" href="/#"><i class="fa fa-spinner fa-spin"></i></a> </div>
+      <div class="buy-button"> <a class="color-full" href="#"><i class="fa fa-spinner fa-spin"></i></a> </div>
       <div id="right-sidebar-scrollbar" class="iq-colorbox-inner">
          <div class="clearfix color-picker">
             <h3 class="iq-font-black">music Awesome Color</h3>
