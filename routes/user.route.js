@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const md5 = require("md5");
-const UserModel = require("../models/user.model");
+
+const UserModel = require('../models/user.model');
 const Helper = require("../utils/helper");
 const config = require("../config/default.json");
 const mailer = require("../misc/mailer");
@@ -127,6 +128,35 @@ router.post('/forget/:token',forgetPasswordMiddleware,(req,res,next)=>{
     const id = req.targetUser.ID
     const updateUser = {refreshToken:null,password:passwordHash,modifileDate:new Date()}
     UserModel.patch(updateUser,id).then(()=>res.redirect('/login')).catch(next)
+})
+
+router.get('/login', function (req, res) {
+
+  res.render('vwUser/login')
+})
+router.post('/login', async function(req, res){
+  const user=await UserModel.singleByUserNameorEmail(req.body.username);
+  if(user===null){
+    return res.render('vwUser/login',{
+      err: 'Invalid username or password.'
+    })
+  }
+  const rs = bcrypt.compareSync(req.body.password, user.password);
+  if (rs === false) {
+    return res.render('vwUser/login', {
+      err: 'Invalid username or password.'
+    })
+  }
+  if(user.status===0){
+    var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
+    mailer.sendActiveToken(user.Email, linkActive);
+  }
+  delete user.password;
+  req.session.isAuthenticated = true;
+  req.session.authUser = user;
+
+  const url = req.query.retUrl || '/';
+  res.redirect(url);
 })
 
 module.exports = router;

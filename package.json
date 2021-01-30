@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-handlebars-sections": "^1.0.1",
+    "express-session": "^1.17.1",
     "formidable": "^1.2.2",
     "jsonwebtoken": "^8.5.1",
     "lru-cache": "^6.0.0",

@@ -14,9 +14,10 @@ app.use(
 );
 
 //config view_engine and libraries helper as hbs-sections
-require("./middlewares/viewengine.mdw")(app);
-
-app.use("/public", express.static("public"));
+require('./middlewares/viewengine.mdw')(app);
+require('./middlewares/session.mdw')(app);
+require('./middlewares/local.mdw')(app);
+app.use('/public', express.static('public'));
 
 //app.get('/',(req,res)=>res.send('Muzik'));
 
@@ -26,7 +27,7 @@ app.get("/", (req, res) => {
 
 app.use('/', require('./routes/user.route'));
 
-app.use("/dashboard", require("./routes/dashboard.rote"));
+app.use("/dashboard", require("./routes/dashboard.route"));
 
 app.get("/throw", (req, res) => {
   throw new Error("error");
