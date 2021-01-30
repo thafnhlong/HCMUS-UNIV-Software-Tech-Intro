@@ -149,7 +149,7 @@ router.post('/login', async function(req, res){
   }
   if(user.status===0){
     var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
-    mailer.sendActiveToken(user.Email, linkActive);
+    mailer.sendActiveToken(user.email, linkActive);
   }
   delete user.password;
   req.session.isAuthenticated = true;
