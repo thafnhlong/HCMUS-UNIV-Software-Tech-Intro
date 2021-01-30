@@ -17,7 +17,7 @@ app.use(
 require('./middlewares/viewengine.mdw')(app);
 require('./middlewares/session.mdw')(app);
 require('./middlewares/local.mdw')(app);
-app.use('/public', express.static('public'));
+app.use('/', express.static('public'));
 
 //app.get('/',(req,res)=>res.send('Muzik'));
 

@@ -169,7 +169,6 @@ Index Of Script
         jQuery("#load").fadeOut();
         jQuery("#loading").delay().fadeOut("");
 
-        
 
        /*---------------------------------------------------------------------
        Owl Carousel
@@ -519,6 +518,14 @@ Index Of Script
                 inline: true
             });
         }
+
+        /*---------------------------------------------------------------------
+           Datatables
+        -----------------------------------------------------------------------*/
+        if(jQuery('.data-tables').length)
+        {
+          $('.data-tables').DataTable();
+        }
         
         /*---------------------------------------------------------------------
            Scroll up menu
@@ -552,5 +559,7 @@ Index Of Script
             jQuery(this).addClass('active');
         });
     });
+
+
 
 })(jQuery);
