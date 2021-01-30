@@ -4,7 +4,8 @@ const moment = require('moment');
 
 module.exports = function (app) {
     app.engine('hbs', exphbs({
-        defaultLayout: 'main.handlebars',
+        extname: "hbs",
+        defaultLayout: 'main.hbs',
         helpers:
         {
             section: express_handlebars_sections(),

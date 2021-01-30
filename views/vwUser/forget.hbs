@@ -1,39 +1,42 @@
-{{#section 'js'}}
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer></script>
-{{/section}}
-Form quen mat khau
-<hr>
-{{#if success}}
-<p style="color: greenyellow;">Da gui huong dan lay lai mat khau den email: {{success.email}}</p>
-{{/if}}
-<form method="post" onsubmit="onSubmit(event)">
-    <label for="email">Nhap email</label>
-    <input type="email" required name="email" id="email" value="{{model.email}}">
-    {{#if error.email}}<p style="color: red;">{{error.email}}</p>{{/if}}
-    
-    <div class="g-recaptcha" data-sitekey="6LfdpSYaAAAAAI5Cq89EOVX57-BLGt6z-zuamKJ5"
-         data-callback="recaptcha_callback"></div>
-    <p style="color: red;" id="errCaptcha"></p>
+{{#section 'title'}}Quên mật khẩu{{/section}}
 
-    <input type="submit" value="Quen mat khau">
-</form>
+<section class="sign-in-page">
+    <div class="container h-100">
+      <div class="row justify-content-center align-items-center h-100">
+          <div class="col-md-6 col-sm-12 col-12 ">
+            <div class="sign-user_card ">
+                <div class="d-flex justify-content-center">
+                  <div class="sign-user_logo">
+                      <img src="/images/login/user.png" class=" img-fluid" alt="Logo">
+                  </div>
+                </div>
+                <div class="sign-in-page-data">
+                  <div class="sign-in-from w-100 m-auto pt-5">
+                      <h1 class="mb-0">Quên mật khẩu</h1>
+                      
+                      {{#if error}}
+                      <div class="alert text-white bg-primary" role="alert">
+                        <div class="iq-alert-text">{{error}}</div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="ri-close-line"></i>
+                        </button>
+                      </div>
+                      {{/if}}
 
-
-<script>
-  var checked_Captcha = true;
-  function onSubmit(e){
-    if (!checked_Captcha)
-    {
-        document.getElementById("errCaptcha").innerHTML = "Captcha không hợp lệ!!!";
-        e.preventDefault()
-    }
-  }
-
-  function recaptcha_callback()
-  {
-    document.getElementById("errCaptcha").innerHTML = "";
-    checked_Captcha = true;
-  }
-</script>
+                      <p class="text-white">Nhập email của bạn để chúng tôi gửi 1 email tới hướng dẫn bạn lấy lại mật khẩu</p>
+                      <form method="post" id="reset" class="mt-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Địa chị Email</label>
+                            <input name="email" type="email" class="form-control mb-0" id="exampleInputEmail1" placeholder="Enter email">
+                        </div>
+                        <div class="d-inline-block w-100">
+                            <button form="reset" class="btn btn-primary float-right">Quên mật khẩu</button>
+                        </div>
+                      </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+</section>
