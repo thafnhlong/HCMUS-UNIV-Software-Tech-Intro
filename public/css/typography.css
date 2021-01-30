@@ -208,6 +208,7 @@ loading
 }
 
 /* Bootstrap override */
+
 .rounded {border-radius: 15px!important;}
 .rounded-normal {border-radius: 5px!important;}
 .rounded-right {border-radius: 0px 15px 15px 0px !important;}
@@ -218,16 +219,16 @@ loading
 .form-control { height: 45px; line-height: 45px; background: transparent; border: 1px solid var(--iq-border-light); font-size: 14px; color: var(--iq-secondary); border-radius: 5px; }
 .form-control:focus { color: var(--iq-dark); border-color: var(--iq-primary); box-shadow: none; }
 .progress-bar{background-color: var(--iq-primary);}
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{background-color: var(--iq-primary-hover);border-color: var(--iq-primary-hover);}
-.btn-primary.focus, .btn-primary:focus{background-color: var(--iq-primary-hover);border-color: var(--iq-primary-hover);}
 .custom-control-input:checked~.custom-control-label::before{background-color: var(--iq-primary);border-color: var(--iq-primary);}
 .custom-checkbox .custom-control-input:disabled:checked~.custom-control-label::before, .custom-radio .custom-control-input:disabled:checked~.custom-control-label::before{background-color: var(--iq-light-primary);color: var(--iq-primary);}
+a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover { background: var(--iq-primary-hover) !important; border-color: var(--iq-primary-hover); }
 .custom-select:focus{box-shadow: none;}
 .table td, .table th{vertical-align: middle;}
 
 /*----------------------------------------------
 Background Color
 ------------------------------------------------*/
+
 .bg-primary, .badge-primary { color: var(--iq-white); background: var(--iq-primary) !important; }
 .bg-secondary, .badge-secondary { color: var(--iq-white); background-color: var(--iq-secondary) !important; }
 .bg-success, .badge-success { color: var(--iq-white); background: var(--iq-success) !important;}
@@ -241,6 +242,7 @@ Background Color
 /*----------------------------------------------
 Background Color Opacity
 ------------------------------------------------*/
+
 .iq-bg-primary {background: var(--iq-light-primary) !important; color: var(--iq-primary) !important;}
 .iq-bg-secondary { background: var(--iq-light-secondary) !important; color: var(--iq-secondary) !important; }
 .iq-bg-success { background: var(--iq-light-success) !important; color: var(--iq-success) !important; }
@@ -250,6 +252,7 @@ Background Color Opacity
 .iq-bg-dark { background: var(--iq-light-dark) !important; color: var(--iq-dark) !important; }
 .iq-bg-close { background: var(--iq-light-close) !important; color: var(--iq-dark) !important; }
 .iq-bg-gray{background:var(--iq-bg-gray)!important; border-radius: 0px !important; box-shadow: none !important;}
+
 /*--------------*/
 .iq-bg-primary-hover:hover { background: var(--iq-light-primary) !important; color: var(--iq-primary); }
 .iq-bg-primary-secondary-hover:hover { background: var(--iq-light-secondary) !important; }
@@ -262,6 +265,7 @@ Background Color Opacity
 /*----------------------------------------------
     Background Border Color
 ------------------------------------------------*/
+
 .iq-border-primary { border: 1px solid var(--iq-white); color: var(--iq-white); background: transparent !important; }
 .iq-border-danger { border: 10px solid var(--iq-light-danger); }
 .iq-border-success { border: 10px solid var(--iq-light-success); }
@@ -271,6 +275,7 @@ Background Color Opacity
 /*----------------------------------------------
 Text Color
 ------------------------------------------------*/
+
 .text-primary { color: var(--iq-primary) !important; }
 .text-secondary { color: var(--iq-secondary) !important; }
 .text-success { color: var(--iq-success) !important; }
@@ -407,8 +412,49 @@ Buttons
 .btn-light:hover { background-color: var(--iq-light-hover); border-color: var(--iq-light-hover); }
 .btn-dark:hover { background-color: var(--iq-dark-hover); border-color: var(--iq-dark-hover); }
 
-/*--------------*/
-a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover { background: var(--iq-primary-hover) !important; border-color: var(--iq-primary-hover); }
+/*------------------*/
+.btn-primary.focus, .btn-primary:focus{background-color: var(--iq-primary-hover);border-color: var(--iq-primary-hover);}
+.btn-secondary.focus, .btn-secondary:focus{background-color: var(--iq-secondary-hover);border-color: var(--iq-secondary-hover);}
+.btn-success.focus, .btn-success:focus{background-color: var(--iq-success-hover);border-color: var(--iq-success-hover);}
+.btn-danger.focus, .btn-danger:focus{background-color: var(--iq-danger-hover);border-color: var(--iq-danger-hover);}
+.btn-warning.focus, .btn-warning:focus{background-color: var(--iq-warning-hover);border-color: var(--iq-warning-hover);}
+.btn-info.focus, .btn-info:focus{background-color: var(--iq-info-hover);border-color: var(--iq-info-hover);}
+.btn-light.focus, .btn-light:focus{background-color: var(--iq-light-hover);border-color: var(--iq-light-hover);}
+.btn-dark.focus, .btn-dark:focus{background-color: var(--iq-dark-hover);border-color: var(--iq-dark-hover);}
+
+
+/*----------------*/
+.btn-primary.disabled, .btn-primary:disabled { color: var(--iq-white); background-color: var(--iq-primary); border-color: var(--iq-primary); }
+.btn-secondary.disabled, .btn-secondary:disabled { color: var(--iq-white); background-color: var(--iq-secondary); border-color: var(--iq-secondary); }
+.btn-success.disabled, .btn-success:disabled {color:var(--iq-white); background-color: var(--iq-success); border-color: var(--iq-success); }
+.btn-danger.disabled, .btn-danger:disabled { color:var(--iq-white); background-color: var(--iq-danger); border-color: var(--iq-danger); }
+.btn-warning.disabled, .btn-warning:disabled { color:var(--iq-white); background-color: var(--iq-warning); border-color: var(--iq-warning); }
+.btn-info.disabled, .btn-info:disabled { color:var(--iq-white); background-color: var(--iq-info); border-color: var(--iq-info); }
+.btn-light.disabled, .btn-light:disabled { color:var(--iq-white); background-color: var(--iq-light); border-color: var(--iq-light); }
+.btn-dark.disabled, .btn-dark:disabled { color:var(--iq-white); background-color: var(--iq-dark); border-color: var(--iq-dark); }
+
+
+/*----------------*/
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-primary); border-color: var(--iq-secondary); }
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-secondary); border-color: var(--iq-secondary); }
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-success); border-color: var(--iq-secondary); }
+.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-danger); border-color: var(--iq-secondary); }
+.btn-warning:not(:disabled):not(.disabled).active, .btn-warning:not(:disabled):not(.disabled):active, .show>.btn-warning.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-warning); border-color: var(--iq-secondary); }
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show>.btn-info.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-info); border-color: var(--iq-secondary); }
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-light); border-color: var(--iq-secondary); }
+.btn-dark:not(:disabled):not(.disabled).active, .btn-dark:not(:disabled):not(.disabled):active, .show>.btn-dark.dropdown-toggle { color: var(--iq-white); background-color: var(--iq-dark); border-color: var(--iq-secondary); }
+
+/*----------------*/
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle{ background-color: var(--iq-primary); border-color: var(--iq-primary);}
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show>.btn-outline-secondary.dropdown-toggle{ background-color: var(--iq-secondary); border-color: var(--iq-secondary);}
+.btn-outline-success:not(:disabled):not(.disabled).active, .btn-outline-success:not(:disabled):not(.disabled):active, .show>.btn-outline-success.dropdown-toggle{ background-color: var(--iq-success); border-color: var(--iq-success);}
+.btn-outline-danger:not(:disabled):not(.disabled).active, .btn-outline-danger:not(:disabled):not(.disabled):active, .show>.btn-outline-danger.dropdown-toggle{ background-color: var(--iq-danger); border-color: var(--iq-danger);}
+.btn-outline-warning:not(:disabled):not(.disabled).active, .btn-outline-warning:not(:disabled):not(.disabled):active, .show>.btn-outline-warning.dropdown-toggle{ background-color: var(--iq-warning); border-color: var(--iq-warning);}
+.btn-outline-info:not(:disabled):not(.disabled).active, .btn-outline-info:not(:disabled):not(.disabled):active, .show>.btn-outline-info.dropdown-toggle{ background-color: var(--iq-info); border-color: var(--iq-info);}
+.btn-outline-light:not(:disabled):not(.disabled).active, .btn-outline-light:not(:disabled):not(.disabled):active, .show>.btn-outline-light.dropdown-toggle{ background-color: var(--iq-light); border-color: var(--iq-light);}
+.btn-outline-dark:not(:disabled):not(.disabled).active, .btn-outline-dark:not(:disabled):not(.disabled):active, .show>.btn-outline-dark.dropdown-toggle{ background-color: var(--iq-dark); border-color: var(--iq-dark);}
+
 
 /*--------------*/
 .btn-outline-primary { color: var(--iq-primary); border-color: var(--iq-primary); }
@@ -429,6 +475,16 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 .btn-outline-info:hover {color:var(--iq-white); background-color: var(--iq-info); border-color: var(--iq-info);}
 .btn-outline-light:hover {color:var(--iq-white); background-color: var(--iq-light); border-color: var(--iq-light);}
 .btn-outline-dark:hover {color:var(--iq-white); background-color: var(--iq-dark); border-color: var(--iq-dark);}
+
+/*----------------*/
+.btn-outline-primary.disabled, .btn-outline-primary:disabled { color: var(--iq-primary); background-color: transparent; }
+.btn-outline-secondary.disabled, .btn-outline-secondary:disabled { color: var(--iq-secondary); background-color: transparent; }
+.btn-outline-success.disabled, .btn-outline-success:disabled { color: var(--iq-success); background-color: transparent; }
+.btn-outline-danger.disabled, .btn-outline-danger:disabled { color: var(--iq-danger); background-color: transparent; }
+.btn-outline-warning.disabled, .btn-outline-warning:disabled { color: var(--iq-warning); background-color: transparent; }
+.btn-outline-info.disabled, .btn-outline-info:disabled { color: var(--iq-info); background-color: transparent; }
+.btn-outline-light.disabled, .btn-outline-light:disabled { color: var(--iq-light); background-color: transparent; }
+.btn-outline-dark.disabled, .btn-outline-dark:disabled { color: var(--iq-dark); background-color: transparent; }
 
 
 /*----------------------------------------------

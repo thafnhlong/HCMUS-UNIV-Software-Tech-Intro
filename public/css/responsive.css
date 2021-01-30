@@ -205,6 +205,7 @@ NOTE: This file contains the styling for responsive Template.
 	.activities-content { width: 390px; }
 	.iq-top-navbar .navbar .iq-search-bar { display: none; }
 	li.nav-item.nav-icon.search-content { display: block; }
+	.search-box .search-audio{display: none;}
 }
 @media(max-width:979px) {
 	.iq-circle-progressbar .percent { font-size: 2.5rem !important; }
@@ -212,6 +213,7 @@ NOTE: This file contains the styling for responsive Template.
 	.iq-circle-progressbar { margin: 0 auto; width: 200px !important; height: 200px !important; }
 	.slider_container { display: none; }
 	.slider_container1 { display: none; }
+	.slider_music{display: flex;}
 	.details1 { position: relative; bottom: 0; top: 0; left: 0; }
 	.iq-music-img { height: 200px; }
 	.equalizer { position: relative; top: -100px; }
@@ -219,6 +221,14 @@ NOTE: This file contains the styling for responsive Template.
 	.iq-song-back .iq-music-img1 { height: 150px; }
 	.iq-song-back .equalizer1 { position: relative; top: -120px; }
 	#calendar1 .fc-toolbar { display: block; text-align: center; }
+	body.sidebar-main .iq-sidebar .iq-sidebar-menu .iq-menu li ul.iq-submenu-data li > a, body.sidebar-main .iq-sidebar:hover .iq-sidebar-menu .iq-menu li ul.iq-submenu-data li > a {
+    padding-left: 80px;}
+	.iq-music-play { display: none; }
+	.iq-musc-icone { display: none; }
+	.iq-music-time { display: none; }
+	.iq-music-play-detail { margin-top: 30px; }
+
+
 }
 @media (min-width:768px) {
 	.sign-info span { display: none !important; }
@@ -290,6 +300,15 @@ NOTE: This file contains the styling for responsive Template.
 	.iq-music-img { height: 150px; }
 	.equalizer { position: relative; top: -125px; }
 	.player1 { display: none; }
+	.music-right {margin-top: 15px;}
+	.iq-music-play-detail { display: block !important; margin-top: 30px; }
+	.iq-music-play-detail h3{font-size: 20px;}
+	.track-artist{text-align: left;}
+	.slider_container.slider_music { position: absolute; top: -30px; left: 0; right: 0; max-width: 100%; flex: 100%; }
+	.iq-footer, body.sidebar-main .iq-footer { padding: 30px 10px 12px; margin-left: 0; width: 100%; }
+	.playpause-track, .prev-track, .next-track { font-size: 14px; }
+	.player { padding: 20px 0 0px 0px; }
+
 }
 @media(min-width:576px) {
 	.card-columns .iq-card { display: inline-block; width: 100%; }
@@ -352,6 +371,9 @@ NOTE: This file contains the styling for responsive Template.
 	.iq-card .iq-card-header { display: block !important; text-align: center; }
 	.iq-card .iq-card-header .iq-header-title { display: block; align-self: center !important; }
 	.iq-card .iq-card-header > .d-flex { display: block !important; margin-top: 10px; }
+	.player { padding: 20px 0 0px 0px; }
+	.iq-footer, body.sidebar-main .iq-footer { padding: 40px 10px 12px; }
+
 }
 @media(max-width:359px) {
 	.iq-search-bar .searchbox { width: 160px; }
@@ -360,4 +382,7 @@ NOTE: This file contains the styling for responsive Template.
 	.playpause-track1, .prev-track1, .next-track1 { padding: 0 5px; }
 	.player { padding: 0px; }
 	ul.iq-song-slide { margin: 0px -5px; }
+	.iq-footer, body.sidebar-main .iq-footer { padding: 30px 10px 12px; margin-left: 0; width: 100%; }
+	.playpause-track, .prev-track, .next-track { font-size: 14px; }
+	.player { padding: 20px 0 0px 0px; }
 }

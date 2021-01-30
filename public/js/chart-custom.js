@@ -7918,5 +7918,210 @@ if(jQuery('#menu-chart-01').length){
         }); 
      }
 
+if(jQuery('#progress-chart-1').length){
+    
+    var options = {
+      chart: {
+        type: 'radialBar',
+        //width:320,
+        height: 300,
+        offsetY: 0,
+        offsetX: 0,
+        
+      },
+      plotOptions: {
+        radialBar: {
+          size: undefined,
+          inverseOrder: false,
+          hollow: {
+            margin: 0,
+            size: '20%',
+            background: 'transparent',
+          },
+          
+          
+          
+          track: {
+            show: true,
+            background: '#e1e5ff',
+            strokeWidth: '15%',
+            opacity: 1,
+            margin: 15, // margin is in pixels
+          },
+
+
+        },
+      },
+      responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+        offsetY: 0,
+        offsetX: 0
+      },    
+        legend: {
+          position: 'bottom',
+          offsetX:0,
+          offsetY: 0
+        }
+      }
+    }],
+    
+    fill: {
+      opacity: 1
+    },
+    
+    colors:['#00d0ff', '#ff4545', '#1ee2ac'],
+    series: [50, 50, 50],
+    labels: ['Total', 'Panding', 'Success'],
+    legend: {
+        fontSize: '16px',  
+        show: false,
+      },         
+    }
+
+    var chart = new ApexCharts(document.querySelector("#progress-chart-1"), options);
+    chart.render();
+}
+
+if (jQuery("#progress-chart-2").length) {
+  var options = {
+    series: [{
+      name: 'Net Profit',
+      data: [5, 15, 25, 35, 45, 55, 45, 35, 25, 15, 5]
+     
+    }, {
+      name: 'Revenue',
+      data: [10, 20, 30, 40, 50, 60, 50, 40, 30, 20, 10]
+    }],
+    chart: {
+      type: 'bar',
+      height: 350
+    },
+    colors: ['#ff4545', '#00d0ff'],
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '35%',
+        endingShape: 'rounded'
+      },
+    },
+    dataLabels: {
+      enabled: false
+    },
+    legend: {
+      show: false,
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      labels: {
+        minHeight: 20,
+        maxHeight: 20
+      },
+    },
+    yaxis: {
+      title: {
+        text: ''
+      },
+      labels: {
+        offsetX: -20,
+        offsetY: 0
+      },
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    },
+    responsive: [{
+      breakpoint: 578,
+      options: {
+        xaxis: {
+          labels: {
+            minHeight: 48,
+            maxHeight: 48
+          }
+        }
+      }
+    }]
+  };
+
+  var chart = new ApexCharts(document.querySelector("#progress-chart-2"), options);
+  chart.render();
+  const body = document.querySelector('body')
+  if (body.classList.contains('dark')) {
+    apexChartUpdate(chart, {
+      dark: true
+    })
+  }
+
+  document.addEventListener('ChangeColorMode', function (e) {
+    apexChartUpdate(chart, e.detail)
+  })
+}
+if(jQuery('#menu-chart-demo3').length){
+
+        var options = {
+          series: [{
+          name: 'TEAM A',
+          type: 'column',
+          data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
+        }],
+        colors: ["#ff4545"],
+          chart: {
+          height: 90,
+          type: 'line',
+          stacked: false,
+          sparkline: {
+            enabled: true,
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        stroke: {
+          width: [0, 2, 5],
+          curve: 'smooth'
+        },
+        plotOptions: {
+          bar: {
+            columnWidth: '50%'
+          }
+        },
+        
+        fill: {
+          opacity: [0.85, 0.25, 1],
+          gradient: {
+            inverseColors: false,
+            shade: 'light',
+            type: "vertical",
+            opacityFrom: 0.85,
+            opacityTo: 0.55,
+            stops: [0, 100, 100, 100]
+          }
+        },
+        labels: ['01/01/2003', '02/01/2003', '03/01/2003', '04/01/2003', '05/01/2003', '06/01/2003', '07/01/2003',
+          '08/01/2003', '09/01/2003', '10/01/2003', '11/01/2003'
+        ],
+        markers: {
+          size: 0
+        },
+        xaxis: {
+          type: 'datetime'
+        }
+        };
+        var chart = new ApexCharts(document.querySelector("#menu-chart-demo3"), options);
+        chart.render();
+    }
 
 
