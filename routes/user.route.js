@@ -10,11 +10,8 @@ const mailer = require("../utils/mailer");
 
 router.all('/confirmmail',(req,res)=>res.render('vwUser/confirmmail',{fullPage:true}))
 
-router.get('/register2',(req,res) => {
-    res.render("vwUser/register2.hbs",{fullPage:true});
-});
 router.get('/register',(req,res) => {
-    res.render("vwUser/register.hbs");
+    res.render("vwUser/register.hbs",{fullPage:true});
 });
 
 router.post('/register/checkinfo', async (req,res) => {
@@ -47,7 +44,6 @@ router.post('/register', async function (req, res){
         userName: req.body.Username,
         Password: passwordHash,
         Email: req.body.Email,
-        Gender: req.body.gender,
         permision: 0,
         delete: 0,
         status: 0,
@@ -62,7 +58,7 @@ router.post('/register', async function (req, res){
     var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
     mailer.sendActiveToken(user.Email, linkActive);
     console.log(user);
-    res.render("vwUser/register.hbs", {Email: req.body.Email, Success: true});
+    res.render("vwUser/register.hbs", {fullPage:true, Email: req.body.Email, Success: true});
 });
 
 router.get('/active', async function (req, res){

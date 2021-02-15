@@ -1,99 +1,87 @@
-{{#section 'js'}}
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer></script>
-{{/section}}
-
+{{#section 'title'}}Register Account{{/section}}
 {{#section 'css'}}
-  <link rel="stylesheet" href="/css/register.css">
+<link rel="stylesheet" href="/css/register.css">
 {{/section}}
-
-{{#if Success}}
-  <h1><span class="success" id="success">Tạo tài khoản thành công. Vui lòng check gmail: {{Email}}, để kích hoạt tài khoản</span></h1>
-{{/if}}
-<form action="register" method="POST" id="formRegister">
-    <div class="container">
-      <h1>Register</h1>
-      <p>Please fill in this form to create an account.</p>
-      <hr>
-  
-      <label for="email"><b>Email</b></label>
-      <input type="email" placeholder="Enter Email" name="Email" id="Email" required>
-      <p class="error" id="errEmail"></p>
-
-      <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="Username" id="Username" required>
-      <p class="error" id="errUS"></p>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="Password" id="psw" required>
-  
-      <label for="birthday"><b>Birthday </b></label>
-      <input type="date" id="birthday" name="Birthday" value="2000-12-15">
-      <hr>
-      <fieldset data-role="controlgroup">
-      <legend><label><b>Choose your gender:</b></label></legend>
-        <label for="male">Male</label>
-        <input type="radio" name="gender" id="male" value="0" checked>
-        <label for="female">Female</label>
-        <input type="radio" name="gender" id="female" value="1">
-      </fieldset>
-      <hr>
-       <div class="g-recaptcha" data-sitekey="6LfdpSYaAAAAAI5Cq89EOVX57-BLGt6z-zuamKJ5"
-         data-callback="recaptcha_callback"></div>
-        <p class="error" id="errCaptcha"></p>
-      <button type="submit" id="registerBtn" class="registerbtn" onclick="resetValue()">Register</button>
+<section class="sign-in-page">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+  <div class="container">
+    <div class="row justify-content-center align-items-center height-self-center">
+      <div class="col-md-6 col-sm-12 col-12 align-self-center">
+        <div class="success">
+          {{#if Success}}
+          <span id="success">Account creation is successful, please check email <span class="error">{{Email}}</span> to
+            activate your account.</span>
+          {{/if}}
+        </div>
+        <div class="sign-user_card ">
+          <div class="sign-in-page-data">
+            <div class="sign-in-from w-100 m-auto pt-5">
+              <h1 class="mb-3 text-center">Sign Up</h1>
+              <form action="/register" method="POST" id="formRegister" class="mt-4">
+                <div class="form-group">
+                  <label for="InputEmail">Email address</label>
+                  <input type="email" class="form-control mb-0" name="Email" id="Email" placeholder="Enter email"
+                    required>
+                  <p class="error" id="errEmail"></p>
+                </div>
+                <div class="form-group">
+                  <label for="InputDateOfBirthday">Date Of Birth</label>
+                  <input type="date" class="form-control mb-0" id="birthday" name="Birthday" value="2000-12-15">
+                </div>
+                <div class="form-group">
+                  <label for="InputUserName">Username</label>
+                  <input type="text" class="form-control mb-0" name="Username" id="Username"
+                    placeholder="Enter Username" required>
+                  <p class="error" id="errUS"></p>
+                </div>
+                <div class="form-group">
+                  <label for="InputPassword">Password</label>
+                  <input type="password" class="form-control mb-0" name="Password" id="Password"
+                    placeholder="Enter Password" required>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary mb-2" onclick="resetValue()">Sign Up</button>
+                  <span class="d-block line-height-2">Already Have Account ? <a href="/login">Log In</a></span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  
-    <div class="container signin">
-      <p>Already have an account? <a href="/login">Sign in</a>.</p>
-    </div>
-</form>
+  </div>
+</section>
 
-<script>
-  var checked_Captcha = false;
-  function resetValue()
-  {
-      document.getElementById("errEmail").innerHTML = "";
-      document.getElementById("errUS").innerHTML = "";
-      document.getElementById("success").innerHTML = "";
-      document.getElementById("errCaptcha").innerHTML = "";
+<script type="text/javascript">
+  function resetValue() {
+    document.getElementById("errEmail").innerHTML = "";
+    document.getElementById("errUS").innerHTML = "";
+    document.getElementById("success").innerHTML = "";
   }
-  $('#formRegister').on('submit', function (e) {
+  $("#formRegister").on("submit", function (e) {
     e.preventDefault();
-    if (!checked_Captcha)
-    {
-        document.getElementById("errCaptcha").innerHTML = "Captcha không hợp lệ!!!";
-        return;
-    }
-    var email =  $("#Email").val();
+    console.log("Hello World");
+    var email = $("#Email").val();
     var username = $("#Username").val();
-    var data = {Email: email, Username: username};
-    data = JSON.stringify({data});
+    var data = { Email: email, Username: username };
+    data = JSON.stringify({ data });
     $.ajax({
-    url: "/register/checkinfo",
-    type: "POST",
-    data: "Data=" + data,
-    success: function (data) {  
-      if (data.Exist){
-        if (data.err == 0){
-          document.getElementById("errEmail").innerHTML = "Email này đã tồn tại";
+      url: "/register/checkinfo",
+      type: "POST",
+      data: "Data=" + data,
+      success: function (data) {
+        if (data.Exist) {
+          if (data.err == 0) {
+            document.getElementById("errEmail").innerHTML = "This Email already exists";
+          }
+          else {
+            document.getElementById("errUS").innerHTML = "This Username already exists";
+          }
         }
-        else
-        {
-          document.getElementById("errUS").innerHTML = "Username này đã tồn tại";
+        else {
+          $('#formRegister').off('submit').submit();
         }
       }
-      else
-      {
-        $('#formRegister').off('submit').submit();
-      }
-    }
     });
   });
-  function recaptcha_callback()
-  {
-    document.getElementById("errCaptcha").innerHTML = "";
-    checked_Captcha = true;
-  }
 </script>
