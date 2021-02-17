@@ -5,8 +5,16 @@ module.exports = {
     add: function(user){
         return db.add(TBL_USER, user);
     },
+    getByID: async (id) => {
+        return db.load(`SELECT * FROM ${TBL_USER} WHERE ID = '${id}'`)
+    },
     getByEmai: async (email) => {
         return db.load(`SELECT * FROM ${TBL_USER} WHERE email = '${email}'`);
+    },
+    getByEmailOrUsername: async (str) => {
+        return db.load(`SELECT * FROM ${TBL_USER} WHERE (email = '${str}' 
+            or userName = '${str}') and \`delete\` = 0
+        `);
     },
     setForgetToken: async (token,id) => {
         return db.patch(TBL_USER,{refreshToken:token},{ID:id})

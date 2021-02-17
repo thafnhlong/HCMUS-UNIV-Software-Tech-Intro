@@ -167,4 +167,19 @@ router.post('/login', async function(req, res){
   res.redirect(url);
 })
 
+router.get('/logout', function (req, res) {
+    delete req.session.isAuthenticated
+    delete req.session.authUser
+    res.redirect('/')
+})
+
+router.get('/login/setAccount/:userName', function (req, res,next) {
+    const {userName} = req.params
+    UserModel.getByEmailOrUsername(userName).then(resp=>{
+        req.session.isAuthenticated = true;
+        req.session.authUser = resp[0];
+        res.send('ok')
+    }).catch(next)
+})
+
 module.exports = router;

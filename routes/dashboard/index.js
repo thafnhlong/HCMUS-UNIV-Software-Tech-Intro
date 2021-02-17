@@ -1,17 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/profile", (req, res) => {
-  let role = req.query.role;
-  if (role === "admin") {
-    res.render("dashboard/profile.hbs", {
-      admin: true,
-    });
-  } else {
-    res.render("dashboard/profile.hbs", {
-      user: true,
-    });
+router.use((req,res,next)=>{
+  if (res.locals.lcIsAuthenticated){
+    return next()
   }
-});
+  res.redirect('/login')
+})
+
+router.use(require('./profile'))
 
 module.exports = router;
