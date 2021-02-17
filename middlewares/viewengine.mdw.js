@@ -1,6 +1,7 @@
 const exphbs = require('express-handlebars');
 var express_handlebars_sections = require('express-handlebars-sections');
 const moment = require('moment');
+moment.locale('vi')
 
 module.exports = function (app) {
     app.engine('hbs', exphbs({
@@ -10,9 +11,12 @@ module.exports = function (app) {
         {
             section: express_handlebars_sections(),
             parseTime: (time) => {
-                moment.locale('vi');
                 return moment(time).format('HH:mm, DD/MM/YYYY');
             },
+            parseDate: (date) => {
+                return moment(date).format('YYYY-MM-DD');
+            },
+            isEqual: (a,b) => a==b
         }
     }));
     app.set('view engine', 'hbs');

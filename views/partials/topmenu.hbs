@@ -6,7 +6,7 @@
                 <div class="main-circle"><i class="las la-bars"></i></div>
             </div>
             <div class="iq-navbar-logo d-flex justify-content-between">
-                <a href="/index.html" class="header-logo">
+                <a href="/" class="header-logo">
                 <img src="/images/logo.png" class="img-fluid rounded-normal" alt="">
                 <div class="pt-2 pl-2 logo-title">
                     <span class="text-primary text-uppercase">Muzik</span>
@@ -19,7 +19,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="list-unstyled iq-menu-top d-flex justify-content-between mb-0 p-0">
-                <li class="active"><a href="/index.html">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="/latest.html">Latest</a></li>
                 <li><a href="/albums.html">Albums</a></li>
             </ul>
@@ -43,6 +43,7 @@
                     <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
                 </form>
                 </li>
+                {{#if lcIsAuthenticated}}
                 <li class="nav-item nav-icon">
                 <a href="#" class="search-toggle iq-waves-effect text-black rounded">
                     <i class="las la-file-audio"></i>
@@ -55,26 +56,33 @@
                     <span class="notice-icon dots badge badge-primary">+</span>
                 </a>
                 </li>
+                {{/if}}
                 <li class="line-height pt-3">
                 <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                    <img src="/images/user/11.png" class="img-fluid rounded-circle" alt="user">
+                    <img src="{{#if lcAuthUser.avatar}}/images/user/upload-{{lcAuthUser.ID}}.png{{else}}/images/user/11.png{{/if}}" class="img-fluid rounded-circle" alt="user">
                 </a>
                 <div class="iq-sub-dropdown iq-user-dropdown">
                     <div class="iq-card shadow-none m-0">
                         <div class="iq-card-body p-0 ">
                             <div class="bg-primary p-3">
-                            <h5 class="mb-0 text-white line-height">Xin chào Long Nguyen</h5>
-                            <span class="text-secondary font-size-12">Admin (show if admin)</span>
+                            <h5 class="mb-0 text-white line-height">Hello {{#if lcAuthUser.userName}}
+                                    {{lcAuthUser.userName}}
+                                {{else}}
+                                Guess
+                                {{/if}} !!!</h5>
+                            {{#if lcAuthUser.permision}}
+                            <span class="text-secondary font-size-12">Admin</span>
+                            {{/if}}
                             </div>
-                            {{#if false}}
-                            <a href="/profile.html" class="iq-sub-card iq-bg-primary-hover">
+                            {{#if lcIsAuthenticated}}
+                            <a href="/profile" class="iq-sub-card iq-bg-primary-hover">
                             <div class="media align-items-center">
                                 <div class="rounded iq-card-icon iq-bg-primary">
                                     <i class="ri-file-user-line"></i>
                                 </div>
                                 <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">Tài khoản</h6>
-                                    <p class="mb-0 font-size-12">Xem thông tin cá nhân và chỉnh sửa</p>
+                                    <h6 class="mb-0 ">Information & Account</h6>
+                                    <p class="mb-0 font-size-12">Edit Information - Change Password</p>
                                 </div>
                             </div>
                             </a>
@@ -84,17 +92,17 @@
                                     <i class="ri-profile-line"></i>
                                 </div>
                                 <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">Bài hát</h6>
-                                    <p class="mb-0 font-size-12">Danh sách, chỉnh sửa và cập nhật</p>
+                                    <h6 class="mb-0 ">Music Listing</h6>
+                                    <p class="mb-0 font-size-12">Listing, Edit and Update</p>
                                 </div>
                             </div>
                             </a>
                             <div class="d-inline-block w-100 text-center p-3">
-                            <a class="bg-primary iq-sign-btn" href="/sign-in.html" role="button">Đăng xuất<i class="ri-login-box-line ml-2"></i></a>
+                            <a class="bg-primary iq-sign-btn" href="/logout" role="button">Logout<i class="ri-login-box-line ml-2"></i></a>
                             </div>
                             {{else}}
                             <div class="d-inline-block w-100 text-center p-3">
-                            <a class="bg-primary iq-sign-btn" href="/login" role="button">Đăng nhập<i class="ri-login-box-line ml-2"></i></a>
+                            <a class="bg-primary iq-sign-btn" href="/login" role="button">Login<i class="ri-login-box-line ml-2"></i></a>
                             </div>
                             {{/if}}
                         </div>
