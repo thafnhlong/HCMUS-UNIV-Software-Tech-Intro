@@ -12,12 +12,11 @@
         "pass": "11112222AAAA"
     },
     "mysql": {
-        "host": "localhost",
-        "port": 3306,
-        "user": "root",
-        "password": "",
-        "database": "muzik",
-        "connectionLimit": 50
+        "connectionLimit": 50,
+        "host": "remotemysql.com",
+        "user": "JuMJWPpv2T",
+        "password": "grGVh0yXNO",
+        "database": "JuMJWPpv2T"
     },
     "pagination": {
         "limit": 6,
