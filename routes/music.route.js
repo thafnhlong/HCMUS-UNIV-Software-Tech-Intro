@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/:id',(req, res) => {
     const id = +req.params.id || 1;
-    res.render("../views/vwMusic/detailMusic.hbs");
+    res.render("../views/vwMusic/detailMusic.hbs",{playable:true});
 });
 
 
