@@ -1,4 +1,4 @@
-{{#section 'title'}}Quên mật khẩu{{/section}}
+{{#section 'title'}}Account recovery{{/section}}
 
 <section class="sign-in-page">
     <div class="container h-100">
@@ -6,13 +6,13 @@
           <div class="col-md-6 col-sm-12 col-12 ">
             <div class="sign-user_card ">
                 <div class="d-flex justify-content-center">
-                  <div class="sign-user_logo">
+                  {{!-- <div class="sign-user_logo">
                       <img src="/images/login/user.png" class=" img-fluid" alt="Logo">
-                  </div>
+                  </div> --}}
                 </div>
                 <div class="sign-in-page-data">
                   <div class="sign-in-from w-100 m-auto pt-5">
-                      <h1 class="mb-0">Quên mật khẩu</h1>
+                      <h1 class="mb-0">Reset Password</h1>
                       
                       {{#if error}}
                       <div class="alert text-white bg-primary" role="alert">
@@ -23,14 +23,14 @@
                       </div>
                       {{/if}}
 
-                      <p class="text-white">Nhập email của bạn để chúng tôi gửi 1 email tới hướng dẫn bạn lấy lại mật khẩu</p>
+                      <p class="text-white">Enter your email address and we'll send you an email with instructions to reset your password.</p>
                       <form method="post" id="reset" class="mt-4">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Địa chị Email</label>
+                            <label for="exampleInputEmail1">Email address</label>
                             <input name="email" type="email" class="form-control mb-0" id="exampleInputEmail1" placeholder="Enter email">
                         </div>
                         <div class="d-inline-block w-100">
-                            <button form="reset" class="btn btn-primary float-right">Quên mật khẩu</button>
+                            <button form="reset" class="btn btn-primary float-right">Reset password</button>
                         </div>
                       </form>
                   </div>
