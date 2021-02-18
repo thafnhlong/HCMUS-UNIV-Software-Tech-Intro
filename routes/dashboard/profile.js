@@ -7,16 +7,16 @@ const router = express.Router();
 const changePassword = async (req,res) => {
     const {cpass,npass,vpass} = req.body
     if (!npass || !vpass || npass != vpass){
-        return {errorMsg: "Mật khẩu nhập lại không chính xác"}
+        return {errorMsg: "New password is invalid or mismatched"}
     }
     const rs = bcrypt.compareSync(cpass, res.locals.lcAuthUser.password);
     if (rs === false) {
-        return {errorMsg: "Mật khẩu hiện tại không chính xác"}
+        return {errorMsg: "Current password is invalid"}
     }
     var passwordHash = bcrypt.hashSync(npass, config.authentication.saltRounds);
 
     return userModel.patch({password:passwordHash},res.locals.lcAuthUser.ID)
-    .then(()=>({succMsg:'Thay đổi mật khẩu thành công'}))
+    .then(()=>({succMsg:'Password changed successfully'}))
 }
 
 router.get("/profile", (req, res) => {
