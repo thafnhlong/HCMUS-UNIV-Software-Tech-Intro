@@ -50,8 +50,8 @@ module.exports = {
      * @param {*} link `http://example.com`
      */
     sendActiveToken: async function(email,link){
-        const subject = "Kích hoạt tài khoản"
-        const html = `<h3>Vui lòng nhấp vào link dưới đây để kích hoạt</h3><br>
+        const subject = "Active account"
+        const html = `<h3>Please click on the link below to activate</h3><br>
             <a href="${link}">${link}</a>`
         
         return await this.sendEmail(email,subject,html)
@@ -63,8 +63,8 @@ module.exports = {
      * @param {*} link `http://example.com`
      */
     sendForgetToken: async function(email,link){
-        const subject = "Quên mật khẩu"
-        const html = `<h3>Vui lòng nhấp vào link dưới đây để lấy lại mật khẩu</h3><br>
+        const subject = "Reset password"
+        const html = `<h3>Please click on the link below to change your password</h3><br>
             <a href="${link}">${link}</a>`
         return await this.sendEmail(email,subject,html)
     }
