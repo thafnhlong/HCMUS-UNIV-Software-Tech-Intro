@@ -82,7 +82,7 @@ router.post('/forget', (req, res, next) => {
     UserModel.getByEmai(email)
         .then(users => {
             if (users.length == 0) {
-                res.render('vwUser/forget', { error: "Không tìm thấy địa chỉ Email", model: { email }, fullPage: 1 })
+                res.render('vwUser/forget', { error: "Emaill address not found!", model: { email }, fullPage: 1 })
                 throw true
             }
             const user = users[0]
@@ -121,7 +121,7 @@ router.get('/forget/:token', forgetPasswordMiddleware, (req, res) => {
 router.post('/forget/:token', forgetPasswordMiddleware, (req, res, next) => {
     const { p1, p2 } = req.body
     if (p1 != p2) {
-        return res.render('vwUser/resetpassword', { error: "Mật khẩu không khớp", fullPage: true })
+        return res.render('vwUser/resetpassword', { error: "Password is invalid or mismatched", fullPage: true })
     }
     var passwordHash = bcrypt.hashSync(req.body.p1, config.authentication.saltRounds);
 
