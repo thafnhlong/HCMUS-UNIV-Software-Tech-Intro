@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 app.use(require('./routes/user.route'));
 app.use(require("./routes/dashboard"));
 app.use('/music', require('./routes/music.route'));
+app.use(require("./routes/songs/searchs"));
 
 app.get("/throw", (req, res) => {
   throw new Error("error");
