@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
   res.render("home.hbs");
 });
 
+app.use(require("./routes/songs/searchs"));
 app.use(require('./routes/user.route'));
 app.use(require("./routes/dashboard"));
 app.use('/music', require('./routes/music.route'));
