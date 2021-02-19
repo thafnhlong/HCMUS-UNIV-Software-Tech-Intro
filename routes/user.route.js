@@ -65,7 +65,6 @@ router.get('/active', async function (req, res) {
     const rs = await UserModel.activeAccount(token);
     if (rs.changedRows > 0)
     {
-        alert("Your account has been activated")
         res.redirect("/login");
     }
     res.send("Active Failed");
