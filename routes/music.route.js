@@ -28,11 +28,17 @@ router.post('/addcomment', async (req, res) => {
       modifileDate: new Date()
     }
     const rs = await SongModel.addComment(entity);
+    const getCommentDate = await SongModel.getNewCommentOfUserById(entity.User, entity.Song);
+    const result = {
+      status: true,
+      cmDate: getCommentDate.cmDate
+    };
     if (rs.affectedRows > 0)
     {
-        return res.status(200).send(true);
+        return res.status(200).send(result);
     }
-    res.status(200).send(false); 
+    result.status = false;
+    res.status(200).send(result); 
 });
 
 
