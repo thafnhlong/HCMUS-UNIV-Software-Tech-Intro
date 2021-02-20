@@ -12,7 +12,7 @@
         "pass": "11112222AAAA"
     },
     "mysql": {
-        "connectionLimit": 50,
+        "connectionLimit": 5,
         "host": "remotemysql.com",
         "user": "JuMJWPpv2T",
         "password": "grGVh0yXNO",
