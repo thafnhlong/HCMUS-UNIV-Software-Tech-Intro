@@ -12,6 +12,8 @@ module.exports={
     },
     getCommentListById: function(id){
         return db.load(`SELECT us.ID, us.userName, us.avatar, usCM.content 
-        FROM ${TBL_Users_Comments} usCM JOIN ${TBL_Users} us ON usCM.User = us.ID WHERE usCM.Song = ${id} and usCM.delete = 0`);
+        FROM ${TBL_Users_Comments} usCM JOIN ${TBL_Users} us ON usCM.User = us.ID 
+        WHERE usCM.Song = ${id} and usCM.delete = 0
+        ORDER BY usCM.createDate DESC`);
     }
 }

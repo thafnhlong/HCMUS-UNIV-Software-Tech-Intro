@@ -253,7 +253,7 @@
         </div>
     </div>
 </div>
-
+{{#if lcIsAuthenticated}}
 <div class="col-lg-12">
     <form id="frmComment">
         <div class="form-group">
@@ -263,6 +263,7 @@
         <button type="submit" class="btn btn-info">Comment</button>
     </form>
 </div>
+{{/if}}
 <div id="commentList" class="col-lg-12 mt-4">
     {{#each listComment}}
     <div class="media mb-3">
