@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-router.use((req,res,next)=>{
+const authenMiddleware =(req,res,next)=>{
+  console.log('hit')
   if (res.locals.lcIsAuthenticated){
     return next()
   }
   res.redirect('/login')
-})
+}
 
-router.use(require('./profile'))
+router.use('/profile',authenMiddleware,require('./profile'))
 
 module.exports = router;

@@ -19,11 +19,11 @@ const changePassword = async (req,res) => {
     .then(()=>({succMsg:'Password changed successfully'}))
 }
 
-router.get("/profile", (req, res) => {
+router.get('/', (req, res) => {
   res.render('dashboard/profile')
 });
 
-router.post("/profile", (req,res,next)=>{
+router.post('/', (req,res,next)=>{
     const data={method:req.query.method}
     switch (req.query.method){
         case 'password':
