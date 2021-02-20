@@ -269,8 +269,8 @@
     <div class="media mb-3">
         <img src="{{#if (isEqual avatar 1)}}/images/user/upload-{{ID}}.png{{else}}/images/user/11.png{{/if}}" class="mr-3 avatar-80" alt="#">
         <div class="media-body">
-            <h5 class="mt-0">{{userName}}</h5>
-            <span style="font-size: 12px;">{{cmDate}}</span><br>
+            <span style="font-size: 12px; color: green;">{{cmDate}}</span>
+            <h5 class="mt-0">{{userName}}</h5>           
             {{content}}
         </div>
     </div>
@@ -295,8 +295,8 @@
                         '<div class="media mb-3">' +
                         '<img src="' + currentAvatar + '" class="mr-3 avatar-80" alt="#">' +
                         '<div class="media-body">' +
-                        '<h5 class="mt-0">{{ lcAuthUser.userName }}</h5>' +
-                        '<span style="font-size: 12px;">' + data.cmDate + '</span><br>' +
+                        '<span style="font-size: 12px; color: green;">' + data.cmDate + '</span><br>' +
+                        '<h5 class="mt-0">{{ lcAuthUser.userName }}</h5>' +                       
                         $("#message").val() +
                         '</div>' +
                         '</div>'
