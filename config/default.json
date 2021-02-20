@@ -11,12 +11,13 @@
         "from": "Hệ thống nghe nhạc trực tuyến MUZIK",
         "pass": "11112222AAAA"
     },
-    "mysql": {
-        "connectionLimit": 5,
-        "host": "remotemysql.com",
-        "user": "JuMJWPpv2T",
-        "password": "grGVh0yXNO",
-        "database": "JuMJWPpv2T"
+   "mysql": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "",
+        "database": "jumjwppv2t",
+        "connectionLimit": 50
     },
     "pagination": {
         "limit": 6,
