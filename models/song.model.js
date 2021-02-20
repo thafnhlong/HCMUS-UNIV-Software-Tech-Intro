@@ -2,6 +2,7 @@ const db=require("../utils/dao");
 
 const TBL_SONG="Songs";
 const TBL_Users_Comments = "Users_Comments";
+const TBL_Users = "Users";
 module.exports={
     search: function(searchString){
         return db.load(`SELECT * FROM ${TBL_SONG} WHERE Name LIKE '${searchString}'`);
@@ -11,6 +12,6 @@ module.exports={
     },
     getCommentListById: function(id){
         return db.load(`SELECT us.ID, us.userName, us.avatar, usCM.content 
-        FROM ${TBL_Users_Comments} usCM JOIN users us ON usCM.User = us.ID WHERE usCM.Song = ${id} and usCM.delete = 0`);
+        FROM ${TBL_Users_Comments} usCM JOIN ${TBL_Users} us ON usCM.User = us.ID WHERE usCM.Song = ${id} and usCM.delete = 0`);
     }
 }
