@@ -21,26 +21,6 @@ let curr_track = document.createElement('audio');
 console.log(curr_track);
 
 // Define the tracks that have to be played
-let track_list = [
-  {
-    name: "Pop Smoke",
-    artist: "Cascada",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
-  },
-  {
-    name: "Gabby Barrett",
-    artist: "Emeli Sande",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
-  },
-  {
-    name: "Megan Thee",
-    artist: "Jessie J",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3",
-  },
-];
 
 function random_bg_color() {
 
@@ -77,7 +57,6 @@ function resetValues() {
 }
 
 // Load the first track in the tracklist
-loadTrack(track_index);
 
 function playpauseTrack() {
   if (!isPlaying) playTrack();
