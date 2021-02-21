@@ -14,6 +14,9 @@ app.use(
   })
 );
 
+/**Async Error router Handler */
+require('./utils/async-error-handler')
+
 //config view_engine and libraries helper as hbs-sections
 require('./middlewares/viewengine.mdw')(app);
 require('./middlewares/session.mdw')(app);
@@ -28,7 +31,7 @@ app.use(require('./routes/user.route'));
 app.use(require("./routes/dashboard"));
 app.use('/music', require('./routes/music.route'));
 
-app.get("/throw", (req, res) => {
+app.get("/throw", async (req, res) => {
   throw new Error("error");
 });
 app.use(function (req, res) {
