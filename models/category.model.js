@@ -3,11 +3,13 @@ const db = require("../utils/dao");
 const TBL_Categories = "Categories";
 module.exports = {
     countCategory: async function () {
-        const rs = db.load(`SELECT count(CT.ID) as numOfcate FROM ${TBL_Categories} CT WHERE CT.delete = 0`);
+        const rs = await db.load(`SELECT count(CT.ID) as numOfcate FROM ${TBL_Categories} CT WHERE CT.delete = 0`);
         return rs[0].numOfcate;
     },
     getListCategoryByPagination: function (page, offset) {
-        return db.load(`SELECT CT.* FROM ${TBL_Categories} CT WHERE CT.delete = 0`);
+        return db.load(`SELECT CT.* FROM ${TBL_Categories} CT 
+            WHERE CT.delete = 0 limit ${page} offset ${offset}`
+        );
     },
     deleteCategory: function (ID) {
         const entity = {
