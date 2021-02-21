@@ -1,3 +1,4 @@
+{{#section 'title'}}Music Name{{/section}}
 <div class="col-lg-12">
     <div class="iq-card">
         <div class="iq-card-body">
@@ -263,8 +264,17 @@
         <button type="submit" class="btn btn-info">Comment</button>
     </form>
 </div>
+{{else}}
+<div class="col-12">
+    <p style="color: red">Please login to comment: 
+        <a href="/login" style="color: blue;">click here to login</a>
+    </p>
+</div>
 {{/if}}
-<div id="commentList" class="col-lg-12 mt-4">
+<div class="col-12 mt-4">
+    <h4>Listener's Feeling...</h4>
+</div>
+<div id="commentList" class="col-lg-12 mt-2">
     {{#each listComment}}
     <div class="media mb-3">
         <img src="{{#if (isEqual avatar 1)}}/images/user/upload-{{ID}}.png{{else}}/images/user/11.png{{/if}}" class="mr-3 avatar-80" alt="#">

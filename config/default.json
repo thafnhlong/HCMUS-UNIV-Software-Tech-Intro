@@ -20,6 +20,7 @@
     },
     "pagination": {
         "limit": 6,
-        "limitAdmin":10
+        "limitAdmin":10,
+        "limitCategory": 3
     }
 }
