@@ -20,26 +20,6 @@ let updateTimer1;
 let curr_track1 = document.createElement('audio');
 
 // Define the tracks that have to be played
-let track_list1 = [
-   {
-    name: "Pop Smoke",
-    artist: "Cascada",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
-  },
-  {
-    name: "Gabby Barrett",
-    artist: "Emeli Sande",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
-  },
-  {
-    name: "Megan Thee",
-    artist: "Jessie J",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3",
-  },
-];
 
 function random_bg_color1() {
 
@@ -55,7 +35,7 @@ function random_bg_color1() {
 
 function loadTrack(track_index1) {
   clearInterval(updateTimer1);
-  resetValues();
+  // resetValues();
   curr_track1.src = track_list1[track_index1].path;
   curr_track1.load();
 
@@ -79,8 +59,8 @@ function loadTrack(track_index1) {
   
   
 
-  updateTimer1 = setInterval(seekUpdate, 1000);
-  curr_track1.addEventListener("ended", nextTrack);
+  updateTimer1 = setInterval(seekUpdate1, 1000);
+  curr_track1.addEventListener("ended", nextTrack1);
   random_bg_color1();
 }
 
@@ -91,7 +71,6 @@ function resetValues1() {
 }
 
 // Load the first track in the tracklist
-loadTrack(track_index1);
 
 function playpauseTrack1() {
   if (!isPlaying1) playTrack1();
@@ -141,7 +120,7 @@ function seekUpdate1() {
   if (!isNaN(curr_track1.duration)) {
     seekPosition = curr_track1.currentTime * (100 / curr_track1.duration);
 
-    seek_slider1.value = seekPosition;
+    // seek_slider1.value = seekPosition;
 
     let currentMinutes = Math.floor(curr_track1.currentTime / 60);
     let currentSeconds = Math.floor(curr_track1.currentTime - currentMinutes * 60);
@@ -153,8 +132,8 @@ function seekUpdate1() {
     if (currentMinutes < 10) { currentMinutes = "0" + currentMinutes; }
     if (durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
 
-    curr_time1.textContent = currentMinutes + ":" + currentSeconds;
-    total_duration1.textContent = durationMinutes + ":" + durationSeconds;
+    // curr_time1.textContent = currentMinutes + ":" + currentSeconds;
+    // total_duration1.textContent = durationMinutes + ":" + durationSeconds;
   }
 }
 
