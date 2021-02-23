@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const categoryModel = require("../../models/category.model");
 const config = require("../../config/default.json");
+const helper = require("../../utils/helper");
 
 router.get('/', async (req, res) => {
     const page = +req.query.page || 1;
@@ -9,21 +10,10 @@ router.get('/', async (req, res) => {
     const offset = (page - 1) * config.pagination.limitCategory;
     const categoryList = await categoryModel.getListCategoryByPagination(config.pagination.limitCategory, offset);
     const nPages = Math.ceil(numOfcate / config.pagination.limitCategory);
-    const page_Items = [];
-    for (let i = 1; i <= nPages; i++){
-        const item = {
-            value: i,
-            isActive: i === page
-        }
-        page_Items.push(item);
-    }
+    const Pagination = helper.Pagination(nPages, page);
     res.render('dashboard/category',{
         categoryList,
-        page_Items, 
-        pre_Value: page - 1,
-        next_Value: page + 1,
-        can_Prev: page > 1,
-        can_Next: page < nPages
+        Pagination
     });
 });
 

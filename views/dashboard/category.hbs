@@ -64,10 +64,10 @@
                 </table>
                 <nav aria-label="Page navigation example" class="pagination justify-content-center">
                     <ul class="pagination mb-0">
-                        <li class="page-item {{#unless can_Prev}}disabled{{/unless}}">
-                            <a class="page-link" href="/category?page={{pre_Value}}">Previous</a>
+                        <li class="page-item {{#unless Pagination.can_Prev}}disabled{{/unless}}">
+                            <a class="page-link" href="/category?page={{Pagination.pre_Value}}">Previous</a>
                         </li>
-                        {{#each page_Items}}
+                        {{#each Pagination.page_Items}}
                             {{#if isActive}}
                             <li class="page-item active" aria-current="page">
                                 <span class="page-link">
@@ -80,8 +80,8 @@
                             </li>
                             {{/if}}
                         {{/each}}
-                        <li class="page-item {{#unless can_Next}}disabled{{/unless}}">
-                            <a class="page-link" href="/category?page={{next_Value}}">Next</a>
+                        <li class="page-item {{#unless Pagination.can_Next}}disabled{{/unless}}">
+                            <a class="page-link" href="/category?page={{Pagination.next_Value}}">Next</a>
                         </li>
                     </ul>
                 </nav>
