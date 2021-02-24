@@ -6,6 +6,9 @@ module.exports = {
         const rs = await db.load(`SELECT count(CT.ID) as numOfcate FROM ${TBL_Categories} CT WHERE CT.delete = 0`);
         return rs[0].numOfcate;
     },
+    getIdName: async ()=>{
+        return db.load(`SELECT CT.ID,CT.Name FROM ${TBL_Categories} CT WHERE CT.delete = 0`)
+    },
     getListCategoryByPagination: function (page, offset) {
         return db.load(`SELECT CT.* FROM ${TBL_Categories} CT 
             WHERE CT.delete = 0 limit ${page} offset ${offset}`

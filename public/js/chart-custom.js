@@ -7211,6 +7211,9 @@ $(document).ready(function() {
     $(".upload-button").on('click', function() {
        $(".file-upload").click();
     });
+    $(".upload-button-music").on('click', function() {
+       $(".file-upload-music").click();
+    });
 });
 
 

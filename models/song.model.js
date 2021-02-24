@@ -4,6 +4,9 @@ const TBL_SONG="Songs";
 const TBL_Users_Comments = "Users_Comments";
 const TBL_Users = "Users";
 module.exports={
+    add: function(song){
+        return db.add(TBL_SONG, song);
+    },
     search: function(searchString){
         return db.load(`SELECT * FROM ${TBL_SONG} WHERE Name LIKE '${searchString}'`);
     },
