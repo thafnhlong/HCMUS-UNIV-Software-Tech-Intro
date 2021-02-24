@@ -9,5 +9,6 @@ const authenMiddleware =(req,res,next)=>{
 }
 
 router.use('/profile',authenMiddleware,require('./profile'))
+router.use('/category',authenMiddleware,require('./category'))
 
 module.exports = router;

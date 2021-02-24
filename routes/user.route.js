@@ -65,7 +65,7 @@ router.get('/active', async function (req, res) {
     const rs = await UserModel.activeAccount(token);
     if (rs.changedRows > 0)
     {
-        res.redirect("/login");
+        return res.redirect("/login");
     }
     res.send("Active Failed");
 });
