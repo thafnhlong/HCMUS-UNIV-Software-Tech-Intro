@@ -30,6 +30,7 @@ app.use(require("./routes/songs/searchs"));
 app.use(require('./routes/user.route'));
 app.use(require("./routes/dashboard"));
 app.use('/music', require('./routes/music.route'));
+app.use('/favorite', require('./routes/favorite.route'));
 
 app.get("/throw", async (req, res) => {
   throw new Error("error");
