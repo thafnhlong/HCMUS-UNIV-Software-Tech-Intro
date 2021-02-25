@@ -79,15 +79,12 @@
                             </div>
                             <div class="form-group col-sm-12">
                                 <label>Category:</label>
-                                <select name="category" class="form-control" id="selectcountry">
-                                    {{#each categoryList}}
-                                    <option value="{{ID}}">{{Name}}</option>
-                                    {{/each}}
+                                <select required name="category" class="form-control" id="selectCategory">
                                 </select>
                             </div>
                         </div>
                         <hr>
-                        <button id="btnSubmit" type="submit" class="btn btn-primary">Upload now</button>
+                        <button id="btnSubmit" disabled type="submit" class="btn btn-primary">Upload now</button>
                     </form>
                 </div>
             </div>
@@ -101,6 +98,7 @@
     let btnSubmit = $('#btnSubmit')
     let thumb = $('input[type="file"]')[0]
     let song = $('input[type="file"]')[1]
+    let selectCategory = $('#selectCategory')
     let msg = $('#msg')
     function showMessage(message,type='primary') {
         msg.html(`<div class="alert text-white bg-${type}" role="alert">
@@ -111,6 +109,13 @@
     </div>`)
     }
     
+    $.get('/category/getIdName').then(resp=>{
+        const categoryList = resp || []
+        categoryList.forEach(x=>{
+            selectCategory.append(new Option(x.Name, x.ID));
+        })
+        btnSubmit.attr('disabled',false)
+    })
     btnSubmit.click(() => {
         if (thumb.files.length == 0 || song.files.length == 0) {
             showMessage('Please pick thumbnail and song to upload music')

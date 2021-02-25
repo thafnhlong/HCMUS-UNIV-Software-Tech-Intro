@@ -21,4 +21,9 @@ router.post('/delete', async (req, res) => {
     const rs = await categoryModel.deleteCategory(req.body.categoryId);
     res.redirect('/category');
 });
+
+router.get('/getIdName',(req,res,next)=>{
+    categoryModel.getIdName().then(res.json.bind(res)).catch(next)
+})
+
 module.exports = router;

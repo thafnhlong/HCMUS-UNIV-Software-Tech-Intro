@@ -4,28 +4,30 @@
         <div class="iq-card-body">
             <div class="row">
                 <div class="col-lg-4">
-                    <img src="/images/dashboard/feature-album/01.png" class="img-fluid w-100" alt="">
+                    <img src="/images/song/upload-{{musicData.ID}}.png" class="img-fluid w-100" alt="">
                 </div>
                 <div class="col-lg-8">
                     <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
                         <div class="music-detail">
-                            <h3>DJ Khaled Featuring</h3>
-                            <span>Edyta Gorniak</span>
-                            <p class="mb-0">389382k Views</p>
-                            <p>Song · 45 Plays</p>
+                            <h3>{{musicData.Name}}</h3>
+                            <p class="mb-0">Singer: {{musicData.Singer}}</p>
+                            <p class="mb-0">Composer: {{musicData.composer}}</p>
+                            <p class="mb-0">{{musicData.views}} Views</p>
+                            <p class="mb-0">{{musicData.likes}} Likes</p>
+                            {{#if musicData.publishDate}}
+                            <p class="mb-0">Public Date: {{parseTime musicData.publishDate }}</p>
+                            {{/if}}
                             <div class="d-flex align-items-center">
-                                <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play
-                                    music</a>
+                                <span class="mr-3">Category: </span>
+                                <a style="display: none;" id="categoryName" href="/category/{{musicData.category}}" class="btn btn-primary iq-play mr-2"></a>
                             </div>
                         </div>
                         <div class="music-right">
                             <div class="d-flex align-items-center">
-                                <div class="iq-circle mr-2 share"><a href="javascript:void();"><i
-                                            class="las la-share-alt-square text-primary"></i></a></div>
-                                <div class="iq-circle mr-2"><a href="javascript:void();"><i
-                                            class="ri-heart-fill  text-primary"></i></a></div>
+                                <div class="iq-circle mr-2"><a href="javascript:void(0);" onclick="likeMusic()"><i
+                                            class="text-primary" id="likeStatus"></i></a></div>
                                 <div class="iq-circle">
-                                    <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+                                    <a href="/song/upload-{{musicData.ID}}.mp3"><i class="las la-download text-primary"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -327,24 +329,42 @@
 <script>
 let track_list = [
   {
-    name: "Pop Smoke",
-    artist: "Cascada",
-    image: "images/dashboard/audio/01.png",
-    path: "https://tainhac123.com/download/niu-duyen-le-bao-binh.WxXR1SGXHAR7.html"
-  },
-  {
-    name: "Gabby Barrett",
-    artist: "Emeli Sande",
-    image: "images/dashboard/audio/01.png",
-    path: "https://tainhac123.com/download/nang-tho-hoang-dung.Kx3Kbih0rS5z.html"
-  },
-  {
-    name: "Megan Thee",
-    artist: "Jessie J",
-    image: "images/dashboard/audio/01.png",
-    path: "https://tainhac123.com/download/lien-khuc-tam-su-nang-xuan-cau-chuyen-dau-nam-xuan-hop-mat-dam-vinh-hung.LtHCGv83MnvJ.html",
-  },
+    name: "{{musicData.Name}}",
+    artist: "{{musicData.Singer}}",
+    image: "/images/song/upload-{{musicData.ID}}.png",
+    path: "/song/upload-{{musicData.ID}}.mp3"
+  }
 ];
 loadTrack(0);
+
+
+let categorySong = '{{musicData.category}}'
+let likeStatus = $('#likeStatus')
+let categoryName = $('#categoryName')
+
+function changeStatus(resp){
+    if (resp==="1")
+        likeStatus.addClass('ri-heart-fill')
+    else 
+        likeStatus.addClass('ri-heart-line')
+}
+
+$.get('/music/like').then(resp=>{
+    changeStatus(resp)
+})
+
+$.get('/category/getIdName').then(resp=>{
+    const curCategory = resp.find(x=>x.ID==categorySong)
+    categoryName.html(curCategory.Name)
+    categoryName.removeAttr('style')
+})
+
+function likeMusic(){
+    likeStatus.removeClass('ri-heart-line')
+    likeStatus.removeClass('ri-heart-fill')
+    $.post('/music/like').then( resp =>{
+        changeStatus(resp)
+    })
+}
 </script>
 {{/section}}
