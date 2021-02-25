@@ -7,6 +7,12 @@ module.exports={
     add: function(song){
         return db.add(TBL_SONG, song);
     },
+    getById: async(id)=>{
+        return db.load(`SELECT * FROM ${TBL_SONG} WHERE ID= '${id}'`)
+    },
+    patch: async(id,entity) =>{
+        return db.patch(TBL_SONG,entity,{id})
+    },
     search: function(searchString){
         return db.load(`SELECT * FROM ${TBL_SONG} WHERE Name LIKE '${searchString}'`);
     },

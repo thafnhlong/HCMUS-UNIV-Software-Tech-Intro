@@ -4,10 +4,27 @@ const songModel = require("../models/song.model");
 const router = express.Router();
 const SongModel = require("../models/song.model");
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', (req, res,next) => {
     const id = +req.params.id || 1;
-    const listComment = await songModel.getCommentListById(id);
-    res.render("../views/vwMusic/detailMusic.hbs",{playable:true, idMusic: id, listComment});
+    let musicData={}
+
+    songModel.getById(id).then(resp => {
+      if (resp.length == 0)
+        throw null
+
+      musicData=resp[0]
+      songModel.patch(id,{views:musicData.views+1})
+      return songModel.getCommentListById(id)
+    })
+    .then(resp=>{
+        res.render("../views/vwMusic/detailMusic.hbs", {
+            playable: true, 
+            idMusic: id, 
+            listComment: resp,
+            musicData
+        });
+    })
+    .catch(next)    
 });
 
 router.post('/addcomment', async (req, res) => {
@@ -41,7 +58,12 @@ router.post('/addcomment', async (req, res) => {
     res.status(200).send(result); 
 });
 
-
+router.get('/like',(req,res)=>{
+  res.send(Math.random() > 0.5 ? '1':'0')
+})
+router.post('/like',(req,res)=>{
+    res.send(Math.random() > 0.5 ? '1':'0')
+})
 
 
 module.exports = router;

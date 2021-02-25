@@ -31,13 +31,6 @@ const uploadMusic = async (req,res) => {
     })
 }
 
-router.all('/upload',(req,res,next)=>{
-    categoryModel.getIdName().then(resp=>{
-        res.locals.categoryList = resp
-        next()
-    })
-})
-
 router.get('/upload', (req, res) => {
     res.render('dashboard/song/upload')
 });
