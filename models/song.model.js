@@ -7,6 +7,20 @@ module.exports={
     add: function(song){
         return db.add(TBL_SONG, song);
     },
+    delete: async(id,author) => {
+        let sql = ''
+        if (author)
+            sql =` and author=${author}`
+        return db.load(`UPDATE ${TBL_SONG} CT SET CT.delete=1  WHERE ID=${id} ${sql}`)
+    },
+    getListSong:async(id=-1)=>{
+        let sql =''
+        if (id!=-1)
+            sql = ` and author=${id}`
+        return db.load(`SELECT CT.* FROM ${TBL_SONG} CT 
+            WHERE CT.delete is NULL ${sql}`
+        );
+    },
     getById: async(id)=>{
         return db.load(`SELECT * FROM ${TBL_SONG} WHERE ID= '${id}'`)
     },

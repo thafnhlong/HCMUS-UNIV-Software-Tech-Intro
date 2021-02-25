@@ -1,9 +1,7 @@
 const express = require("express");
 const config = require('../../config/default.json');
-const categoryModel = require("../../models/category.model");
 const songModel = require("../../models/song.model");
 const { uploadFn,moveFn } = require("../../utils/upload");
-const { route } = require("./profile");
 const router = express.Router();
 
 const uploadMusic = async (req,res) => {
@@ -41,4 +39,27 @@ router.post('/upload', (req,res,next)=>{
         res.render('dashboard/song/upload',{...data,...resp})
     }).catch(next)
 })
+
+//user
+router.get('/list/me',(req,res,next)=>{
+    songModel.getListSong(res.locals.lcAuthUser.ID)
+    .then( songList =>{
+        res.render('dashboard/song/list',{
+            songList,
+        })
+    }).catch(next)
+})
+
+router.get('/:id/edit',(req,res)=>{
+    res.send(`edit ${req.params.id}`)
+})
+
+router.post('/:id/delete',(req,res)=>{
+    if (+req.params.id > 0){
+        songModel.delete(req.params.id,res.locals.lcAuthUser.ID).then(console.log)
+        .catch(console.log)
+    }
+    res.redirect('back')
+})
+
 module.exports = router;
