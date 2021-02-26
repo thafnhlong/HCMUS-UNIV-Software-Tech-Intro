@@ -1,8 +1,13 @@
 const express = require("express");
 const { now } = require("moment");
+const categoryModel = require("../models/category.model");
 const songModel = require("../models/song.model");
 const router = express.Router();
 const SongModel = require("../models/song.model");
+
+router.get('/getCategoryIdName',(req,res,next)=>{
+  categoryModel.getIdName().then(res.json.bind(res)).catch(next)
+})
 
 router.get('/:id', (req, res,next) => {
     const id = +req.params.id || 1;

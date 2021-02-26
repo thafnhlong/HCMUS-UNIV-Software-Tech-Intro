@@ -353,7 +353,7 @@ $.get('/music/like').then(resp=>{
     changeStatus(resp)
 })
 
-$.get('/category/getIdName').then(resp=>{
+$.get('/music/getCategoryIdName').then(resp=>{
     const curCategory = resp.find(x=>x.ID==categorySong)
     categoryName.html(curCategory.Name)
     categoryName.removeAttr('style')
