@@ -17,7 +17,6 @@ router.get("/search/:searchString",async (req,res,next)=>{
     ]).then(([[{numOfSong}],songList])=>{
         const nPages = Math.ceil(numOfSong / limitSong);
         const Pagination = helper.Pagination(nPages, page);
-        console.log(numOfSong,Pagination)
         res.render("vwSong/list.hbs", {
             searchString,
             songList,
