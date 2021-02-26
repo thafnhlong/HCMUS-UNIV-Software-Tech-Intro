@@ -299,7 +299,6 @@
             type: "POST",
             data: 'info=' + dataToSend,
             success: function (data) {
-                console.log(data);
                 if (data.status) {
                     $("#commentList").prepend(
                         '<div class="media mb-3">' +
