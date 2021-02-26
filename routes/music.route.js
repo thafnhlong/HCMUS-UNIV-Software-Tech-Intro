@@ -9,7 +9,7 @@ router.get('/:id', (req, res,next) => {
     let musicData={}
 
     songModel.getById(id).then(resp => {
-      if (resp.length == 0)
+      if (resp.length == 0 || resp[0].status != 1)
         throw null
 
       musicData=resp[0]

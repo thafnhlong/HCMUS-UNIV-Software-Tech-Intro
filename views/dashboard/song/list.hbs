@@ -36,8 +36,18 @@
                             <td>{{likes}}</td>
                             <td>{{#if status}}
                                 <span class="badge iq-bg-success">Published</span>
+                                {{#if ../isAdmin}}
+                                <form style="display: inline;" action="/song/{{ID}}/draft" method="POST">
+                                    <button class="btn btn-primary"><i class="fa fa-cloud-download" aria-hidden="true"></i></button>
+                                </form>
+                                {{/if}}
                                 {{else}}
                                 <span class="badge iq-bg-warning">Pending</span>
+                                {{#if ../isAdmin}}
+                                <form style="display: inline;" action="/song/{{ID}}/publish" method="POST">
+                                    <button class="btn btn-success"><i class="fa fa-cloud-upload" aria-hidden="true"></i></button>
+                                </form>
+                                {{/if}}
                                 {{/if}}
                             </td>
                             <td>
@@ -83,7 +93,13 @@
     </div>
 </div>
 
+{{#section 'css'}}
+<link rel="stylesheet" href="/css/dataTables.bootstrap4.min.css">
+{{/section}}
+
 {{#section 'js'}}
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap4.min.js"></script>
 <script>
     function onDelete(ctr){
         const id = $(ctr).attr('songid')

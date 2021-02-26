@@ -7,6 +7,7 @@ module.exports = function (app) {
                 if (resp.length > 0){
                     res.locals.lcAuthUser = resp[0] 
                     res.locals.lcIsAuthenticated = true;
+                    res.locals.isAdmin = resp[0].permision == 1
                 } else 
                     delete req.session.authUser
                 next();
