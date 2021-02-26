@@ -7,12 +7,18 @@ const router = express.Router();
 const uploadMusic = async (req,res) => {
     return uploadFn(req).then(({fields,files})=>{
         let {name,singer,composer,category} = fields
+        if (! +category>0){
+            return {errMsg: "Category is not valid"}
+        }
+
         const entity={
             Name:name,
             Singer:singer,
             composer:composer,
             author:res.locals.lcAuthUser.ID,
             category:category,
+            views:0,
+            likes:0,
             createDate:new Date(),
         }
         if (files && files.thumb && files.thumb.size > 0 
@@ -29,14 +35,39 @@ const uploadMusic = async (req,res) => {
     })
 }
 
+const updateMusic = async (req,res) => {
+    return uploadFn(req).then(({fields,files})=>{
+        let {id} = req.params
+        let {name,singer,composer,category} = fields
+        if (! +category>0){
+            return {errMsg: "Category is not valid"}
+        }
+
+        const entity={
+            Name:name,
+            Singer:singer,
+            composer:composer,
+            category:category,
+        }
+        res.locals.songData = {...res.locals.songData,...entity}
+
+        if (files && files.thumb && files.thumb.size > 0){
+            moveFn(files.thumb.path,'./public/images/song/upload-'+id+'.png')
+        }
+
+        return songModel.patch(id,entity).then(resp=>{
+            return {succMsg: "Upload successfully."}
+        })
+    })
+}
+
 router.get('/upload', (req, res) => {
     res.render('dashboard/song/upload')
 });
 
 router.post('/upload', (req,res,next)=>{
-    const data={method:req.query.method}
     uploadMusic(req,res).then(resp=>{
-        res.render('dashboard/song/upload',{...data,...resp})
+        res.render('dashboard/song/upload',resp)
     }).catch(next)
 })
 
@@ -50,13 +81,33 @@ router.get('/list/me',(req,res,next)=>{
     }).catch(next)
 })
 
+router.all('/:id/edit',(req,res,next)=>{
+    if (+req.params.id > 0){
+        return songModel.getById(req.params.id,res.locals.lcAuthUser.ID)
+        .then(resp=>{
+            if (resp.length==0)
+                return next('router')
+            res.locals.songData = resp[0]
+            return next()
+        })
+        .catch(next)
+    }
+    next('router')
+})
+
 router.get('/:id/edit',(req,res)=>{
-    res.send(`edit ${req.params.id}`)
+    res.render('dashboard/song/edit')
+})
+
+router.post('/:id/edit', (req,res,next)=>{
+    updateMusic(req,res).then(resp=>{
+        res.render('dashboard/song/edit',resp)
+    }).catch(next)
 })
 
 router.post('/:id/delete',(req,res)=>{
     if (+req.params.id > 0){
-        songModel.delete(req.params.id,res.locals.lcAuthUser.ID).then(console.log)
+        songModel.delete(req.params.id,res.locals.lcAuthUser.ID)
         .catch(console.log)
     }
     res.redirect('back')

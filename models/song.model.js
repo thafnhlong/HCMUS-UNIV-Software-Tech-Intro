@@ -21,8 +21,11 @@ module.exports={
             WHERE CT.delete is NULL ${sql}`
         );
     },
-    getById: async(id)=>{
-        return db.load(`SELECT * FROM ${TBL_SONG} WHERE ID= '${id}'`)
+    getById: async(id,author)=>{
+        let sql = ''
+        if (author)
+            sql =` and author=${author}`
+        return db.load(`SELECT * FROM ${TBL_SONG} CT WHERE ID= '${id}' CT.delete is NULL ${sql}`)
     },
     patch: async(id,entity) =>{
         return db.patch(TBL_SONG,entity,{id})

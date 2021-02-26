@@ -7197,6 +7197,7 @@ $(document).ready(function() {
 
             reader.onload = function (e) {
                 $('.profile-pic').attr('src', e.target.result);
+                $('.profile-pic').css('display','')
             }
     
             reader.readAsDataURL(input.files[0]);
