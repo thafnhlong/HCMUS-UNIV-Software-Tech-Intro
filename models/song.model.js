@@ -30,8 +30,15 @@ module.exports={
     patch: async(id,entity) =>{
         return db.patch(TBL_SONG,entity,{id})
     },
-    search: function(searchString){
-        return db.load(`SELECT * FROM ${TBL_SONG} WHERE Name LIKE '${searchString}'`);
+    search: function(searchString,count=false,page,offset){
+        let sql = "*",sql2=`limit ${page} offset ${offset}`
+        if (count){
+            sql = "COUNT(*) numOfSong"
+            sql2 = ''
+        }
+        return db.load(`SELECT ${sql} FROM ${TBL_SONG} CT
+        WHERE CT.delete is NULL and status=1 and MATCH (Name,Singer,composer)
+        AGAINST ('${searchString}' IN NATURAL LANGUAGE MODE) ${sql2}`)
     },
     addComment: function(entity){
         return db.add(TBL_Users_Comments, entity);

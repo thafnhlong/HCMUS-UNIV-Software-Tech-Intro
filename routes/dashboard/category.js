@@ -26,4 +26,9 @@ router.get('/getIdName',(req,res,next)=>{
     categoryModel.getIdName().then(res.json.bind(res)).catch(next)
 })
 
+router.get('/:id/edit',(req,res)=>{
+    res.render('home')
+})
+
+
 module.exports = router;

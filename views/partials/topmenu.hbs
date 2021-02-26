@@ -19,39 +19,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="list-unstyled iq-menu-top d-flex justify-content-between mb-0 p-0">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/latest.html">Latest</a></li>
-                <li><a href="/albums.html">Albums</a></li>
+                <li class="{{#if (isEqual METHODPAGE '')}}active{{/if}}"><a href="/">Home</a></li>
+                <li class="{{#if (isEqual METHODPAGE 'album')}}active{{/if}}"><a href="/album">Album</a></li>
             </ul>
             <ul class="navbar-nav ml-auto navbar-list">
                 <li class="nav-item nav-icon">
-                <div class="iq-search-bar">
-                    <form action="#" class="searchbox">
-                        <input type="text" class="text search-input" placeholder="Search Here..">
-                        <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
-                        <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
-                    </form>
-                </div>
-                </li>
-                <li class="nav-item nav-icon search-content">
-                <a href="#" class="search-toggle iq-waves-effect text-gray rounded"><span class="ripple rippleEffect " ></span>
-                    <i class="ri-search-line text-black"></i>
-                </a>
-                <form action="#" class="search-box p-0">
-                    <input type="text" class="text search-input" placeholder="Type here to search...">
-                    <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
-                    <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
-                </form>
+                    <div class="iq-search-bar">
+                        <form action="/search" class="searchbox">
+                            <input value="{{searchString}}" type="text" class="text search-input" name='keyword' placeholder="Search Here..">
+                            <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
+                        </form>
+                    </div>
                 </li>
                 {{#if lcIsAuthenticated}}
                 <li class="nav-item nav-icon">
-                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
+                <a href="/favorite" class="text-black rounded">
                     <i class="las la-file-audio"></i>
                     <span class=" dots"></span>
                 </a>
                 </li>
                 <li class="nav-item nav-icon">
-                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
+                <a href="/song/upload" class="iq-waves-effect text-black rounded">
                     <i class="las la-cloud-upload-alt"></i>
                     <span class="notice-icon dots badge badge-primary">+</span>
                 </a>
@@ -71,7 +59,7 @@
                                 Guess
                                 {{/if}} !!!</h5>
                             {{#if lcAuthUser.permision}}
-                            <span class="text-secondary font-size-12">Admin</span>
+                            <span class="text-white font-size-12">Admin</span>
                             {{/if}}
                             </div>
                             {{#if lcIsAuthenticated}}
@@ -86,7 +74,7 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="/profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
+                            <a href="/song/list/me" class="iq-sub-card iq-bg-primary-hover">
                             <div class="media align-items-center">
                                 <div class="rounded iq-card-icon iq-bg-primary">
                                     <i class="ri-profile-line"></i>

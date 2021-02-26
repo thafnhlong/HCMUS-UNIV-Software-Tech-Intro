@@ -16,7 +16,9 @@ module.exports = function (app) {
             parseDate: (date) => {
                 return moment(date).format('YYYY-MM-DD');
             },
-            isEqual: (a,b) => a==b
+            isEqual: (a,b) => a==b,
+            or: (a,b) => a || b,
+            and: (a,b) => a && b
         }
     }));
     app.set('view engine', 'hbs');
