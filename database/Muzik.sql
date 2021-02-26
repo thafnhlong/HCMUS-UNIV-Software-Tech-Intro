@@ -283,11 +283,6 @@ ALTER TABLE `Song_category`
   ADD CONSTRAINT `FKSong_categ859474` FOREIGN KEY (`Song`) REFERENCES `Songs` (`ID`),
   ADD CONSTRAINT `FKSong_categ986104` FOREIGN KEY (`category`) REFERENCES `Categories` (`ID`);
 
---
--- Constraints for table `Users`
---
-ALTER TABLE `Users`
-  ADD CONSTRAINT `permision` FOREIGN KEY (`permision`) REFERENCES `Permision` (`ID`);
 
 --
 -- Constraints for table `Users_Comments`

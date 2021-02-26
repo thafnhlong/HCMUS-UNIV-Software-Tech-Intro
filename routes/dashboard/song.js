@@ -61,6 +61,12 @@ const updateMusic = async (req,res) => {
     })
 }
 
+const isAdminMiddleware=(req,res,next)=>{
+    if (res.locals.isAdmin)
+        return next()
+    res.redirect('back')
+}
+
 router.get('/upload', (req, res) => {
     res.render('dashboard/song/upload')
 });
@@ -81,9 +87,41 @@ router.get('/list/me',(req,res,next)=>{
     }).catch(next)
 })
 
+//admin
+router.get('/list',isAdminMiddleware,(req,res,next)=>{
+    songModel.getListSong()
+    .then( songList =>{
+        res.render('dashboard/song/list',{
+            songList,
+        })
+    }).catch(next)
+})
+
+router.post('/:id/publish',isAdminMiddleware,(req,res,next)=>{
+    if (+req.params.id > 0){
+        songModel.patch(req.params.id,{
+            status:1,
+            publishDate: new Date()
+        }).catch(console.log)
+    }
+    return res.redirect('back')
+})
+router.post('/:id/draft',isAdminMiddleware,(req,res,next)=>{
+    if (+req.params.id > 0){
+        songModel.patch(req.params.id,{
+            status:0,
+            publishDate: null
+        }).catch(console.log)
+    }
+    return res.redirect('back')
+})
+
+//
+
 router.all('/:id/edit',(req,res,next)=>{
     if (+req.params.id > 0){
-        return songModel.getById(req.params.id,res.locals.lcAuthUser.ID)
+
+        return songModel.getById(req.params.id,res.locals.isAdmin?null:res.locals.lcAuthUser.ID)
         .then(resp=>{
             if (resp.length==0)
                 return next('router')
@@ -107,7 +145,7 @@ router.post('/:id/edit', (req,res,next)=>{
 
 router.post('/:id/delete',(req,res)=>{
     if (+req.params.id > 0){
-        songModel.delete(req.params.id,res.locals.lcAuthUser.ID)
+        songModel.delete(req.params.id,res.locals.isAdmin?null:res.locals.lcAuthUser.ID)
         .catch(console.log)
     }
     res.redirect('back')
