@@ -2,7 +2,9 @@ const db=require("../utils/dao");
 
 const TBL_SONG="Songs";
 const TBL_Users_Comments = "Users_Comments";
+const TBL_Users_like_Songs = "Users_like_Songs";
 const TBL_Users = "Users";
+
 module.exports={
     add: function(song){
         return db.add(TBL_SONG, song);
@@ -12,6 +14,17 @@ module.exports={
         if (author)
             sql =` and author=${author}`
         return db.load(`UPDATE ${TBL_SONG} CT SET CT.delete=1  WHERE ID=${id} ${sql}`)
+    },
+    likedList: async id => {
+        return db.load(`select CT.ID from Songs CT 
+        JOIN ${TBL_Users_like_Songs} US on CT.ID = US.Song
+        where CT.delete is NULL and US.User=${id}`)
+    },
+    like :async(Song,User) =>{
+        return db.add(TBL_Users_like_Songs,{Song,User})
+    },
+    unLike: async(Song,User) =>{
+        return db.load(`delete from Users_like_Songs where Song = ${Song} and User = ${User}`)
     },
     getListSong:async(id=-1)=>{
         let sql =''
