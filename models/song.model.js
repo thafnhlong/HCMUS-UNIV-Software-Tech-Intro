@@ -83,5 +83,11 @@ module.exports={
     },
     deleteFavoriteSong: function(userId, songId){
         return db.load(`DELETE FROM ${TBL_Users_Favorite_Songs} WHERE User = ${userId} AND Song = ${songId}`);
+    },
+    addFavoriteSong: function(userId, songId){
+        return db.add(TBL_Users_Favorite_Songs, {
+            User: userId,
+            Song: songId
+        });
     }
 }

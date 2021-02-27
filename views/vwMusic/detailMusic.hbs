@@ -28,7 +28,7 @@
                                 <div class="iq-circle mr-2"><a href="javascript:void(0);" class="likeButton" songId="{{musicData.ID}}" onclick="likeMusic(this)"><i
                                             class="text-primary"></i></a></div>
                                 <div class="iq-circle mr-2">
-                                    <a href="/song/upload-{{musicData.ID}}.mp3"><i class="ri-add-circle-line"></i></a>
+                                    <a onclick="addFavoriteSong({{musicData.ID}})" href="javascript:void(0);"><i class="ri-add-circle-line"></i></a>
                                 </div>
                                 {{/if}}
                                 <div class="iq-circle">
@@ -68,7 +68,7 @@
                                             class="font-size-32 text-primary"></i></a>
                         </p>
                         <p class="mb-0 col-2 col-md-2 iq-music-play">
-                            <a href="/song/upload-{{ID}}.mp3"><i class="font-size-32 ri-add-circle-line"></i></a>
+                            <a onclick="addFavoriteSong({{ID}})" href="javascript:void(0);"><i class="font-size-32 ri-add-circle-line"></i></a>
                         </p>
                         {{/if}}
                         <div class="iq-card-header-toolbar iq-music-drop d-flex align-items-center col-2 col-md-1">
@@ -202,6 +202,17 @@ function likeMusic(ctr){
     $.post('/song/like',{id,state}).then(()=>{
         reloadLiked()    
     })
+}
+
+function addFavoriteSong(songId) {
+    $.ajax({
+        url: "/favorite/add",
+        type: "POST",
+        data: 'id=' + songId,
+        success: function (status) {
+           alert("Song added successfully");
+        }
+    });
 }
 
 $.get('/music/getCategoryIdName').then(resp=>{
