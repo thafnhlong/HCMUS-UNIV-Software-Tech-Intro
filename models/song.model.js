@@ -77,7 +77,7 @@ module.exports={
         return commentInfo[0];
     },
     getFavoriteListByUserId: function(userId){
-        return db.load(`SELECT s.ID as songId, s.Name, s.composer
+        return db.load(`SELECT s.ID as songId, s.views, s.Name, s.composer
         FROM ${TBL_Users_Favorite_Songs} usFS JOIN ${TBL_SONG} s ON usFS.Song = s.ID JOIN ${TBL_Users} us ON s.author = us.ID 
         WHERE usFS.User = ${userId} AND s.delete is NULL`);
     },
