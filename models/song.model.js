@@ -28,17 +28,11 @@ module.exports={
         return commentInfo[0];
     },
     getFavoriteListByUserId: function(userId){
-        return db.load(`SELECT usFS.ID, s.ID as songId, s.Name, us.userName 
+        return db.load(`SELECT s.ID as songId, s.Name, s.composer
         FROM ${TBL_Users_Favorite_Songs} usFS JOIN ${TBL_SONG} s ON usFS.Song = s.ID JOIN ${TBL_Users} us ON s.author = us.ID 
-        WHERE usFS.User = ${userId} AND usFS.delete = 0 AND s.delete = 0`);
+        WHERE usFS.User = ${userId} AND s.delete is NULL`);
     },
-    deleteFavoriteSongById: function(id){
-        const entity = {
-            delete: 1
-        }
-        const conditions = {
-            ID: id
-        }
-        return db.patch(TBL_Users_Favorite_Songs, entity, conditions);
+    deleteFavoriteSong: function(userId, songId){
+        return db.load(`DELETE FROM ${TBL_Users_Favorite_Songs} WHERE User = ${userId} AND Song = ${songId}`);
     }
 }

@@ -9,8 +9,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/delete', async (req, res) => {
-    const id = req.body.id;
-    const rs = await SongModel.deleteFavoriteSongById(id);
+    const rs = await SongModel.deleteFavoriteSong(res.locals.lcAuthUser.ID, req.body.id);
     let status = true;
     if (rs.affectedRows === 0){
         status = false;
