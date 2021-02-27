@@ -40,6 +40,12 @@ module.exports={
             sql =` and author=${author}`
         return db.load(`SELECT * FROM ${TBL_SONG} CT WHERE ID= '${id}' AND CT.delete is NULL ${sql}`)
     },
+    getRandomByCategory: async (category,num=1)=>{
+        return db.load(`SELECT CT.* FROM ${TBL_SONG} CT 
+        WHERE CT.delete is NULL and category = ${category}
+            and status=1
+        ORDER BY RAND() LIMIT ${num+1}`)
+    },
     patch: async(id,entity) =>{
         return db.patch(TBL_SONG,entity,{id})
     },

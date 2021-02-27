@@ -19,13 +19,18 @@ router.get('/:id', (req, res,next) => {
 
       musicData=resp[0]
       songModel.patch(id,{views:musicData.views+1})
-      return songModel.getCommentListById(id)
+      return Promise.all([
+        songModel.getCommentListById(id),
+        songModel.getRandomByCategory(musicData.category,6)
+      ])
     })
-    .then(resp=>{
+    .then(([listComment,songList])=>{
+        songList = songList.filter(x=>x.ID != musicData.ID)
         res.render("../views/vwMusic/detailMusic.hbs", {
             playable: true, 
             idMusic: id, 
-            listComment: resp,
+            listComment,
+            songList,
             musicData
         });
     })
