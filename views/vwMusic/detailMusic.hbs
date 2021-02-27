@@ -24,8 +24,13 @@
                         </div>
                         <div class="music-right">
                             <div class="d-flex align-items-center">
-                                <div class="iq-circle mr-2"><a href="javascript:void(0);" onclick="likeMusic()"><i
-                                            class="text-primary" id="likeStatus"></i></a></div>
+                                {{#if lcIsAuthenticated}}
+                                <div class="iq-circle mr-2"><a href="javascript:void(0);" class="likeButton" songId="{{musicData.ID}}" onclick="likeMusic(this)"><i
+                                            class="text-primary"></i></a></div>
+                                <div class="iq-circle mr-2">
+                                    <a href="/song/upload-{{musicData.ID}}.mp3"><i class="ri-add-circle-line"></i></a>
+                                </div>
+                                {{/if}}
                                 <div class="iq-circle">
                                     <a href="/song/upload-{{musicData.ID}}.mp3"><i class="las la-download text-primary"></i></a>
                                 </div>
@@ -55,8 +60,12 @@
                             </div>
                         </div>
                         <p class="mb-0 col-md-2 col-md-2 iq-music-time">9:52</p>
-                        <p class="mb-0 col-md-2 col-md-2 iq-musc-icone"><i class="lar la-star font-size-20"></i>
+                        {{#if lcIsAuthenticated}}
+                        <p class="mb-0 col-md-2 col-md-2 iq-musc-icone">
+                            <a href="javascript:void(0);" class="likeButton" songId="{{musicData.ID}}" onclick="likeMusic(this)"><i
+                                            class="text-primary"></i></a>
                         </p>
+                        {{/if}}
                         <p class="mb-0 col-2 col-md-2 iq-music-play"><i class="las la-play-circle font-size-32"></i>
                         </p>
                         <div class="iq-card-header-toolbar iq-music-drop d-flex align-items-center col-2 col-md-1">
@@ -339,19 +348,32 @@ loadTrack(0);
 
 
 let categorySong = '{{musicData.category}}'
-let likeStatus = $('#likeStatus')
+let likeButton = $('.likeButton')
+let likeStatus = $('.likeButton > i')
 let categoryName = $('#categoryName')
 
-function changeStatus(resp){
-    if (resp==="1")
-        likeStatus.addClass('ri-heart-fill')
-    else 
-        likeStatus.addClass('ri-heart-line')
+function reloadLiked(){
+    likeStatus.removeClass('ri-heart-line')
+    likeStatus.removeClass('ri-heart-fill')
+    $.get('/song/like').then(resp=>{
+        likeButton.each((id,x)=>{
+            let className = 'ri-heart-line',nextState='1'
+            if (resp.includes(+$(x).attr('songID'))){
+                className = 'ri-heart-fill'
+                nextState = '0'
+            }
+            $(x).children().first().addClass(className)
+            $(x).attr('nextState',nextState)
+        })
+    })
 }
-
-$.get('/music/like').then(resp=>{
-    changeStatus(resp)
-})
+function likeMusic(ctr){
+    let state = $(ctr).attr('nextState')
+    let id = $(ctr).attr('songID')
+    $.post('/song/like',{id,state}).then(()=>{
+        reloadLiked()    
+    })
+}
 
 $.get('/music/getCategoryIdName').then(resp=>{
     const curCategory = resp.find(x=>x.ID==categorySong)
@@ -359,12 +381,9 @@ $.get('/music/getCategoryIdName').then(resp=>{
     categoryName.removeAttr('style')
 })
 
-function likeMusic(){
-    likeStatus.removeClass('ri-heart-line')
-    likeStatus.removeClass('ri-heart-fill')
-    $.post('/music/like').then( resp =>{
-        changeStatus(resp)
-    })
-}
+{{#if lcIsAuthenticated}}
+reloadLiked()
+{{/if}}
+
 </script>
 {{/section}}

@@ -209,7 +209,6 @@ INSERT INTO `Users_Favorite_Songs` (`ID`, `User`, `Song`, `delete`, `createDate`
 --
 
 CREATE TABLE `Users_like_Songs` (
-  `ID` int(10) NOT NULL,
   `User` int(10) NOT NULL,
   `Song` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -258,7 +257,7 @@ ALTER TABLE `Users_Favorite_Songs`
 -- Indexes for table `Users_like_Songs`
 --
 ALTER TABLE `Users_like_Songs`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`User`,`Song`),
   ADD KEY `FKUsers_like408315` (`User`),
   ADD KEY `FKUsers_like387257` (`Song`);
 
@@ -295,12 +294,6 @@ ALTER TABLE `Users_Comments`
 --
 ALTER TABLE `Users_Favorite_Songs`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `Users_like_Songs`
---
-ALTER TABLE `Users_like_Songs`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

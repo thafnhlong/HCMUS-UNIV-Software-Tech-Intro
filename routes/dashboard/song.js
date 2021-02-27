@@ -151,4 +151,26 @@ router.post('/:id/delete',(req,res)=>{
     res.redirect('back')
 })
 
+router.get('/like',(req,res,next)=>{
+    songModel.likedList(res.locals.lcAuthUser.ID).then(resp=>{
+        const result = resp.map(x=>x.ID)
+        res.json(result)
+    }).catch(next)
+})
+router.post('/like',(req,res)=>{
+    const {id,state} = req.body
+    if (+id > 0){
+        let fn = songModel.unLike
+        if (+state>0)
+            fn = songModel.like
+        fn(id,res.locals.lcAuthUser.ID)
+        .catch(()=>{})
+        .finally(()=>{
+            res.sendStatus(200)
+        })
+    }
+    else 
+        res.sendStatus(200)
+})
+
 module.exports = router;

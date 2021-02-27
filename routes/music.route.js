@@ -63,12 +63,4 @@ router.post('/addcomment', async (req, res) => {
     res.status(200).send(result); 
 });
 
-router.get('/like',(req,res)=>{
-  res.send(Math.random() > 0.5 ? '1':'0')
-})
-router.post('/like',(req,res)=>{
-    res.send(Math.random() > 0.5 ? '1':'0')
-})
-
-
 module.exports = router;
