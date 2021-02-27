@@ -23,5 +23,8 @@
         "limitAdmin":10,
         "limitCategory": 3,
         "limitSong":18
+    },
+    "schedule":{
+        "song":30
     }
 }
