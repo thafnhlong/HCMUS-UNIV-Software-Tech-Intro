@@ -11,5 +11,6 @@ const authenMiddleware =(req,res,next)=>{
 router.use('/profile',authenMiddleware,require('./profile'))
 router.use('/category',authenMiddleware,require('./category'))
 router.use('/song',authenMiddleware,require('./song'))
+router.use('/favorite',authenMiddleware,require('./favorite'));
 
 module.exports = router;

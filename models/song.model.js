@@ -4,6 +4,7 @@ const TBL_SONG="Songs";
 const TBL_Users_Comments = "Users_Comments";
 const TBL_Users_like_Songs = "Users_like_Songs";
 const TBL_Users = "Users";
+const TBL_Users_Favorite_Songs = "Users_Favorite_Songs";
 
 module.exports={
     add: function(song){
@@ -74,5 +75,13 @@ module.exports={
         WHERE usCM.User = ${idUser} And usCM.Song = ${idSong}
         ORDER BY usCM.createDate DESC LIMIT 1`);
         return commentInfo[0];
+    },
+    getFavoriteListByUserId: function(userId){
+        return db.load(`SELECT s.ID as songId, s.Name, s.composer
+        FROM ${TBL_Users_Favorite_Songs} usFS JOIN ${TBL_SONG} s ON usFS.Song = s.ID JOIN ${TBL_Users} us ON s.author = us.ID 
+        WHERE usFS.User = ${userId} AND s.delete is NULL`);
+    },
+    deleteFavoriteSong: function(userId, songId){
+        return db.load(`DELETE FROM ${TBL_Users_Favorite_Songs} WHERE User = ${userId} AND Song = ${songId}`);
     }
 }
