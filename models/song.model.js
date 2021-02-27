@@ -16,7 +16,7 @@ module.exports={
         return db.load(`UPDATE ${TBL_SONG} CT SET CT.delete=1  WHERE ID=${id} ${sql}`)
     },
     likedList: async id => {
-        return db.load(`select CT.ID from Songs CT 
+        return db.load(`select CT.ID from ${TBL_SONG} CT 
         JOIN ${TBL_Users_like_Songs} US on CT.ID = US.Song
         where CT.delete is NULL and US.User=${id}`)
     },
@@ -24,7 +24,16 @@ module.exports={
         return db.add(TBL_Users_like_Songs,{Song,User})
     },
     unLike: async(Song,User) =>{
-        return db.load(`delete from Users_like_Songs where Song = ${Song} and User = ${User}`)
+        return db.load(`delete from ${TBL_Users_like_Songs} where Song = ${Song} and User = ${User}`)
+    },
+    updateLike: async () => {
+        return db.load(`UPDATE ${TBL_SONG} as US 
+        INNER JOIN (
+            SELECT Song, COUNT(Song) countSong
+            FROM ${TBL_Users_like_Songs}
+            GROUP BY Song
+        ) as LJ on US.ID=LJ.Song
+        set likes = LJ.countSong`)
     },
     getListSong:async(id=-1)=>{
         let sql =''
@@ -70,7 +79,7 @@ module.exports={
     },
     getNewCommentOfUserById: async function(idUser, idSong) {
         const commentInfo = await db.load(`SELECT usCM.ID, usCM.content, DATE_FORMAT(usCM.createDate, "%M %d, %Y %H:%i") as cmDate 
-        FROM Users_Comments usCM 
+        FROM ${TBL_Users_Comments} usCM 
         WHERE usCM.User = ${idUser} And usCM.Song = ${idSong}
         ORDER BY usCM.createDate DESC LIMIT 1`);
         return commentInfo[0];

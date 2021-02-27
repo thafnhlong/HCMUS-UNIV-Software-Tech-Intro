@@ -186,21 +186,17 @@ INSERT INTO `Users_Comments` (`ID`, `content`, `User`, `Song`, `delete`, `create
 --
 
 CREATE TABLE `Users_Favorite_Songs` (
-  `ID` int(10) NOT NULL,
   `User` int(10) NOT NULL,
-  `Song` int(10) NOT NULL,
-  `delete` tinyint(3) DEFAULT NULL,
-  `createDate` int(10) DEFAULT NULL,
-  `modifileDate` int(10) DEFAULT NULL
+  `Song` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `Users_Favorite_Songs`
 --
 
-INSERT INTO `Users_Favorite_Songs` (`ID`, `User`, `Song`, `delete`, `createDate`, `modifileDate`) VALUES
-(1, 126, 15, 0, NULL, NULL),
-(2, 126, 16, 0, NULL, NULL);
+INSERT INTO `Users_Favorite_Songs` (`User`, `Song`) VALUES
+(126, 15),
+(126, 16);
 
 -- --------------------------------------------------------
 
@@ -245,11 +241,11 @@ ALTER TABLE `Users_Comments`
   ADD KEY `FKUsers_Comm215024` (`User`),
   ADD KEY `FKUsers_Comm193966` (`Song`);
 
---
+--e
 -- Indexes for table `Users_Favorite_Songs`
 --
 ALTER TABLE `Users_Favorite_Songs`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`User`,`Song`),
   ADD KEY `FKUsers_Favo456767` (`User`),
   ADD KEY `FKUsers_Favo477825` (`Song`);
 

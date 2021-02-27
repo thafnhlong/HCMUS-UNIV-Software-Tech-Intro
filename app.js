@@ -22,6 +22,9 @@ require('./middlewares/viewengine.mdw')(app);
 require('./middlewares/session.mdw')(app);
 require('./middlewares/local.mdw')(app);
 
+//schedule
+require('./schedule/updateLike')
+
 app.get("/", (req, res) => {
   res.render("home.hbs");
 });
