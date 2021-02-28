@@ -22,5 +22,8 @@ module.exports = {
             ID: ID
         }
         return db.patch(TBL_Categories, entity, conditions);
+    },
+    add: function(category){
+        return db.add(TBL_Categories, category);
     }
 }
