@@ -1,8 +1,47 @@
 const express = require("express");
 const router = express.Router();
+const config = require('./../config/default.json')
+const songModel = require('./../models/song.model');
+const categoryModel = require('../models/category.model');
+const helper = require("./../utils/helper");
+const limitSong = config.pagination.limitSong
 
-router.get('/', (req, res,next) => {
+router.get("/",async (req,res,next)=>{
     res.render('album')
 });
 
-module.exports = router;
+router.get("/:id",async (req,res,next)=>{
+    const {id} = req.params
+    if (+id > 0){
+        const page = +req.query.page || 1;
+        const offset = (page - 1) * limitSong;
+
+        return categoryModel.getByID(id)
+        .then(resp=>{
+            if (resp.length > 0){
+                const categoryData = resp[0]
+
+                return Promise.all([
+                    songModel.getByCategory(id,true),
+                    songModel.getByCategory(id,false,limitSong,offset)
+                ]).then(([[{numOfSong}],songList])=>{
+                    const nPages = Math.ceil(numOfSong / limitSong);
+                    const Pagination = helper.Pagination(nPages, page);
+                    res.render("vwSong/list.hbs", {
+                        categoryData,
+                        songList,
+                        numOfSong,
+                        Pagination,
+                        isAlbum:true
+                    });
+                })
+            }
+            else
+                throw null
+        })
+        .catch(next)
+    }
+    next()
+});
+
+module.exports=router;
