@@ -69,6 +69,15 @@ module.exports={
         WHERE CT.delete is NULL and status=1 and MATCH (Name,Singer,composer)
         AGAINST ('${searchString}' IN NATURAL LANGUAGE MODE) ${sql2}`)
     },
+    getByCategory: async (id,count=false,page,offset) => {
+        let sql = "*",sql2=`limit ${page} offset ${offset}`
+        if (count){
+            sql = "COUNT(*) numOfSong"
+            sql2 = ''
+        }
+        return db.load(`SELECT ${sql} FROM ${TBL_SONG} CT
+        WHERE CT.delete is NULL and status=1 and category=${id} ${sql2}`)
+    },
     addComment: function(entity){
         return db.add(TBL_Users_Comments, entity);
     },

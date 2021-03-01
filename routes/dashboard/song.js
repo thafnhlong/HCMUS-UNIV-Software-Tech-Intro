@@ -1,6 +1,7 @@
 const express = require("express");
 const config = require('../../config/default.json');
 const songModel = require("../../models/song.model");
+const { setUpdateLike } = require("../../schedule/updateLike");
 const { uploadFn,moveFn } = require("../../utils/upload");
 const router = express.Router();
 
@@ -166,6 +167,7 @@ router.post('/like',(req,res)=>{
         fn(id,res.locals.lcAuthUser.ID)
         .catch(()=>{})
         .finally(()=>{
+            setUpdateLike()
             res.sendStatus(200)
         })
     }
