@@ -24,16 +24,14 @@ require('./middlewares/local.mdw')(app);
 
 //schedule
 require('./schedule/updateLike')
-
-app.get("/", (req, res) => {
-  res.render("home.hbs");
-});
+require('./schedule/updateComments')
 
 app.use(require("./routes/songs/searchs"));
 app.use(require('./routes/user.route'));
 app.use(require("./routes/dashboard"));
 app.use('/music', require('./routes/music.route'));
 app.use('/album', require('./routes/album.route'));
+app.get("/", require('./routes/home.route'));
 
 app.get("/throw", async (req, res) => {
   throw new Error("error");

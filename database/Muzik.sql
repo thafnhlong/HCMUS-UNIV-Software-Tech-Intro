@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2021 at 07:42 AM
+-- Generation Time: Mar 02, 2021 at 07:16 AM
 -- Server version: 8.0.13-4
 -- PHP Version: 7.2.24-0ubuntu0.18.04.7
 
@@ -33,21 +33,42 @@ CREATE TABLE `Categories` (
   `Name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `delete` tinyint(3) DEFAULT NULL,
   `createDate` datetime(6) DEFAULT NULL,
-  `modifileDate` datetime(6) DEFAULT NULL
+  `modifileDate` datetime(6) DEFAULT NULL,
+  `description` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `Categories`
 --
 
-INSERT INTO `Categories` (`ID`, `Name`, `delete`, `createDate`, `modifileDate`) VALUES
-(1, 'pop', 0, NULL, NULL),
-(2, 'Young', 0, NULL, NULL),
-(3, 'Rock', 0, NULL, NULL),
-(4, 'Type1', 0, NULL, NULL),
-(5, 'Type2', 0, NULL, NULL),
-(6, 'Type3', 0, NULL, NULL),
-(7, 'Type4', 0, NULL, NULL);
+INSERT INTO `Categories` (`ID`, `Name`, `delete`, `createDate`, `modifileDate`, `description`) VALUES
+(1, 'pop', 0, NULL, NULL, ''),
+(2, 'Young', 0, NULL, NULL, ''),
+(3, 'Rock', 0, NULL, NULL, ''),
+(4, 'Type1', 0, NULL, NULL, ''),
+(5, 'Type2', 0, NULL, NULL, ''),
+(6, 'Type3', 0, NULL, NULL, ''),
+(7, 'Type4', 0, NULL, NULL, ''),
+(8, NULL, NULL, '2021-02-28 22:54:31.010000', NULL, NULL),
+(9, 'name', NULL, '2021-02-28 23:00:44.471000', NULL, 'test'),
+(10, 'name', NULL, '2021-02-28 23:03:01.365000', NULL, 'test'),
+(11, 'test1', NULL, '2021-02-28 23:15:14.331000', NULL, 'test1'),
+(12, 'test2', NULL, '2021-02-28 23:16:10.525000', NULL, 'test2'),
+(13, 'test2', NULL, '2021-02-28 23:24:25.096000', NULL, 'test2'),
+(14, 'test3', NULL, '2021-02-28 23:24:33.213000', NULL, 'test3'),
+(15, 'test3', NULL, '2021-02-28 23:25:01.144000', NULL, 'test3'),
+(16, 'test4', NULL, '2021-02-28 23:26:27.967000', NULL, 'test4'),
+(17, 'test4', NULL, '2021-02-28 23:26:38.286000', NULL, 'test4'),
+(18, 'hieuttm', NULL, '2021-02-28 23:27:23.195000', NULL, '123456'),
+(19, '', NULL, '2021-02-28 23:30:15.920000', NULL, ''),
+(20, '', NULL, '2021-02-28 23:30:16.797000', NULL, ''),
+(21, '', NULL, '2021-02-28 23:30:17.663000', NULL, ''),
+(22, '', NULL, '2021-02-28 23:30:44.531000', NULL, ''),
+(23, 'test5', NULL, '2021-02-28 23:33:00.864000', NULL, 'test5'),
+(24, 'hieuttm', NULL, '2021-02-28 23:43:25.016000', NULL, '123456'),
+(25, 'test7', NULL, '2021-02-28 23:47:14.416000', NULL, 'test7'),
+(26, 'testlasst', NULL, '2021-02-28 23:52:03.866000', NULL, 'test'),
+(27, '213', NULL, '2021-03-01 09:12:20.107000', NULL, '213');
 
 -- --------------------------------------------------------
 
@@ -63,8 +84,9 @@ CREATE TABLE `Songs` (
   `author` int(10) NOT NULL,
   `views` int(10) DEFAULT NULL,
   `likes` int(10) DEFAULT NULL,
+  `comments` int(11) NOT NULL DEFAULT '0',
   `category` int(10) NOT NULL,
-  `status` int(10) DEFAULT NULL,
+  `status` int(10) NOT NULL DEFAULT '0',
   `createDate` datetime(6) DEFAULT NULL,
   `publishDate` datetime(6) DEFAULT NULL,
   `delete` tinyint(3) DEFAULT NULL
@@ -74,23 +96,28 @@ CREATE TABLE `Songs` (
 -- Dumping data for table `Songs`
 --
 
-INSERT INTO `Songs` (`ID`, `Name`, `Singer`, `composer`, `author`, `views`, `likes`, `category`, `status`, `createDate`, `publishDate`, `delete`) VALUES
-(1, 'thunder', 'minh hieu', 'minh hieu', 13, 26, 0, 1, 0, '2021-02-18 00:00:00.000000', NULL, NULL),
-(2, '', '', '', 11, 1, 0, 1, 1, NULL, '2021-02-26 11:44:21.274000', NULL),
-(3, 'hello', 'babye', '', 11, 6, 0, 1, 1, NULL, '2021-02-26 11:53:19.823000', NULL),
-(4, 'hello', 'babye', '', 11, 2, 0, 1, 1, NULL, '2021-02-26 11:54:11.346000', NULL),
-(5, 'hello', 'babye', '', 11, 0, 0, 1, NULL, NULL, NULL, NULL),
-(6, 'hello', 'babye', '', 11, 0, 0, 1, NULL, NULL, NULL, NULL),
-(7, 'song1', 'singer1', 'composer1', 11, 0, 0, 5, NULL, '2021-02-24 15:18:09.359000', NULL, NULL),
-(8, 'we of present co the abc', 'sontungMTP123', 'sontungMTP', 11, 31, 0, 5, 1, '2021-02-24 15:34:31.735000', '2021-02-26 14:04:18.739000', NULL),
-(9, 'thunder', 'minh hieu', 'minh hieu', 13, 16, 1, 1, 1, '2021-02-18 00:00:00.000000', '2021-02-19 00:00:00.000000', NULL),
-(10, '', '', '', 12, 0, 0, 1, NULL, NULL, NULL, NULL),
-(11, 'hello', 'babye', '', 12, 0, 0, 1, NULL, NULL, NULL, NULL),
-(12, 'hello', 'babye', '', 12, 0, 0, 1, NULL, NULL, NULL, NULL),
-(13, 'hello', 'babye', '', 11, 0, 0, 1, NULL, NULL, NULL, NULL),
-(14, 'hello', 'babye', '', 11, 0, 0, 1, NULL, NULL, NULL, NULL),
-(15, 'song1', 'singer1', 'composer1', 11, 0, 0, 5, NULL, '2021-02-24 15:18:09.359000', NULL, NULL),
-(16, 'we of present', 'sontungMTP', 'sontungMTP', 11, 25, 0, 1, NULL, '2021-02-24 15:34:31.735000', NULL, NULL);
+INSERT INTO `Songs` (`ID`, `Name`, `Singer`, `composer`, `author`, `views`, `likes`, `comments`, `category`, `status`, `createDate`, `publishDate`, `delete`) VALUES
+(1, 'thunder', 'minh hieu', 'minh hieu', 13, 26, 0, 0, 1, 0, '2021-02-18 00:00:00.000000', NULL, NULL),
+(2, '', '', '', 11, 8, 1, 0, 1, 1, NULL, '2021-02-26 11:44:21.274000', NULL),
+(3, 'hello', 'babye', '', 11, 9, 2, 0, 1, 1, NULL, '2021-02-26 11:53:19.823000', NULL),
+(4, 'hello', 'babye', '', 11, 11, 1, 0, 1, 1, NULL, '2021-02-26 11:54:11.346000', NULL),
+(5, 'hello', 'babye', '', 11, 0, 0, 0, 1, 0, NULL, NULL, NULL),
+(6, 'hello', 'babye', '', 11, 0, 0, 0, 1, 0, NULL, NULL, NULL),
+(7, 'song1', 'singer1', 'composer1', 11, 6, 2, 0, 5, 1, '2021-02-24 15:18:09.359000', NULL, NULL),
+(8, 'we of present co the abc', 'sontungMTP123', 'sontungMTP', 11, 92, 0, 0, 5, 1, '2021-02-24 15:34:31.735000', '2021-02-26 14:04:18.739000', NULL),
+(9, 'thunder', 'minh hieu', 'minh hieu', 13, 24, 2, 0, 1, 1, '2021-02-18 00:00:00.000000', '2021-02-19 00:00:00.000000', NULL),
+(10, '', '', '', 12, 0, 0, 0, 1, 0, NULL, NULL, NULL),
+(11, 'hello', 'babye', '', 12, 0, 0, 0, 1, 0, NULL, NULL, NULL),
+(12, 'hello', 'babye', '', 12, 0, 0, 0, 1, 0, NULL, NULL, NULL),
+(13, 'hello', 'babye', '', 11, 0, 0, 0, 1, 0, NULL, NULL, NULL),
+(14, 'hello', 'babye', '', 11, 0, 0, 0, 1, 0, NULL, NULL, NULL),
+(15, 'song1', 'singer1', 'composer1', 11, 0, 0, 0, 5, 0, '2021-02-24 15:18:09.359000', NULL, NULL),
+(16, 'we of present', 'sontungMTP', 'sontungMTP', 11, 41, 2, 0, 1, 1, '2021-02-24 15:34:31.735000', '2021-02-27 20:26:56.326000', NULL),
+(17, 'chao ngay moi', 'anh da den', 'anh da den', 11, 2, 0, 0, 4, 1, '2021-02-26 22:52:38.993000', '2021-02-26 22:52:56.830000', NULL),
+(18, 'hello', 'babye', '', 11, 6, 1, 0, 1, 1, NULL, '2021-02-26 11:53:19.823000', NULL),
+(19, 'hello', 'babye', '', 11, 2, 100, 0, 1, 1, NULL, '2021-02-26 11:54:11.346000', NULL),
+(20, 'thunder', 'minh hieu', 'minh hieu', 13, 16, 1, 0, 1, 1, '2021-02-18 00:00:00.000000', '2021-02-19 00:00:00.000000', NULL),
+(21, 'chao', 'helo', 'son tung', 11, 0, 0, 0, 5, 1, '2021-03-02 14:16:05.602000', '2021-03-02 14:16:43.469000', NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +159,7 @@ INSERT INTO `Users` (`ID`, `userName`, `password`, `email`, `DOB`, `gender`, `av
 (21, 'vuongtrieu0303', '$2b$08$zrL4KOsvW3/rOKjoH76ci.C1.79k0ie3UXlP8ZJk3wgPYmazz4FnW', 'vuongtrieu0303@vnzmail.xyz', '2000-12-15', NULL, NULL, 0, 0, '2021-02-15 20:59:27.000000', '2021-02-15 20:59:27.000000', 1, NULL, NULL),
 (124, 'test2', '$2b$08$tqzx0dKXjYWZ4UInh491WeiX7SWnd/6bfRC76EzCd68lYN7Uw682e', 'test2@yopmail.com', '2000-12-15', NULL, NULL, 0, 0, '2021-02-18 11:16:30.000000', '2021-02-18 11:37:15.332000', 1, NULL, NULL),
 (125, 'test3', '$2b$08$xY2EttKnQzY9G1KcRe1DNuTINro7ogpQSV7EZnFbuTAKVTh6Xheq6', 'longlong0303@yopmail.com', '2000-12-15', NULL, NULL, 0, 0, '2021-02-20 17:03:00.000000', '2021-02-20 17:03:00.000000', 1, NULL, NULL),
-(126, 'khoabd', '$2b$08$QLgcsR9vIXEbFtOjPVSqPezwhoTMbk5XDQFPCuc76qS3qHaya./oK', 'buidangkhoa357@gmail.com', '2000-12-15', NULL, NULL, 0, 0, '2021-02-21 14:28:11.000000', '2021-02-21 14:28:11.000000', 1, NULL, NULL);
+(126, 'khoabd', '$2b$08$QLgcsR9vIXEbFtOjPVSqPezwhoTMbk5XDQFPCuc76qS3qHaya./oK', 'buidangkhoa357@gmail.com', '2000-12-15', NULL, NULL, 1, 0, '2021-02-21 14:28:11.000000', '2021-02-21 14:28:11.000000', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,8 +222,11 @@ CREATE TABLE `Users_Favorite_Songs` (
 --
 
 INSERT INTO `Users_Favorite_Songs` (`User`, `Song`) VALUES
-(126, 15),
-(126, 16);
+(11, 9),
+(11, 19),
+(126, 3),
+(126, 9),
+(126, 18);
 
 -- --------------------------------------------------------
 
@@ -208,6 +238,23 @@ CREATE TABLE `Users_like_Songs` (
   `User` int(10) NOT NULL,
   `Song` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Users_like_Songs`
+--
+
+INSERT INTO `Users_like_Songs` (`User`, `Song`) VALUES
+(11, 3),
+(11, 4),
+(11, 7),
+(11, 9),
+(11, 16),
+(14, 7),
+(126, 2),
+(126, 3),
+(126, 9),
+(126, 16),
+(126, 18);
 
 --
 -- Indexes for dumped tables
@@ -241,7 +288,7 @@ ALTER TABLE `Users_Comments`
   ADD KEY `FKUsers_Comm215024` (`User`),
   ADD KEY `FKUsers_Comm193966` (`Song`);
 
---e
+--
 -- Indexes for table `Users_Favorite_Songs`
 --
 ALTER TABLE `Users_Favorite_Songs`
@@ -265,13 +312,13 @@ ALTER TABLE `Users_like_Songs`
 -- AUTO_INCREMENT for table `Categories`
 --
 ALTER TABLE `Categories`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `Songs`
 --
 ALTER TABLE `Songs`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `Users`
@@ -284,12 +331,6 @@ ALTER TABLE `Users`
 --
 ALTER TABLE `Users_Comments`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `Users_Favorite_Songs`
---
-ALTER TABLE `Users_Favorite_Songs`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

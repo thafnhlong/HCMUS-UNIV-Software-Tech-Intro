@@ -4,7 +4,7 @@ const config = require('./../config/default.json')
 const songModel = require('./../models/song.model');
 const categoryModel = require('../models/category.model');
 const helper = require("./../utils/helper");
-const limitSong = config.pagination.limitAlbum
+const limitSong = config.stack.limitAlbum
 
 function buildAlbum(input){
     const data = [],tmp={}

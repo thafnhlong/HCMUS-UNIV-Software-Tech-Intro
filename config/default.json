@@ -21,10 +21,18 @@
     },
     "pagination": {
         "limitCategory": 3,
-        "limitSong":18,
-        "limitAlbum": 12
+        "limitSong":18
+    },
+    "stack": {
+        "limitAlbum": 12,
+        "toptrend": 9,
+        "newest": 10,
+        "hot": 10,
+        "trending": 12,
+        "popular": 12
     },
     "schedule":{
-        "like":"*/30 * * * * *"
+        "like":"*/30 * * * * *",
+        "comment":"*/30 * * * * *"
     }
 }

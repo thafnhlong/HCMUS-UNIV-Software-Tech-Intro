@@ -31,6 +31,31 @@ module.exports = {
         ) s on c.ID=s.category
         WHERE c.delete != 1 and rank_song <= ${num}`)
     },
+    getTopTrend: async (number) => {
+        return db.load(`SELECT CT.* FROM ${TBL_SONG} CT 
+        WHERE CT.delete is NULL and status=1
+        ORDER BY views DESC, publishDate DESC, comments DESC, likes DESC LIMIT ${number}`)
+    },
+    getNewest: async (number) => {
+        return db.load(`SELECT CT.* FROM ${TBL_SONG} CT 
+        WHERE CT.delete is NULL and status=1
+        ORDER BY publishDate DESC LIMIT ${number}`)
+    },
+    getHotSong: async (number) => {
+        return db.load(`SELECT CT.* FROM ${TBL_SONG} CT 
+        WHERE CT.delete is NULL and status=1
+        ORDER BY comments DESC, likes DESC LIMIT ${number}`)
+    },
+    getTrend: async (number) => {
+        return db.load(`SELECT CT.* FROM ${TBL_SONG} CT 
+        WHERE CT.delete is NULL and status=1
+        ORDER BY views DESC LIMIT ${number}`)
+    },
+    getPopular: async (number) => {
+        return db.load(`SELECT CT.* FROM ${TBL_SONG} CT 
+        WHERE CT.delete is NULL and status=1
+        ORDER BY RAND() LIMIT ${number}`)
+    },
     deleteCategory: function (ID) {
         const entity = {
             delete: 1
