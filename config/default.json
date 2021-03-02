@@ -16,15 +16,15 @@
         "host": "remotemysql.com",
         "user": "JuMJWPpv2T",
         "password": "grGVh0yXNO",
-        "database": "JuMJWPpv2T"
+        "database": "JuMJWPpv2T",
+        "multipleStatements":true
     },
     "pagination": {
-        "limit": 6,
-        "limitAdmin":10,
         "limitCategory": 3,
-        "limitSong":18
+        "limitSong":18,
+        "limitAlbum": 12
     },
     "schedule":{
-        "song":30
+        "like":"*/30 * * * * *"
     }
 }
