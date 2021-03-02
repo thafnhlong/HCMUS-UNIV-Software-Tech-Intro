@@ -4,10 +4,34 @@ const config = require('./../config/default.json')
 const songModel = require('./../models/song.model');
 const categoryModel = require('../models/category.model');
 const helper = require("./../utils/helper");
-const limitSong = config.pagination.limitSong
+const limitSong = config.pagination.limitAlbum
+
+function buildAlbum(input){
+    const data = [],tmp={}
+    input.forEach(x=>{
+        if (tmp[x.categoryName]){
+            tmp[x.categoryName].list.push(x)
+        } else {
+            tmp[x.categoryName] = {
+                categoryId:x.category,
+                categoryName:x.categoryName,
+                list: [x]
+            }
+        }
+    })
+    Object.entries(tmp).forEach(x=>{
+        data.push(x[1])
+    })
+    return data
+}
 
 router.get("/",async (req,res,next)=>{
-    res.render('album')
+    categoryModel.getAlbum(limitSong)
+    .then(([_,resp])=>{
+        const albumData = buildAlbum(resp)
+        res.render('album',{albumData})
+    })
+    .catch(next)    
 });
 
 router.get("/:id",async (req,res,next)=>{

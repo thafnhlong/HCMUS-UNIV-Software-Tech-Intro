@@ -4,12 +4,10 @@ const songModel = require('../models/song.model')
 
 let isUpdateLike = true
 
-const job = schedule.scheduleJob({second:config.schedule.song}, function(){
-    console.log('Time for tea!');
-    
+schedule.scheduleJob(config.schedule.like, function(){
     if (isUpdateLike){
         songModel.updateLike().then(()=>{
-            console.log('Updated');
+            console.log('Updated like');
             isUpdateLike=false
         }).catch(console.log)
     }
