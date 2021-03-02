@@ -18,6 +18,18 @@ router.post('/delete', async (req, res) => {
 });
 
 
+router.post('/add', async (req, res) => {
+    try{
+        const rs = await SongModel.addFavoriteSong(res.locals.lcAuthUser.ID, req.body.id);
+    }
+    catch{}
+    finally{
+        res.status(200).send(true); 
+    }
+});
+
+
+
 
 
 
