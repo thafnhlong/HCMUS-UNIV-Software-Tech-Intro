@@ -4,6 +4,7 @@ const categoryModel = require("../models/category.model");
 const songModel = require("../models/song.model");
 const router = express.Router();
 const SongModel = require("../models/song.model");
+const { setUpdateComment } = require("../schedule/updateComments");
 
 router.get('/getCategoryIdName',(req,res,next)=>{
   categoryModel.getIdName().then(res.json.bind(res)).catch(next)
@@ -62,6 +63,7 @@ router.post('/addcomment', async (req, res) => {
     };
     if (rs.affectedRows > 0)
     {
+        setUpdateComment()
         return res.status(200).send(result);
     }
     result.status = false;

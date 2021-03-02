@@ -36,6 +36,15 @@ module.exports={
         ) as LJ on US.ID=LJ.Song
         set likes = LJ.countSong`)
     },
+    updateComment: async () => {
+        return db.load(`UPDATE ${TBL_SONG} as US 
+        INNER JOIN (
+            SELECT Song, COUNT(Song) countSong
+            FROM ${TBL_Users_Comments}
+            GROUP BY Song
+        ) as LJ on US.ID=LJ.Song
+        set comments = LJ.countSong`)
+    },
     getListSong:async(id=-1)=>{
         let sql =''
         if (id!=-1)
