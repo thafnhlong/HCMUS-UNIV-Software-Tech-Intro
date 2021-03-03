@@ -34,6 +34,11 @@ function random_bg_color() {
 
 }
 
+function playMusic(index){
+  loadTrack(index)
+  playTrack()
+}
+
 function loadTrack(track_index) {
   clearInterval(updateTimer);
   resetValues();

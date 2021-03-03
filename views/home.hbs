@@ -54,11 +54,14 @@
                                     </div>
                                 </div>
                                 {{#if ../lcIsAuthenticated}}
-                                <p class="mb-0 col-2 col-md-2 iq-music-play">
+                                <p class="mb-0 col-2 col-md-2">
                                     <a onclick="addFavoriteSong({{ID}})" href="javascript:void(0);"><i class="font-size-32 ri-add-circle-line"></i></a>
                                 </p>
                                 {{/if}}
-                                <p class="mb-0 col-2 col-md-2"><i class="las la-play-circle font-size-32"></i></p>
+                                <p class="mb-0 col-2 col-md-2">
+                                    <a href="javascript:void(0);" onclick="playMusic({{@index}})"><i
+                                                    class="las la-play-circle font-size-32"></i></a>
+                                </p>
                                 <div class="iq-card-header-toolbar iq-music-drop d-flex align-items-center  col-md-1">
                                     <div class="dropdown">
                                         <span class="dropdown-toggle text-primary" id="dropdownMenuButton1"

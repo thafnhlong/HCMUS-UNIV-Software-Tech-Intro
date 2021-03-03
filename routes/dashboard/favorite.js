@@ -5,7 +5,10 @@ const SongModel = require("../../models/song.model");
 router.get('/', async (req, res) => {
     const userId = res.locals.lcAuthUser.ID;
     const favoriteList = await SongModel.getFavoriteListByUserId(userId);
-    res.render('../views/vwMusic/favorite.hbs', {favoriteList})
+    let playable=false
+    if (favoriteList.length>0)
+        playable = true
+    res.render('../views/vwMusic/favorite.hbs', {playable,favoriteList})
 });
 
 router.post('/delete', async (req, res) => {
