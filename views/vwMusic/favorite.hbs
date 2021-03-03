@@ -24,7 +24,10 @@
                             <a href="javascript:void(0);" class="likeButton " songId="{{songId}}" onclick="likeMusic(this)"><i
                                             class="font-size-32 text-primary"></i></a>
                         </p>
-                        <p class="mb-0 col-2 col-md-2 iq-music-play"><i class="las la-play-circle font-size-32"></i></p>
+                        <p class="mb-0 col-2 col-md-2 iq-music-play">
+                            <a href="javascript:void(0);" onclick="playMusic({{@index}})"><i
+                                                    class="las la-play-circle font-size-32"></i></a>
+                        </p>
                         <div class="iq-card-header-toolbar iq-music-drop d-flex align-items-center col-2 col-md-1">
                             <div class="dropdown">
                                 <span class="dropdown-toggle text-primary" id="dropdownMenuButton2"
@@ -52,7 +55,27 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
 {{#section 'js'}}
+
+<script src="/js/music-player.js"></script>
+
 <script>
+
+let track_list = [
+{{#each favoriteList}}
+  {
+    name: "{{Name}}",
+    artist: "{{composer}}",
+    image: "/images/song/upload-{{songId}}.png",
+    path: "/song/upload-{{songId}}.mp3"
+  },
+{{/each}}
+];
+
+{{#if favoriteList}}
+loadTrack(0);
+{{/if}}
+
+
 let likeButton = $('.likeButton')
 let likeStatus = $('.likeButton > i')
 function deleteFavoriteSong(songId) {
