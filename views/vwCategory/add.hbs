@@ -12,15 +12,21 @@
             </div>
             <div class="iq-card-body">
                 <div class="new-user-info">
-                    <form action="/category/add" method="POST">
+                    <form action="/category/{{#if isEdit}}edit{{else}}add{{/if}}" method="POST">
                         <div class="row">
+                            {{#if isEdit}}
+                            <div class="form-group col-md-12">
+                                <label for="categoryId">Category ID:</label>
+                                <input type="text" class="form-control" name="categoryId" value="{{currentCategory.ID}}" readonly="true">  
+                            </div>
+                            {{/if}}
                             <div class="form-group col-md-12">
                                 <label for="fname">Category name:</label>
-                                <input type="text" class="form-control" name="name" id="fname" placeholder="Name" required>
+                                <input type="text" class="form-control" name="name" id="fname" placeholder="Name" value="{{currentCategory.Name}}"required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="lname">Category description:</label>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="description...">
+                                <input type="text" class="form-control" name="description" id="description" value="{{currentCategory.description}}"placeholder="description...">
                             </div>
                         </div>
                         <hr>

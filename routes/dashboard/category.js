@@ -28,8 +28,21 @@ router.get('/getIdName',(req,res,next)=>{
     categoryModel.getIdName().then(res.json.bind(res)).catch(next)
 })
 
-router.get('/:id/edit',(req,res)=>{
-    res.render('home')
+router.get('/:id/edit',async (req,res)=>{
+    const currentCategory = await categoryModel.getByID(req.params.id);
+    res.render('vwCategory/add', {currentCategory, isEdit: true});
+})
+
+router.post('/edit',async (req,res)=>{
+    console.log(req.body.categoryId);
+    var entity={
+        ID: req.body.categoryId,
+        Name: req.body.name,
+        description: req.body.description,
+        createDate: new Date()
+    }
+    await categoryModel.edit(entity);
+    res.redirect('/category');
 })
 
 router.get('/add', (req,res)=>{
@@ -39,12 +52,13 @@ router.post('/add',async (req,res)=>{
     var entity={
         Name: req.body.name,
         description: req.body.description,
+        delete: 0,
         createDate: new Date()
     }
     if(await categoryModel.add(entity))
     {
         return res.render('vwCategory/add',{Success:true});
     }
-    res.redirect('/category/add')
+    res.redirect('/category');
 })
 module.exports = router;
