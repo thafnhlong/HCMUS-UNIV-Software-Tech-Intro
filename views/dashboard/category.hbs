@@ -89,3 +89,16 @@
         </div>
     </div>
 </div>
+<script>
+    let url = new URL(window.location.href);
+    let status = url.searchParams.get("status");
+    let params = new URLSearchParams(url.search);
+
+    if (status == 'edited'){
+        window.setTimeout('alert("Successfully edited category!!!");window.close();', 500);
+    }
+    else if(status == 'added'){
+        window.setTimeout('alert("Successfully edited category!!!");window.close();', 500);
+    }
+    history.replaceState(null, "", location.href.split("?")[0]);
+</script>

@@ -34,7 +34,6 @@ router.get('/:id/edit',async (req,res)=>{
 })
 
 router.post('/edit',async (req,res)=>{
-    console.log(req.body.categoryId);
     var entity={
         ID: req.body.categoryId,
         Name: req.body.name,
@@ -42,7 +41,7 @@ router.post('/edit',async (req,res)=>{
         createDate: new Date()
     }
     await categoryModel.edit(entity);
-    res.redirect('/category');
+    res.redirect('/category?status=edited');
 })
 
 router.get('/add', (req,res)=>{
@@ -55,10 +54,7 @@ router.post('/add',async (req,res)=>{
         delete: 0,
         createDate: new Date()
     }
-    if(await categoryModel.add(entity))
-    {
-        return res.render('vwCategory/add',{Success:true});
-    }
-    res.redirect('/category');
+    await categoryModel.add(entity);
+    res.redirect('/category?status=added');
 })
 module.exports = router;
