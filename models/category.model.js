@@ -9,7 +9,8 @@ module.exports = {
         return rs[0].numOfcate;
     },
     getByID: async id => {
-        return db.load(`SELECT CT.* FROM ${TBL_Categories} CT WHERE CT.delete = 0 and ID=${id}`)
+        const result = await db.load(`SELECT CT.* FROM ${TBL_Categories} CT WHERE CT.delete = 0 and ID=${id}`);
+        return result[0];
     },
     getIdName: async ()=>{
         return db.load(`SELECT CT.ID,CT.Name FROM ${TBL_Categories} CT WHERE CT.delete = 0`)
@@ -67,5 +68,10 @@ module.exports = {
     },
     add: function(category){
         return db.add(TBL_Categories, category);
+    },
+    edit: function(entity){
+        const conditions = {ID: entity.ID};
+        delete(entity.ID);
+        return db.patch(TBL_Categories, entity, conditions);
     }
 }
