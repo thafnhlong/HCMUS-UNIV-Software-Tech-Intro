@@ -28,9 +28,16 @@ router.get('/getIdName',(req,res,next)=>{
     categoryModel.getIdName().then(res.json.bind(res)).catch(next)
 })
 
-router.get('/:id/edit',async (req,res)=>{
-    const currentCategory = await categoryModel.getByID(req.params.id);
-    res.render('vwCategory/add', {currentCategory, isEdit: true});
+router.get('/:id/edit',(req,res,next)=>{
+    categoryModel.getByID(req.params.id).then(resp=>{
+        if (resp.length > 0) {
+            const currentCategory = resp[0]
+            res.render('vwCategory/add', {currentCategory, isEdit: true});
+        }
+        else 
+            throw null
+    })
+    .catch(next)
 })
 
 router.post('/edit',async (req,res)=>{

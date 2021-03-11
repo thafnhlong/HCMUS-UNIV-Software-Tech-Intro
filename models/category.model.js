@@ -9,8 +9,9 @@ module.exports = {
         return rs[0].numOfcate;
     },
     getByID: async id => {
-        const result = await db.load(`SELECT CT.* FROM ${TBL_Categories} CT WHERE CT.delete = 0 and ID=${id}`);
-        return result[0];
+        // const result = await db.load(`SELECT CT.* FROM ${TBL_Categories} CT WHERE CT.delete = 0 and ID=${id}`);
+        // return result[0];
+        return db.load(`SELECT CT.* FROM ${TBL_Categories} CT WHERE CT.delete = 0 and ID=${id}`)
     },
     getIdName: async ()=>{
         return db.load(`SELECT CT.ID,CT.Name FROM ${TBL_Categories} CT WHERE CT.delete = 0`)
