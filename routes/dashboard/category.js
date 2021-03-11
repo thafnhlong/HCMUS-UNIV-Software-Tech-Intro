@@ -4,7 +4,13 @@ const categoryModel = require("../../models/category.model");
 const config = require("../../config/default.json");
 const helper = require("../../utils/helper");
 
-router.get('/', async (req, res) => {
+const isAdminMiddleware=(req,res,next)=>{
+    if (res.locals.isAdmin)
+        return next()
+    res.redirect('back')
+}
+
+router.get('/',isAdminMiddleware, async (req, res) => {
     const page = +req.query.page || 1;
     const numOfcate = await categoryModel.countCategory();
     const offset = (page - 1) * config.pagination.limitCategory;
@@ -17,7 +23,7 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.post('/delete', async (req, res) => {
+router.post('/delete',isAdminMiddleware, async (req, res) => {
     const rs = await categoryModel.deleteCategory(req.body.categoryId);
     res.redirect('/category');
 });
@@ -28,7 +34,7 @@ router.get('/getIdName',(req,res,next)=>{
     categoryModel.getIdName().then(res.json.bind(res)).catch(next)
 })
 
-router.get('/:id/edit',(req,res,next)=>{
+router.get('/:id/edit',isAdminMiddleware,(req,res,next)=>{
     categoryModel.getByID(req.params.id).then(resp=>{
         if (resp.length > 0) {
             const currentCategory = resp[0]
@@ -40,7 +46,7 @@ router.get('/:id/edit',(req,res,next)=>{
     .catch(next)
 })
 
-router.post('/edit',async (req,res)=>{
+router.post('/edit',isAdminMiddleware,async (req,res)=>{
     var entity={
         ID: req.body.categoryId,
         Name: req.body.name,
@@ -51,10 +57,10 @@ router.post('/edit',async (req,res)=>{
     res.redirect('/category?status=edited');
 })
 
-router.get('/add', (req,res)=>{
+router.get('/add',isAdminMiddleware, (req,res)=>{
     res.render('vwCategory/add');
 });
-router.post('/add',async (req,res)=>{
+router.post('/add',isAdminMiddleware,async (req,res)=>{
     var entity={
         Name: req.body.name,
         description: req.body.description,
