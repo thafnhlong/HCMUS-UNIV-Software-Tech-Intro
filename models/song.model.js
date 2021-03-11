@@ -29,21 +29,21 @@ module.exports={
     },
     updateLike: async () => {
         return db.load(`UPDATE ${TBL_SONG} as US 
-        INNER JOIN (
+        LEFT JOIN (
             SELECT Song, COUNT(Song) countSong
             FROM ${TBL_Users_like_Songs}
             GROUP BY Song
         ) as LJ on US.ID=LJ.Song
-        set likes = LJ.countSong`)
+        set likes = IFNULL(LJ.countSong,0)`)
     },
     updateComment: async () => {
         return db.load(`UPDATE ${TBL_SONG} as US 
-        INNER JOIN (
+        LEFT JOIN (
             SELECT Song, COUNT(Song) countSong
             FROM ${TBL_Users_Comments}
             GROUP BY Song
         ) as LJ on US.ID=LJ.Song
-        set comments = LJ.countSong`)
+        set comments = IFNULL(LJ.countSong,0)`)
     },
     getListSong:async(id=-1)=>{
         let sql =''

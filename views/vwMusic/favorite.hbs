@@ -11,7 +11,7 @@
                     <div class="d-flex justify-content-between align-items-center row">
                         <div class="media align-items-center col-10 col-md-5">
                             <div class="iq-realese-song ">
-                                <a href="/music/{{songId}}"><img src="images/dashboard/realease-song/01.png"
+                                <a href="/music/{{songId}}"><img src="/images/song/upload-{{songId}}.png"
                                         class="img-border-radius avatar-60 img-fluid" alt=""></a>
                             </div>
                             <div class="media-body ml-3">
@@ -40,7 +40,7 @@
                                             class="ri-eye-fill mr-2"></i>View</a>
                                     <a class="dropdown-item" style="cursor: pointer" onclick="deleteFavoriteSong({{songId}})"><i
                                             class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                    <a class="dropdown-item" href="#"><i
+                                    <a class="dropdown-item" href="/song/upload-{{songId}}.mp3" target='_blank'><i
                                             class="ri-file-download-fill mr-2"></i>Download</a>
                                 </div>
                             </div>
