@@ -15,6 +15,7 @@ function buildAlbum(input){
             tmp[x.categoryName] = {
                 categoryId:x.category,
                 categoryName:x.categoryName,
+                description: x.description,
                 list: [x]
             }
         }

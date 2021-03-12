@@ -23,7 +23,7 @@ module.exports = {
     },
     getAlbum: async(num)=>{
         return db.load(`SET @rank_song=0,@category=-1;
-        SELECT s.*,c.Name categoryName
+        SELECT s.*,c.Name categoryName, c.description
         FROM ${TBL_Categories} c JOIN ( 
             SELECT ID,Name,composer,
                 @rank_song:=if(@category=category,@rank_song+1,1) as rank_song,@category:=category as category
