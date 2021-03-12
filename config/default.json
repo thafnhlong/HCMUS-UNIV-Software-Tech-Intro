@@ -8,11 +8,11 @@
     "email": {
         "service": "Gmail",
         "user": "tn397032@gmail.com",
-        "from": "Hệ thống nghe nhạc trực tuyến MUZIK",
+        "from": "MUZIK Admin",
         "pass": "11112222AAAA"
     },
     "mysql": {
-        "connectionLimit": 5,
+        "connectionLimit": 50,
         "host": "remotemysql.com",
         "user": "JuMJWPpv2T",
         "password": "grGVh0yXNO",
@@ -20,7 +20,7 @@
         "multipleStatements":true
     },
     "pagination": {
-        "limitCategory": 3,
+        "limitCategory": 12,
         "limitSong":18
     },
     "stack": {
