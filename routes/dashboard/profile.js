@@ -25,7 +25,8 @@ const changeInformation = async (req,res) => {
         const entity={
             email,
             DOB: new Date(dob),
-            gender:+gender
+            gender:+gender,
+            modifileDate: new Date()
         }
 
         const currentUser = res.locals.lcAuthUser

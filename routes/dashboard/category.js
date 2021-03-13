@@ -51,7 +51,7 @@ router.post('/edit',isAdminMiddleware,async (req,res)=>{
         ID: req.body.categoryId,
         Name: req.body.name,
         description: req.body.description,
-        createDate: new Date()
+        modifileDate: new Date()
     }
     await categoryModel.edit(entity);
     res.redirect('/category?status=edited');
@@ -61,11 +61,13 @@ router.get('/add',isAdminMiddleware, (req,res)=>{
     res.render('vwCategory/add');
 });
 router.post('/add',isAdminMiddleware,async (req,res)=>{
+    const today = new Date()
     var entity={
         Name: req.body.name,
         description: req.body.description,
         delete: 0,
-        createDate: new Date()
+        createDate: today,
+        modifileDate: today
     }
     await categoryModel.add(entity);
     res.redirect('/category?status=added');
