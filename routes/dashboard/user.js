@@ -8,7 +8,7 @@ const helper = require("../../utils/helper");
 const isAdminMiddleware=(req,res,next)=>{
     if (res.locals.isAdmin)
         return next()
-    res.redirect('back')
+    res.redirect('/')
 }
 
 router.get('/',isAdminMiddleware, async (req, res) => {

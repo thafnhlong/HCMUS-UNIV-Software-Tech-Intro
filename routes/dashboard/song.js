@@ -65,7 +65,7 @@ const updateMusic = async (req,res) => {
 const isAdminMiddleware=(req,res,next)=>{
     if (res.locals.isAdmin)
         return next()
-    res.redirect('back')
+    res.redirect('/')
 }
 
 router.get('/upload', (req, res) => {
