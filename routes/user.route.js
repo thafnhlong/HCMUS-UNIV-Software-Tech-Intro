@@ -54,9 +54,8 @@ router.post('/register', async function (req, res) {
     // Lưu user xuống db
     await UserModel.add(user);
     // Sendmail
-    var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
+    var linkActive = `${config.site.url}/active?token=${user.activeToken}`;
     mailer.sendActiveToken(user.Email, linkActive);
-    console.log(user);
     res.render("vwUser/register.hbs", {fullPage:true, Email: req.body.Email, Success: true});
 });
 
@@ -149,7 +148,7 @@ router.post('/login', async function (req, res) {
         })
     }
     if (user.status === 0) {
-        var linkActive = `http://localhost:3000/active?token=${user.activeToken}`;
+        var linkActive = `${config.site.url}/active?token=${user.activeToken}`;
         mailer.sendActiveToken(user.email, linkActive);
     }
     delete user.password;
