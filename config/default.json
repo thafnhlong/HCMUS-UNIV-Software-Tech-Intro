@@ -21,7 +21,8 @@
     },
     "pagination": {
         "limitCategory": 3,
-        "limitSong":18
+        "limitSong":18,
+        "limitUser": 12
     },
     "stack": {
         "limitAlbum": 12,
