@@ -4,7 +4,7 @@
     <div class="iq-card">
         <div class="iq-card-header d-flex justify-content-between">
             <div class="iq-header-title">
-                <h4 class="card-title">Category Lists</h4>
+                <h4 class="card-title">Category List</h4>
             </div>
             <div class="iq-card-header-toolbar d-flex align-items-center">
                 <a href="/category/add" class="btn btn-primary">Add New Category</a>
@@ -17,6 +17,7 @@
                         <tr>
                             <th width="2%">ID</th>
                             <th width="20%">Category name</th>
+                            <th width="20%">Description</th>
                             <th width="5%">Action</th>
                         </tr>
                     </thead>
@@ -25,6 +26,7 @@
                         <tr>
                             <td>{{ID}}</td>
                             <td>{{Name}}</td>
+                            <td>{{description}}</td>
                             <td>
                                 <div class="flex align-items-center list-user-action">
                                     <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
@@ -100,7 +102,7 @@
         window.setTimeout('alert("Successfully edited category!!!");window.close();', 500);
     }
     else if(status == 'added'){
-        window.setTimeout('alert("Successfully edited category!!!");window.close();', 500);
+        window.setTimeout('alert("Successfully added category!!!");window.close();', 500);
     }
     history.replaceState(null, "", location.href.split("?")[0]);
 </script>

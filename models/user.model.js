@@ -2,6 +2,9 @@ const db = require("../utils/dao");
 
 const TBL_USER = "Users"
 module.exports = {
+    getListUserByPagination: function(page, offset){
+        return db.load(`SELECT US.* FROM ${TBL_USER} US WHERE US.delete = 0 limit ${page} offset ${offset}`);
+    },
     add: function(user){
         return db.add(TBL_USER, user);
     },
@@ -52,4 +55,53 @@ module.exports = {
             return null;
         return rows[0];
     },
+    //check username
+    checkExistAccount: async function(username){
+        const result = await db.load(`SELECT * FROM ${TBL_USER} WHERE username = '${username} or email = '${username}'`);
+        return result.length > 0;
+    },
+
+    // active account
+
+    // get otp 
+    singleOtp: async function (username, email) {
+        const rows = await db.load(`select otpverify from ${TBL_USER} where username = '${username}' or email = '${email}'`);
+        if (rows.length === 0)
+            return null;
+        return rows[0];
+    },
+
+    updatePermission: function(entity){
+        const condition = {
+            ID: entity.ID
+        };
+        delete(entity.ID);
+        return db.patch(TBL_USER, entity, condition);
+    },
+
+    activeAccountByAdmin: function(entity){
+        const condition = {
+            ID: entity.ID
+        };
+        delete(entity.ID);
+        return db.patch(TBL_USER, entity, condition);
+    },
+
+    checkExistEmailWithID: async function(Email, ID){
+        const rs = await db.load(`SELECT count(US.ID) as userCount FROM ${TBL_USER} US WHERE US.delete = 0 and US.Email = '${Email}' AND US.ID != ${ID}`);
+        return +rs[0].userCount > 0;
+    },
+
+    delete: function(entity){
+        const condition = {
+            ID: entity.ID
+        }
+        delete(entity.ID);
+        return db.patch(TBL_USER, entity, condition);
+    },
+
+    countUser: async function(){
+        const rs = await db.load(`SELECT count(US.ID) as numOfUser FROM ${TBL_USER} US WHERE US.delete = 0`);
+        return +rs[0].numOfUser;
+    }
 }
