@@ -1,11 +1,7 @@
 const mysql = require('mysql');
 const config = require('../config/default.json');
 
-let pool
-if (process.env.MYSQL_ConnectionString)
-    pool = mysql.createPool(process.env.MYSQL_ConnectionString);
-else    
-    pool = mysql.createPool(config.mysql);
+let pool = mysql.createPool(config.mysql);
 
 module.exports = {
     load: function (sql) {

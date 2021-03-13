@@ -1,4 +1,17 @@
+const config = require('./config/default.json')
+
 console.log(`this is ${process.env.ENVIROMENT} environment`);
+
+if (process.env.FULL_LINK) {
+  config.site.url=process.env.FULL_LINK
+}
+
+if (process.env.MYSQL_HOST) {
+  config.mysql.host = process.env.MYSQL_HOST
+  config.mysql.database = process.env.MYSQL_DATABASE
+  config.mysql.user = process.env.MYSQL_USERNAME
+  config.mysql.password = process.env.MYSQL_PASSWORD
+}
 
 const express = require("express");
 
@@ -51,6 +64,6 @@ app.use(function (err, req, res, next) {
 
 app.listen(process.env.WEB_PORT, () => {
   console.log(
-    `Server is running at ${process.env.WEB_URL}:${process.env.WEB_PORT}`
+    `Server is running at ${config.site.url}`
   );
 });
